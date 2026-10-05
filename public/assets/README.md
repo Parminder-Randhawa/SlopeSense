@@ -1,7 +1,14 @@
-# Illustrative mountain artwork
+# Mountain artwork
 
-`mountain-winter.png` was generated with the built-in imagegen tool for this application. It is generic coastal British Columbia winter scenery, not a photograph or a surveyed depiction of Cypress, Grouse or Seymour. The application uses different crops with scenario-dependent brightness and cloud overlays. The illustration is bundled locally; no image host is needed.
+`north-shore-diorama.png` is a generated realistic terrain illustration, created and refined with the built-in image-generation tool on October 5, 2026. Its three terrain groups are an illustrative composition, not a geographically surveyed reconstruction. It is decorative winter artwork and does not show current conditions.
 
-Prompt:
+References informed the broad forms: Cypress's Black Mountain / Mount Strachan basin, Grouse's compact summit and The Cut clearing, and Seymour's rolling wooded ridge toward Brockton Point. Source photographs are not served by the app.
 
-> Use case: photorealistic-natural. Asset type: atmospheric background photograph for SlopeSense, a premium dark ski and snowboard application. Primary request: a cinematic wide landscape of snowy, forested coastal British Columbia mountains in winter, quiet and natural. Snow-covered rounded mountain ridges with dark evergreen trees, layered misty peaks fading into a charcoal blue overcast sky, viewed from an elevated ridge. Composition: panoramic 3:2 landscape, main sculpted snowy ridge on right and across lower half, open subtle dark sky on left/top for UI overlays. Cold blue-gray tones, delicate silver snow highlights, restrained light, crisp natural texture. Outdoor editorial photography, photoreal. No people, text, logos, buildings or watermarks. This is evocative illustrative scenery, not a depiction of a specific resort.
+- [Cypress trail maps](https://www.cypressmountain.com/trail-maps-and-stats)
+- [Grouse winter map](https://www.grousemountain.com/maps/winter-map)
+- [Seymour trail map](https://mtseymour.ca/the-mountain/trail-map)
+- [Black Mountain reference photograph](https://commons.wikimedia.org/wiki/File:Cypress_mtn.jpg), Shaund, CC BY-SA 3.0, used as a geographic reference in an earlier generation. It was not pasted into the artwork.
+
+The final refinement replaced repetitive conical trees with an irregular continuous coastal forest canopy, softened lighting, removed bright boundary rings and retained broad rounded ski terrain. The exact final prompt is in `artwork-prompt.txt` alongside this file. The bundled map geometry remains independent of the illustration and comes from OpenStreetMap (ODbL).
+
+`mountain-winter.png` is the original project artwork, retained for compatibility with the original unused onboarding component. The active home screen uses `north-shore-diorama.png`.

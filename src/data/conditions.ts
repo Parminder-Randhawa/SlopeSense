@@ -36,5 +36,10 @@ export const conditions: Record<ResortId, Conditions> = {
   },
 };
 export function firmRisk(c: Conditions) {
-  return c.daytimeHigh > 0 && c.overnightLow < 0;
+  return (
+    c.daytimeHigh !== null &&
+    c.overnightLow !== null &&
+    c.daytimeHigh > 0 &&
+    c.overnightLow < 0
+  );
 }

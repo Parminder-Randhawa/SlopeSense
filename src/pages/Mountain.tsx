@@ -3,47 +3,44 @@ import type { SkiRun } from "../types/trail";
 import type { ResortId } from "../types/resort";
 import type { Profile } from "../types/rider";
 import type { Fit } from "../engine/recommendations";
-import { weights } from "../engine/recommendations";
+import type { LiveWeather } from "../types/live";
 import { resorts, resortById } from "../data/resorts";
 import { trailsByResort } from "../data/trails";
-import { conditions, firmRisk } from "../data/conditions";
-import { TrailMap } from "../components/TrailMap";
-import { DifficultyPill, Match, Notice } from "../components/Shared";
+import { mountainInfo } from "../data/mountains";
+import { RunMap } from "../components/RunMap";
+import { DifficultyPill } from "../components/Shared";
 import { Icon } from "../components/Icon";
+import { MiniMountain } from "../components/MiniMountain";
 import { routeFor } from "../engine/route";
-
-type Props = {
-  resortId: ResortId;
-  selected: SkiRun | null;
-  fits: Fit[];
-  profile: Profile;
-  onResort: (id: ResortId) => void;
-  onSelect: (trail: SkiRun) => void;
-  onReplay: (trail: SkiRun, auto: boolean) => void;
-};
-const partNames = {
-  ability: "Ability fit",
-  terrain: "Terrain preferences",
-  conditions: "Scenario conditions",
-  progression: "Progression fit",
-  evidence: "Riding evidence",
-};
 export function Mountain({
   resortId,
   selected,
   fits,
   profile,
+  weather,
   onResort,
   onSelect,
-  onReplay,
-}: Props) {
-  const [filter, setFilter] = useState("all");
-  const resort = resortById[resortId],
-    c = conditions[resortId],
-    trails = trailsByResort[resortId];
+  onRecord,
+  onRefresh,
+  loading,
+}: {
+  resortId: ResortId;
+  selected: SkiRun | null;
+  fits: Fit[];
+  profile: Profile;
+  weather: LiveWeather;
+  onResort: (id: ResortId) => void;
+  onSelect: (t: SkiRun | null) => void;
+  onRecord: (t: SkiRun) => void;
+  onRefresh: () => void;
+  loading: boolean;
+}) {
+  const [filter, setFilter] = useState("all"),
+    resort = resortById[resortId],
+    trails = trailsByResort[resortId],
+    info = mountainInfo[resortId];
   const ranked = fits.filter((f) => f.trail.resortId === resortId),
-    top = ranked[0];
-  const fit = selected ? ranked.find((f) => f.trail.id === selected.id) : null;
+    fit = ranked.find((f) => f.trail.id === selected?.id);
   const shown = trails.filter(
     (t) =>
       filter === "all" ||
@@ -57,200 +54,164 @@ export function Mountain({
         {resorts.map((r) => (
           <button
             key={r.id}
-            className={resortId === r.id ? "active" : ""}
+            className={r.id === resortId ? "active" : ""}
             onClick={() => {
               setFilter("all");
               onResort(r.id);
             }}
           >
-            <Icon name="mountain" size={17} />
+            <Icon name="mountain" size={16} />
             {r.shortName}
           </button>
         ))}
       </div>
-      <div className="mountain-heading">
+      <header className="mountain-live-heading">
         <div>
-          <p className="eyebrow">{resort.location} · DEMO WINTER DAY</p>
+          <p className="eyebrow">{resort.location}</p>
           <h1>{resort.name}</h1>
         </div>
-        <div className="condition-brief">
-          <Icon name={c.visibility === "good" ? "sun" : "cloud"} size={30} />
-          <strong>{c.temperature}°</strong>
+        <div className="weather-now">
+          <Icon
+            name={weather.description.includes("Clear") ? "sun" : "cloud"}
+            size={28}
+          />
+          <strong>
+            {weather.temperature === null
+              ? "—"
+              : `${Math.round(weather.temperature)}°`}
+          </strong>
           <span>
-            {c.snowfall} cm new snow<small>Simulated · 24 hours</small>
+            {weather.description}
+            <small>
+              {weather.simulated
+                ? "Demo scenario"
+                : weather.stale
+                  ? "Cached forecast"
+                  : "Weather model"}
+            </small>
           </span>
         </div>
+      </header>
+      <div className="weather-strip">
+        <span>
+          <Icon name="snow" size={16} />
+          <b>{weather.snowfall ?? "—"} cm</b> / past 24h{" "}
+          {weather.simulated ? "(demo)" : "estimated"}
+        </span>
+        <span>
+          <Icon name="wind" size={16} />
+          {weather.wind ?? "—"} km/h wind
+        </span>
+        <button
+          disabled={loading || weather.simulated}
+          onClick={onRefresh}
+          aria-label="Refresh weather"
+        >
+          <Icon name="reset" size={16} />
+          {loading ? "Updating…" : "Refresh"}
+        </button>
       </div>
-      <div className="explore-layout">
+      <div className="explore-layout live-explore">
         <section className="map-area">
-          <TrailMap
+          <RunMap
             key={resortId}
             resort={resort}
-            trails={trails}
+            trails={shown}
             selectedTrail={selected}
             onSelectTrail={onSelect}
-            recommendedId={top?.trail.id}
           />
           <div className="map-underbar">
-            <span>
-              <Icon name="location" size={14} />
-              {trails.length} real mapped trails
-            </span>
-            <span>
-              <Icon name="star" size={14} />
-              {ranked.length} within your ceiling
-            </span>
-            <span>Drag · pinch · tap a run</span>
+            <span>● Green &nbsp; ■ Blue &nbsp; ◆ Black &nbsp; ◆◆ Expert</span>
+            <span>Tap a run · pinch to zoom</span>
           </div>
-          <details className="conditions-details">
-            <summary>
-              <Icon name="cloud" size={16} /> Winter scenario details{" "}
-              <Icon name="chevron" size={15} />
-            </summary>
-            <div className="conditions-body">
-              <span>Wind: {c.wind} km/h</span>
-              <span>Visibility: {c.visibility}</span>
-              <span>Daytime high: {c.daytimeHigh}°C</span>
-              <span>Overnight low: {c.overnightLow}°C</span>
-              <p>
-                {firmRisk(c)
-                  ? "A simulated thaw followed by freezing raises estimated firm-surface risk. It does not establish the surface of this trail."
-                  : "No freeze–thaw flag in this scenario. This does not establish the surface of any trail."}
-              </p>
-              <small>
-                Fictional weather inputs for Jan 17, 2026. These are not
-                historical observations or current ski conditions.
-              </small>
-            </div>
-          </details>
         </section>
         <aside className="trail-panel">
           {selected ? (
             <>
-              <div className="sheet-handle" />
               <div className="trail-detail-title">
                 <div>
                   <p className="eyebrow">
-                    {selected.id === top?.trail.id
-                      ? "★ YOUR NEXT RUN"
-                      : "TRAIL DETAILS"}
+                    {fit ? "MATCHES YOUR TERRAIN LIMIT" : "MAPPED RUN"}
                   </p>
                   <h2>{selected.name}</h2>
                   <DifficultyPill difficulty={selected.difficulty} />
                 </div>
-                {fit && <Match score={fit.score} large />}
+                <button
+                  className="icon-button"
+                  aria-label="Close trail details"
+                  onClick={() => onSelect(null)}
+                >
+                  <Icon name="close" />
+                </button>
               </div>
               <div className="trail-attributes">
                 <div>
                   <strong>
-                    {((selected.lengthMeters ?? 0) / 1000).toFixed(2)}{" "}
+                    {((selected.lengthMeters || 0) / 1000).toFixed(2)}{" "}
                     <small>km</small>
                   </strong>
                   <span>Mapped length</span>
                 </div>
                 <div>
-                  <strong>Unknown</strong>
-                  <span>Surveyed vertical</span>
-                </div>
-                <div>
                   <strong>
-                    {selected.grooming === "unknown"
-                      ? "Unknown"
-                      : selected.grooming}
+                    {selected.grooming === "groomed" ? "Groomed" : "Unverified"}
                   </strong>
-                  <span>OSM grooming</span>
+                  <span>
+                    {selected.grooming === "groomed"
+                      ? "OSM tag · daily unknown"
+                      : "Daily grooming"}
+                  </span>
                 </div>
               </div>
               {fit ? (
                 <>
-                  <div className="fit-intro">
-                    <Icon name="target" size={18} />
-                    <h3>Why it fits you</h3>
-                  </div>
+                  <h3>Why this run</h3>
                   <ul className="reasons">
                     {fit.reasons.slice(0, 3).map((r) => (
                       <li key={r}>
-                        <Icon name="check" size={14} />
+                        <Icon name="check" size={15} />
                         {r}
                       </li>
                     ))}
                   </ul>
-                  <details className="score-details">
-                    <summary>
-                      Inside your {fit.score}% match
-                      <Icon name="plus" size={15} />
-                    </summary>
-                    <div className="score-parts">
-                      {Object.entries(fit.parts).map(([key, value]) => (
-                        <div className="score-part" key={key}>
-                          <span>
-                            {partNames[key as keyof typeof partNames]}
-                            <small>
-                              {weights[key as keyof typeof weights]}% weight
-                            </small>
-                          </span>
-                          <div className="score-track">
-                            <i style={{ width: `${value}%` }} />
-                          </div>
-                          <strong>{value}</strong>
-                        </div>
-                      ))}
-                    </div>
-                    <ul className="uncertainty-list">
-                      {fit.uncertainty.map((u) => (
-                        <li key={u}>{u}</li>
-                      ))}
-                    </ul>
-                    <p className="fine-print">
-                      Weighted sum, then a −15 adjustment for the most recent
-                      run or −5 for either of the two before it. A match score
-                      is a preference ranking, not a skill percentage or safety
-                      prediction. Unknown features receive no positive evidence.
-                    </p>
-                  </details>
                   <button
                     className="primary"
-                    onClick={() => onReplay(selected, false)}
-                  >
-                    Ride this run
-                    <Icon name="arrow" />
-                  </button>
-                  <button
-                    className="secondary replay-button"
-                    onClick={() => onReplay(selected, true)}
+                    onClick={() => onRecord(selected)}
                   >
                     <Icon name="play" size={16} />
-                    Demo Replay<span>Synthetic telemetry</span>
+                    Record this run
                   </button>
                 </>
               ) : (
-                <Notice>
-                  This run is outside your selected terrain ceiling, unrated,
-                  closed in the dataset, or excluded as backcountry. It is not
-                  recommended. You can change your ceiling in Profile.
-                </Notice>
+                <p className="inline-notice">
+                  This run is outside your selected terrain limit or excluded
+                  from recommendations. Update your limit in Profile if needed.
+                </p>
               )}
+              <a
+                className="official-link"
+                href={info.official}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Check official conditions & openings ↗
+              </a>
               <details className="source-details">
-                <summary>
-                  Trail sources & what is unknown
-                  <Icon name="info" size={14} />
-                </summary>
+                <summary>Map accuracy & sources</summary>
                 <p>
-                  Coordinates, name and mapped rating: OpenStreetMap snapshot,
-                  Oct 3, 2026. These community tags are not a verified official
-                  resort rating. Grooming, exact gradient, elevation and daily
-                  opening status may be unknown.
+                  Community-mapped OSM trails, snapshot October 3, 2026. This is
+                  a selection of mapped runs, not a complete resort map.
+                  Ratings, daily openings and grooming need confirmation from
+                  the resort.
                 </p>
                 <p>
-                  Replay follows{" "}
                   {routeFor(selected).partial
-                    ? "the longest connected segment; disjoint ways are never bridged"
-                    : "connected OSM geometry"}
-                  . Its elevation, movement and pitch are simulated, and route
-                  direction is not navigation guidance.
+                    ? "Some source ways are disconnected. Only shared endpoints are joined; unmapped gaps remain visible."
+                    : "Connected source ways are joined at their shared endpoints."}{" "}
+                  Geometry does not establish downhill direction.
                 </p>
                 <div className="source-links">
-                  {((selected.metadata?.osmWayIds as string[]) ?? []).map(
+                  {((selected.metadata?.osmWayIds as string[]) || []).map(
                     (id) => (
                       <a
                         key={id}
@@ -258,7 +219,7 @@ export function Mountain({
                         target="_blank"
                         rel="noreferrer"
                       >
-                        OSM way {id} ↗
+                        OSM {id} ↗
                       </a>
                     ),
                   )}
@@ -266,88 +227,90 @@ export function Mountain({
               </details>
             </>
           ) : (
-            <div className="select-prompt">
-              <Icon name="compass" size={36} />
-              <h2>Find your line.</h2>
-              <p>Tap a trail on the map, or explore your best matches below.</p>
-              {top && (
-                <button className="primary" onClick={() => onSelect(top.trail)}>
-                  Explore {top.trail.name}
+            <>
+              <MiniMountain resortId={resortId} />
+              <p className="eyebrow">{shown.length} MAPPED RUNS</p>
+              <h2>Pick your line.</h2>
+              <p>Tap a trail to focus it. Labels appear as you zoom in.</p>
+              {ranked[0] && (
+                <button
+                  className="primary"
+                  onClick={() => onSelect(ranked[0].trail)}
+                >
+                  Explore {ranked[0].trail.name}
                   <Icon name="arrow" />
                 </button>
               )}
-            </div>
+              <a
+                className="official-link"
+                href={info.official}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Official mountain report ↗
+              </a>
+            </>
           )}
         </aside>
       </div>
-      <section className="trail-browser">
+      <div className="trail-browser">
         <div className="section-title">
-          <div>
-            <p className="eyebrow">EXPLORE YOUR OPTIONS</p>
-            <h2>Every run has a story.</h2>
-          </div>
-          <span className="muted">Ceiling: {profile.ceiling}</span>
+          <h2>Runs at {resort.shortName}</h2>
+          <span className="muted">Your limit: {profile.ceiling}</span>
         </div>
         <div className="chips filter-chips">
           {[
-            ["all", "All trails"],
+            ["all", "All runs"],
             ["for-you", "For you"],
             ["green", "● Green"],
             ["blue", "■ Blue"],
             ["black", "◆ Black"],
-            ["double-black", "◆◆ Double black"],
+            ["double-black", "◆◆ Expert"],
           ].map(([id, label]) => (
             <button
               key={id}
               className={`chip ${filter === id ? "selected" : ""}`}
-              onClick={() => setFilter(id)}
+              onClick={() => {
+                setFilter(id);
+                onSelect(null);
+              }}
             >
               {label}
             </button>
           ))}
         </div>
         <div className="trail-grid">
-          {shown.length ? (
-            shown.map((t) => {
-              const f = ranked.find((x) => x.trail.id === t.id);
-              return (
-                <button
-                  key={t.id}
-                  className={`trail-row ${selected?.id === t.id ? "selected" : ""}`}
-                  onClick={() => {
-                    onSelect(t);
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                  }}
-                >
-                  <DifficultyPill difficulty={t.difficulty} />
-                  <div>
-                    <strong>{t.name}</strong>
-                    <span>
-                      {((t.lengthMeters ?? 0) / 1000).toFixed(2)} km ·{" "}
-                      {t.grooming === "unknown"
-                        ? "grooming unknown"
-                        : t.grooming}
-                    </span>
-                  </div>
-                  <span className={f ? "fit-small" : "outside-limit"}>
-                    {f ? `${f.score}%` : "Not eligible"}
-                  </span>
-                  <Icon name="chevron" size={15} />
-                </button>
-              );
-            })
-          ) : (
-            <div className="empty-inline">
-              No trails in this category for {resort.shortName}.
-            </div>
-          )}
+          {shown.map((t) => (
+            <button
+              key={t.id}
+              className={`trail-row ${selected?.id === t.id ? "selected" : ""}`}
+              onClick={() => {
+                onSelect(t);
+                document
+                  .querySelector(".live-explore")
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+            >
+              <DifficultyPill difficulty={t.difficulty} />
+              <div>
+                <strong>{t.name}</strong>
+                <span>
+                  {((t.lengthMeters || 0) / 1000).toFixed(2)} km mapped
+                </span>
+              </div>
+              <Icon name="chevron" size={16} />
+            </button>
+          ))}
         </div>
-      </section>
-      <Notice>
-        Suggestions use your preferences and activity history. Follow official
-        closures, signage and mountain warnings. SlopeSense does not determine
-        terrain safety or provide backcountry or avalanche advice.
-      </Notice>
+        {!shown.length && (
+          <p className="empty-inline">No mapped runs in this category.</p>
+        )}
+      </div>
+      <p className="data-note">
+        {weather.simulated
+          ? "Simulated winter weather for the hackathon."
+          : `${weather.observedAt ? `Model valid ${new Date(weather.observedAt).toLocaleString()}. ` : ""}Open-Meteo estimates at the map location, not a resort snow report. Snowfall is estimated, not a measured snow stake total.`}{" "}
+      </p>
     </div>
   );
 }

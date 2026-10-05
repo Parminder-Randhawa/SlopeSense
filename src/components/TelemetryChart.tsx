@@ -16,13 +16,18 @@ export function TelemetryChart({
   const id = useId().replace(/:/g, "");
   const last = samples.at(-1)!;
   const current = sampleAt(samples, time ?? last.time);
+  const hasAltitude = samples.every((s) => s.elevationKnown !== false);
+  const safeMode =
+    !hasAltitude && (mode === "elevation" || mode === "gradient")
+      ? "speed-distance"
+      : mode;
   const yKey =
-    mode === "elevation"
+    safeMode === "elevation"
       ? "elevation"
-      : mode === "gradient"
+      : safeMode === "gradient"
         ? "gradient"
         : "speed";
-  const xKey = mode === "speed-time" ? "time" : "distance";
+  const xKey = safeMode === "speed-time" ? "time" : "distance";
   const minY =
     yKey === "elevation"
       ? Math.floor(Math.min(...samples.map((s) => s.elevation)) / 50) * 50
@@ -41,7 +46,10 @@ export function TelemetryChart({
   const visible = [...samples.filter((s) => s.time < current.time), current];
   const line = (points: Sample[]) =>
     points
-      .map((s, i) => `${i ? "L" : "M"}${x(s).toFixed(2)},${y(s).toFixed(2)}`)
+      .map(
+        (s, i) =>
+          `${i && !s.breakBefore ? "L" : "M"}${x(s).toFixed(2)},${y(s).toFixed(2)}`,
+      )
       .join(" ");
   const units = yKey === "elevation" ? "m" : yKey === "gradient" ? "%" : "km/h";
   return (
@@ -57,13 +65,17 @@ export function TelemetryChart({
         </span>
         <select
           aria-label="Graph type"
-          value={mode}
+          value={safeMode}
           onChange={(e) => setMode(e.target.value)}
         >
           <option value="speed-distance">Speed / distance</option>
-          <option value="elevation">Elevation / distance</option>
+          <option value="elevation" disabled={!hasAltitude}>
+            Elevation / distance
+          </option>
           <option value="speed-time">Speed / time</option>
-          <option value="gradient">Gradient / distance</option>
+          <option value="gradient" disabled={!hasAltitude}>
+            Gradient / distance
+          </option>
         </select>
       </div>
       <svg
@@ -136,7 +148,7 @@ export function TelemetryChart({
         )}
         <path
           d={`${line(visible)} L${x(current)},139 L38,139 Z`}
-          fill={`url(#${id})`}
+          fill={samples.some((s) => s.breakBefore) ? "none" : `url(#${id})`}
         />
         <path
           d={line(visible)}

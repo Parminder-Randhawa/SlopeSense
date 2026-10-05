@@ -1,3 +1,4 @@
+import { routeFor } from "../engine/route";
 import type { Feature, FeatureCollection, GeoJsonProperties } from "geojson";
 import { isDifficulty } from "./difficulty";
 import { isUsableGeometry } from "./geoUtils";
@@ -111,7 +112,12 @@ export function trailsToFeatureCollection(trails: SkiRun[]): FeatureCollection {
     features: trails.map((trail): Feature => ({
       type: "Feature",
       id: trail.id,
-      geometry: trail.geometry,
+      geometry: {
+        type: "MultiLineString",
+        coordinates: routeFor(trail).chains.map((line) =>
+          line.map((p) => [p.lng, p.lat]),
+        ),
+      },
       properties: {
         id: trail.id,
         name: trail.name,
