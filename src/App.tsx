@@ -22,6 +22,7 @@ import type { ResortId } from "./types/resort";
 import type { SkiRun } from "./types/trail";
 import "./styles.css";
 import "./live.css";
+import "./personal.css";
 const nav = [
   { id: "home", label: "Home", icon: "home" },
   { id: "explore", label: "Explore", icon: "compass" },
@@ -171,7 +172,7 @@ export default function App() {
       {prefs.demo && (
         <div className="mode-ribbon">
           DEMO MODE{" "}
-          <span>Simulated weather & GPS · change in Profile settings</span>
+          <span>Sample profile, rides & weather · exit in Settings</span>
         </div>
       )}
       {!online && (
@@ -267,7 +268,8 @@ export default function App() {
           <Profile
             key={String(prefs.demo)}
             profile={prefs.profile}
-            count={activities.length}
+            activities={activities}
+            onActivity={openActivity}
             onSave={(p) => updatePrefs(p)}
             demo={prefs.demo}
             onDemo={(v) => {

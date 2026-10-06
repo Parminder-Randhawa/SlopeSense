@@ -106,32 +106,32 @@ export function Home({
             </button>
           </div>
         </div>
-      </section>
-      <section className="home-shortcuts" aria-label="Your riding">
-        <button onClick={() => onNavigate("activity")}>
-          <span className="shortcut-icon">
-            <Icon name="play" />
-          </span>
-          <span>
-            <strong>Rides & replays</strong>
-            <small>
-              {activities.length
-                ? `${activities.length} saved rides · replay your tracks`
-                : "Your saved tracks live here"}
-            </small>
-          </span>
-          <Icon name="chevron" size={17} />
-        </button>
-        <button onClick={() => onNavigate("progress")}>
-          <span className="shortcut-icon">
-            <Icon name="progress" />
-          </span>
-          <span>
-            <strong>Your progress</strong>
-            <small>Distance, terrain & riding patterns</small>
-          </span>
-          <Icon name="chevron" size={17} />
-        </button>
+        <section className="home-shortcuts" aria-label="Your riding">
+          <button onClick={() => onNavigate("activity")}>
+            <span className="shortcut-icon">
+              <Icon name="play" />
+            </span>
+            <span>
+              <strong>Rides & replays</strong>
+              <small>
+                {activities.length
+                  ? `${activities.length} saved rides · replay your tracks`
+                  : "Your saved tracks live here"}
+              </small>
+            </span>
+            <Icon name="chevron" size={17} />
+          </button>
+          <button onClick={() => onNavigate("progress")}>
+            <span className="shortcut-icon">
+              <Icon name="progress" />
+            </span>
+            <span>
+              <strong>Your progress</strong>
+              <small>Distance, terrain & riding patterns</small>
+            </span>
+            <Icon name="chevron" size={17} />
+          </button>
+        </section>
       </section>
     </div>
   );

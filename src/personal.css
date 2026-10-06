@@ -1,0 +1,466 @@
+/* The mountain scene is the home page; all controls sit within it. */
+.live-shell .main-content.home-content {
+  max-width: none;
+  padding: 0;
+}
+.home-page .range-scene {
+  position: relative;
+  display: block;
+  height: calc(100svh - 74px);
+  min-height: 740px;
+  max-height: 1080px;
+  padding: 0;
+  overflow: hidden;
+  background: #10191c;
+  border-radius: 0;
+}
+.home-page .range-scene:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    #10191c22 0%,
+    transparent 40%,
+    transparent 58%,
+    #10191cdb 82%,
+    #10191c 100%
+  );
+}
+.home-page .illustrated-range {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  bottom: auto;
+  right: auto;
+  transform: translateX(-50%);
+  width: min(100%, 950px, calc(100svh - 10px));
+  height: auto;
+  max-width: 950px;
+  aspect-ratio: 1;
+  margin: 0;
+}
+.home-page .range-artwork {
+  mask-image: radial-gradient(
+    ellipse 56% 68% at 50% 45%,
+    #000 53%,
+    transparent 92%
+  );
+}
+.home-page .range-intro {
+  position: absolute;
+  inset: 36px auto auto max(32px, calc((100vw - 1280px) / 2));
+  z-index: 3;
+  padding: 0;
+  text-align: left;
+  width: min(300px, 40%);
+}
+.home-page .range-intro h1 {
+  font-size: clamp(34px, 3.5vw, 50px);
+  line-height: 1.08;
+  margin: 16px 0 12px;
+}
+.home-page .range-intro h1 br {
+  display: block;
+}
+.home-page .range-intro h1 em:before {
+  content: none;
+}
+.home-page .range-intro .eyebrow {
+  justify-content: flex-start;
+  font-size: 9px;
+}
+.home-page .range-intro > p:last-child {
+  font-size: 12px;
+}
+.home-page .art-caption {
+  display: none;
+}
+.home-page .range-bottom {
+  position: absolute;
+  z-index: 3;
+  inset: auto max(32px, calc((100vw - 1280px) / 2)) 96px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: end;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  gap: 40px;
+  background: transparent;
+}
+.home-page .range-next {
+  border: 0;
+  padding: 0;
+}
+.home-page .range-next .eyebrow {
+  font-size: 9px;
+}
+.home-page .next-run-title h2 {
+  font-size: 28px;
+}
+.home-page .range-next > small {
+  font-size: 10px;
+}
+.home-page .range-stats {
+  grid-template-columns: 1fr 1fr auto;
+  gap: 24px;
+  align-items: center;
+}
+.home-page .range-stats > .primary {
+  grid-column: auto;
+  width: auto;
+  min-height: 48px;
+  padding: 12px 20px;
+}
+.home-page .range-stats strong {
+  font-size: 26px;
+}
+.home-page .range-stats > div > span {
+  font-size: 10px;
+}
+.home-page .home-shortcuts {
+  position: absolute;
+  z-index: 3;
+  inset: auto max(32px, calc((100vw - 1280px) / 2)) 22px;
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 16px 0 0;
+  border-top: 1px solid #b8d6ca1a;
+}
+.home-page .home-shortcuts > button {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: auto;
+  padding: 4px 0;
+  min-height: 40px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+.home-page .home-shortcuts > button:hover {
+  color: #c4ebd8;
+}
+.home-page .home-shortcuts .shortcut-icon {
+  padding: 0;
+  width: auto;
+  height: auto;
+  background: none;
+  border: 0;
+}
+.home-page .home-shortcuts small {
+  display: none;
+}
+.home-page .home-shortcuts strong {
+  font-size: 12px;
+  font-weight: 500;
+}
+.home-page .home-shortcuts > button > svg:last-child {
+  width: 13px;
+}
+.live-shell .main-content:not(.home-content) {
+  max-width: 1180px;
+}
+.live-explore {
+  grid-template-columns: minmax(0, 1.5fr) minmax(300px, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.live-explore .run-map {
+  height: clamp(420px, 52vh, 560px);
+}
+.profile-layout {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+.profile-layout > aside {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.profile-layout > aside > * {
+  margin: 0;
+}
+.profile-snapshot h3 {
+  margin: 24px 0 12px;
+  font-size: 14px;
+}
+.profile-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  margin-top: 20px;
+}
+.profile-stat-grid strong {
+  display: block;
+  font-size: 25px;
+  letter-spacing: -0.7px;
+}
+.profile-stat-grid strong small {
+  font-size: 12px;
+  font-weight: 400;
+  color: #9bb1aa;
+}
+.profile-stat-grid > div > span {
+  display: block;
+  font-size: 11px;
+  color: #9bb1aa;
+  margin-top: 5px;
+}
+.profile-mountains {
+  display: grid;
+  gap: 10px;
+}
+.profile-mountains > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+}
+.profile-mountains svg {
+  color: #95bcae;
+}
+.profile-mountains strong {
+  margin-left: auto;
+  color: #9eb8ac;
+  font-size: 11px;
+  font-weight: 400;
+}
+.profile-recent {
+  display: grid;
+}
+.profile-recent > button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  min-height: 56px;
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid #cadad515;
+}
+.profile-recent > button:hover {
+  color: #b6decb;
+}
+.profile-recent > button > span {
+  display: grid;
+  gap: 5px;
+  flex: 1;
+  min-width: 0;
+}
+.profile-recent strong {
+  font-size: 13px;
+}
+.profile-recent small {
+  font-size: 11px;
+  color: #9bb1aa;
+}
+.profile-recent > button > svg:first-child {
+  color: #b6decb;
+}
+.demo-setting {
+  border-top: 1px solid #a3bfad20;
+  padding: 16px 4px 0;
+}
+.demo-setting .setting-row {
+  padding: 0;
+  border: 0;
+  gap: 20px;
+}
+.demo-setting strong {
+  font-size: 12px;
+  font-weight: 500;
+}
+.demo-setting .setting-row p,
+.demo-setting .fine-print {
+  font-size: 10px;
+  line-height: 1.5;
+}
+.demo-setting .fine-print {
+  margin: 8px 0 0;
+}
+.demo-setting .toggle-switch {
+  width: 36px;
+  height: 20px;
+  min-width: 36px;
+  position: relative;
+}
+.demo-setting .toggle-switch:before {
+  content: "";
+  position: absolute;
+  inset: -12px -4px;
+}
+.demo-setting .toggle-switch > i {
+  position: absolute;
+  transform: none;
+  width: 14px;
+  height: 14px;
+  top: 3px;
+  left: 3px;
+}
+.demo-setting .toggle-switch.on > i {
+  transform: none;
+  left: 19px;
+}
+/* Keep all map controls, credits and run labels consistent with the dark base. */
+.run-map {
+  background: #141e23;
+}
+.run-map .maplibregl-ctrl-attrib {
+  background: #152127e8 !important;
+  color: #a8c1b7 !important;
+  font-size: 9px;
+}
+.run-map .maplibregl-ctrl-attrib a {
+  color: #a8c1b7 !important;
+}
+.run-map .maplibregl-ctrl-scale {
+  background: #152127cc;
+  border-color: #9eb9b1;
+  color: #bfd2cb;
+}
+.run-map .maplibregl-ctrl-group {
+  background: #23353b !important;
+  border: 1px solid #c3d6ce24;
+  box-shadow: 0 2px 10px #0003;
+}
+.run-map .maplibregl-ctrl-group button + button {
+  border-color: #c3d6ce24;
+}
+.run-map .maplibregl-ctrl-icon {
+  filter: invert(1);
+}
+.run-map-tools button,
+.map-all-runs {
+  background: #23353bf5;
+  color: #d5e6de !important;
+  border-color: #c3d6ce24;
+}
+.map-toolbar {
+  justify-content: flex-end;
+  pointer-events: none;
+}
+.map-toolbar button {
+  pointer-events: auto;
+}
+.run-map-tools {
+  top: 85px;
+}
+.map-notice {
+  background: #172b31e8;
+  color: #bcd5ca;
+}
+@media (max-width: 1000px) {
+  .home-page .range-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .home-page .range-stats > .primary {
+    grid-column: 1 / -1;
+    width: 100%;
+  }
+}
+@media (max-width: 900px) {
+  .live-explore,
+  .profile-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .live-explore .run-map {
+    height: 440px;
+  }
+  .home-page .range-intro {
+    width: auto;
+    inset: 24px 24px auto;
+  }
+  .home-page .range-intro h1 {
+    font-size: 34px;
+  }
+  .home-page .range-intro h1 br {
+    display: none;
+  }
+  .home-page .range-intro h1 em:before {
+    content: " ";
+  }
+  .home-page .range-bottom {
+    left: 24px;
+    right: 24px;
+    gap: 24px;
+  }
+}
+@media (max-width: 600px) {
+  .home-page .range-scene {
+    height: calc(100svh - 130px);
+    min-height: 740px;
+    max-height: none;
+  }
+  .home-page .range-intro {
+    inset: 22px 20px auto;
+  }
+  .home-page .range-intro .eyebrow {
+    font-size: 8px;
+  }
+  .home-page .range-intro h1 {
+    font-size: 32px;
+    margin: 12px 0 8px;
+  }
+  .home-page .illustrated-range {
+    top: 84px;
+    width: 100%;
+  }
+  .home-page .range-bottom {
+    inset: auto 20px 82px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+  }
+  .home-page .next-run-title h2 {
+    font-size: 25px;
+  }
+  .home-page .range-stats {
+    grid-template-columns: 1fr 1fr auto;
+    gap: 12px;
+  }
+  .home-page .range-stats > .primary {
+    grid-column: auto;
+    width: auto;
+    min-height: 46px;
+    padding: 12px;
+    font-size: 11px;
+  }
+  .home-page .home-shortcuts {
+    inset: auto 20px 16px;
+    gap: 26px;
+  }
+  .home-page .range-next > small {
+    font-size: 9px;
+  }
+  .live-explore .run-map {
+    height: 390px;
+  }
+  .profile-stat-grid {
+    gap: 18px;
+  }
+}
+@media (max-width: 360px) {
+  .home-page .range-intro h1 {
+    font-size: 28px;
+  }
+  .home-page .range-stats strong {
+    font-size: 22px;
+  }
+  .home-page .range-stats {
+    gap: 8px;
+  }
+  .home-page .range-stats > .primary {
+    padding: 10px;
+    font-size: 10px;
+  }
+}

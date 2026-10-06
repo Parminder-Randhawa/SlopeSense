@@ -1,16 +1,10 @@
 import assert from "node:assert/strict";
 import { mkdirSync } from "node:fs";
-import { chromium } from "playwright";
-const base = process.env.SLOPESENSE_URL || "http://127.0.0.1:5174";
+import { launchBrowser, disableWebGL } from "./browser-test-utils.mjs";
+const base = process.env.SLOPESENSE_URL || "http://127.0.0.1:5173";
 const out = process.env.SLOPESENSE_SCREENSHOTS || "test-results";
 mkdirSync(out, { recursive: true });
-const browser = await chromium.launch({
-  headless: true,
-  executablePath:
-    process.env.CHROME_PATH ||
-    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-  args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
-});
+const browser = await launchBrowser();
 let checks = 0;
 const ok = (v, label) => {
   assert.ok(v, label);
@@ -46,6 +40,7 @@ try {
   // External outages are deterministic in this suite. A separate visual preview
   // verifies the actual providers; these tests never depend on an internet feed.
   await page.route("https://**/*", (r) => r.abort());
+  await page.addInitScript(disableWebGL);
   await page.goto(base);
   const nav = async (name) =>
     page
@@ -71,7 +66,10 @@ try {
       .isVisible(),
     "Mountain selector opens matching Explore screen",
   );
-  await page.getByRole("button", { name: "Runs only", exact: true }).click();
+
+  await page
+    .getByRole("group", { name: "Interactive trail map for Grouse Mountain" })
+    .waitFor();
   ok(
     await page
       .getByRole("group", { name: "Interactive trail map for Grouse Mountain" })
@@ -182,15 +180,15 @@ try {
   );
   await nav("Profile");
   await page.getByRole("switch", { name: "Demo mode" }).click();
-  await page.getByText("6 demo activities · this device").waitFor();
+  await page.getByText("18 demo activities · this device").waitFor();
   ok(
     (await page.getByRole("textbox", { name: "Name" }).inputValue()) === "Alex",
     "Demo has a complete separate profile",
   );
   await page.getByRole("button", { name: "Activities", exact: true }).click();
   ok(
-    (await page.locator(".activity-row").count()) === 6,
-    "Demo starts with six completed rides",
+    (await page.locator(".activity-row").count()) === 18,
+    "Demo starts with eighteen completed rides",
   );
   await page.locator(".activity-row").first().click();
   await page.getByRole("button", { name: "Play replay", exact: true }).click();
@@ -231,7 +229,7 @@ try {
   await nav("Profile");
   await page.getByRole("button", { name: "Activities", exact: true }).click();
   ok(
-    (await page.locator(".activity-row").count()) === 7,
+    (await page.locator(".activity-row").count()) === 19,
     "Demo history excludes the real GPS ride",
   );
   await nav("Profile");

@@ -1,12 +1,13 @@
 import { useState } from "react";
-import type { Profile as RiderProfile } from "../types/rider";
+import type { Activity, Profile as RiderProfile } from "../types/rider";
 import { ProfileFields } from "../components/ProfileForm";
 import { PageHeading } from "../components/Shared";
 import { Icon } from "../components/Icon";
-import { mountainInfo } from "../data/mountains";
+import { ProfileSnapshot } from "../components/ProfileSnapshot";
 export function Profile({
   profile,
-  count,
+  activities,
+  onActivity,
   onSave,
   demo,
   onDemo,
@@ -15,7 +16,8 @@ export function Profile({
   onExport,
 }: {
   profile: RiderProfile;
-  count: number;
+  activities: Activity[];
+  onActivity: (a: Activity) => void;
   onSave: (p: RiderProfile) => void;
   demo: boolean;
   onDemo: (v: boolean) => void;
@@ -37,7 +39,8 @@ export function Profile({
             <div>
               <h2>{draft.name || "Rider"}</h2>
               <p>
-                {count} {demo ? "demo" : "saved"} activities · this device
+                {activities.length} {demo ? "demo" : "saved"} activities · this
+                device
               </p>
             </div>
           </div>
@@ -70,35 +73,11 @@ export function Profile({
           </button>
         </section>
         <aside>
-          <section className="panel settings-panel">
-            <p className="eyebrow">SETTINGS</p>
-            <h2>Hackathon demo</h2>
-            <div className="setting-row">
-              <div>
-                <strong>Demo mode</strong>
-                <p>Alex’s complete rider profile & sample rides.</p>
-              </div>
-              <button
-                role="switch"
-                aria-checked={demo}
-                aria-label="Demo mode"
-                disabled={locked}
-                className={`toggle-switch ${demo ? "on" : ""}`}
-                onClick={() => onDemo(!demo)}
-              >
-                <i />
-              </button>
-            </div>
-            <p className="fine-print">
-              {locked
-                ? "Finish or discard your current draft before switching modes."
-                : "Includes six completed rides, feedback, progress stats and playable replays. Demo data stays separate from your real profile."}
-            </p>
-            <span className={`mode-status ${demo ? "demo" : ""}`}>
-              <span className="status-dot" />
-              {demo ? "Demo mode active" : "Live GPS & weather"}
-            </span>
-          </section>
+          <ProfileSnapshot
+            activities={activities}
+            demo={demo}
+            onActivity={onActivity}
+          />
           <section className="panel data-transparency">
             <h2>On this device</h2>
             <p>
@@ -149,6 +128,31 @@ export function Profile({
               Report a map issue ↗
             </a>
           </details>
+          <section className="demo-setting" aria-label="Demo settings">
+            <div className="setting-row">
+              <div>
+                <strong>Try a sample profile</strong>
+                <p>Explore rides, replays and progress.</p>
+              </div>
+              <button
+                role="switch"
+                aria-checked={demo}
+                aria-label="Demo mode"
+                disabled={locked}
+                className={`toggle-switch ${demo ? "on" : ""}`}
+                onClick={() => onDemo(!demo)}
+              >
+                <i />
+              </button>
+            </div>
+            <p className="fine-print">
+              {locked
+                ? "Finish or discard your draft to switch modes."
+                : demo
+                  ? "Demo is active. Your real rides stay separate."
+                  : "Sample data stays separate from your own rides."}
+            </p>
+          </section>
         </aside>
       </div>
     </div>

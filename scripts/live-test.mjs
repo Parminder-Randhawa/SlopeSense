@@ -23,11 +23,41 @@ try {
   const { rankTrails } = await server.ssrLoadModule(
     "/src/engine/recommendations.ts",
   );
-  const { allTrails, demoProfile } =
+  const { allTrails, demoProfile, seedActivities } =
     await server.ssrLoadModule("/src/data/demo.ts");
   const { routeFor } = await server.ssrLoadModule("/src/engine/route.ts");
   const { trailsToFeatureCollection } = await server.ssrLoadModule(
     "/src/lib/trailParser.ts",
+  );
+  const samples = seedActivities();
+  ok(
+    samples.length === 18 && new Set(samples.map((a) => a.id)).size === 18,
+    "Extended sample season has unique stable ride IDs",
+  );
+  ok(
+    samples.every(
+      (a) =>
+        a.simulated &&
+        a.telemetry.length > 1 &&
+        allTrails.some((t) => t.id === a.trailId),
+    ),
+    "Every sample ride has a replayable mapped route and provenance",
+  );
+  ok(
+    new Set(samples.map((a) => a.resortId)).size === 3,
+    "Sample season covers all three mountains",
+  );
+  const dates = samples.map((a) => Date.parse(a.date));
+  ok(
+    Math.max(...dates) - Math.min(...dates) > 6 * 7 * 86400000,
+    "Sample history spans enough weeks for progress charts",
+  );
+  const { mapStyle } = await server.ssrLoadModule("/src/lib/mapStyle.ts");
+  const dark = mapStyle();
+  ok(
+    dark.sources.openmaptiles.url === "https://tiles.openfreemap.org/planet" &&
+      dark.sources.openmaptiles.attribution.includes("OpenStreetMap"),
+    "Detailed basemap uses dark tiles with provider attribution",
   );
   const base = Date.parse("2026-10-05T12:00:00Z");
   const fix = (seq, lat = 49, lng = -123, extra = {}) => ({

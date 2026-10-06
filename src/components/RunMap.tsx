@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import maplibregl, {
   type GeoJSONSource,
   type Map as MapType,
-  type StyleSpecification,
 } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import type { Resort } from "../types/resort";
@@ -11,56 +10,24 @@ import type { Sample } from "../types/rider";
 import { trailsToFeatureCollection } from "../lib/trailParser";
 import { OfflineTrailMap } from "./OfflineTrailMap";
 import { Icon } from "./Icon";
+import { mapStyle } from "../lib/mapStyle";
 const colors = [
   "match",
   ["get", "difficulty"],
   "green",
-  "#399270",
+  "#77cba5",
   "blue",
-  "#367bc0",
+  "#75b7ee",
   "black",
-  "#41485b",
+  "#d4dce2",
   "double-black",
-  "#80559c",
+  "#bf9bde",
   "#86958b",
 ] as any;
 const empty = {
   type: "FeatureCollection",
   features: [],
 } as GeoJSON.FeatureCollection;
-export function mapStyle(): StyleSpecification {
-  return {
-    version: 8,
-    glyphs: "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
-    sources: {
-      context: {
-        type: "raster",
-        tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
-        tileSize: 256,
-        maxzoom: 19,
-        attribution:
-          '<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>',
-      },
-    },
-    layers: [
-      {
-        id: "paper",
-        type: "background",
-        paint: { "background-color": "#e9eddf" },
-      },
-      {
-        id: "map-context",
-        source: "context",
-        type: "raster",
-        paint: {
-          "raster-saturation": -0.8,
-          "raster-opacity": 0.48,
-          "raster-contrast": -0.2,
-        },
-      },
-    ],
-  };
-}
 export function RunMap({
   resort,
   trails = [],
@@ -150,7 +117,7 @@ export function RunMap({
         source: "trails",
         layout: { "line-cap": "round", "line-join": "round" },
         paint: {
-          "line-color": "#ffffff",
+          "line-color": "#0a141a",
           "line-width": 7,
           "line-opacity": 0.8,
         },
@@ -206,8 +173,8 @@ export function RunMap({
           "text-allow-overlap": false,
         },
         paint: {
-          "text-color": "#374941",
-          "text-halo-color": "#f6f7ed",
+          "text-color": "#d8e8e4",
+          "text-halo-color": "#132027",
           "text-halo-width": 2,
         },
       });
@@ -435,20 +402,6 @@ export function RunMap({
   };
   const controls = (
     <div className="map-toolbar">
-      <div className="map-view-switch" role="group" aria-label="Map appearance">
-        <button
-          aria-pressed={!offline}
-          onClick={() => {
-            setNotice("");
-            setOffline(false);
-          }}
-        >
-          Map detail
-        </button>
-        <button aria-pressed={offline} onClick={() => setOffline(true)}>
-          Runs only
-        </button>
-      </div>
       {selectedTrail && onClearSelection && (
         <button className="map-all-runs" onClick={onClearSelection}>
           <Icon name="back" size={15} />

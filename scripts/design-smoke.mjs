@@ -1,15 +1,10 @@
 import assert from "node:assert/strict";
 import { mkdirSync } from "node:fs";
-import { chromium } from "playwright";
+import { launchBrowser, disableWebGL } from "./browser-test-utils.mjs";
 const base = process.env.SLOPESENSE_URL || "http://127.0.0.1:5173";
 const out = process.env.SLOPESENSE_SCREENSHOTS || "test-results/design";
 mkdirSync(out, { recursive: true });
-const browser = await chromium.launch({
-  headless: true,
-  executablePath:
-    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
-  args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"],
-});
+const browser = await launchBrowser();
 let count = 0;
 const check = (test, label) => {
   assert.ok(test, label);
@@ -22,6 +17,7 @@ try {
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.route("https://**/*", (r) => r.abort());
+  await page.addInitScript(disableWebGL);
   await page.goto(base);
   const nav = async (name) => {
     const mobile = page.getByRole("navigation", { name: "Mobile navigation" });
@@ -46,8 +42,8 @@ try {
     );
     const art = await page.locator(".range-artwork").boundingBox();
     check(
-      Math.abs(art.width - art.height) < 2 && art.width <= 700,
-      `${width}px artwork keeps native aspect without oversized crop`,
+      Math.abs(art.width - art.height) < 2 && art.width <= 950,
+      `${width}px immersive artwork keeps native aspect`,
     );
     await nav("Record");
     await page
@@ -102,7 +98,7 @@ try {
   }
   await page.setViewportSize({ width: 390, height: 844 });
   await nav("Explore");
-  await page.getByRole("button", { name: "Runs only", exact: true }).click();
+
   await page.getByRole("group", { name: /Interactive trail map/ }).waitFor();
   const initialView = await page
     .locator(".terrain-canvas>g")
@@ -175,20 +171,39 @@ try {
       overview,
     "All runs button restores overview camera",
   );
-  await page.getByRole("button", { name: "Map detail", exact: true }).click();
-  await page.locator(".run-canvas").waitFor();
   check(
     (await page
-      .getByRole("button", { name: "Map detail", exact: true })
-      .getAttribute("aria-pressed")) === "true",
-    "Switching back to detailed map works",
+      .getByRole("button", { name: "Runs only", exact: true })
+      .count()) === 0,
+    "Removed map style switch stays absent",
   );
-  await page.getByRole("button", { name: "Runs only", exact: true }).click();
+  await nav("Profile");
+  const demoControl = page.getByRole("switch", { name: "Demo mode" });
+  await demoControl.click();
+  await page.getByText("18 demo activities · this device").waitFor();
+  check(
+    await page.getByRole("region", { name: "Riding overview" }).isVisible(),
+    "Profile shows calculated riding overview",
+  );
   check(
     await page
-      .getByRole("group", { name: /Interactive trail map/ })
+      .getByRole("heading", { name: "Recent rides & replays" })
       .isVisible(),
-    "Map appearance switch remains reversible",
+    "Replays are directly accessible from Profile",
+  );
+  check(
+    await page
+      .locator("aside > :last-child")
+      .getByRole("switch", { name: "Demo mode" })
+      .isVisible(),
+    "Small demo control is last in Settings",
+  );
+  await page.locator(".profile-recent button").first().click();
+  check(
+    await page
+      .getByRole("button", { name: "Play replay", exact: true })
+      .isVisible(),
+    "Profile recent ride opens its replay",
   );
   check(errors.length === 0, `No runtime errors: ${errors.join("; ")}`);
   console.log(`${count} design checks passed.`);

@@ -119,7 +119,7 @@ export function Mountain({
             trails={shown}
             selectedTrail={selected}
             onSelectTrail={onSelect}
-            onClearSelection={()=>onSelect(null)}
+            onClearSelection={() => onSelect(null)}
             lockCamera
           />
           <div className="map-underbar">
@@ -233,7 +233,10 @@ export function Mountain({
               <MiniMountain resortId={resortId} />
               <p className="eyebrow">{shown.length} MAPPED RUNS</p>
               <h2>Pick your line.</h2>
-              <p>Choose a run to focus its route. Tap beside it or use All runs to return.</p>
+              <p>
+                Choose a run to focus its route. Tap beside it or use All runs
+                to return.
+              </p>
               {ranked[0] && (
                 <button
                   className="primary"
@@ -310,7 +313,7 @@ export function Mountain({
       </div>
       <p className="data-note">
         {weather.simulated
-          ? "Simulated winter weather for the hackathon."
+          ? "Sample winter weather."
           : `${weather.observedAt ? `Model valid ${new Date(weather.observedAt).toLocaleString()}. ` : ""}Open-Meteo estimates at the map location, not a resort snow report. Snowfall is estimated, not a measured snow stake total.`}{" "}
       </p>
     </div>
