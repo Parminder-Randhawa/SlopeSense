@@ -119,10 +119,12 @@ export function Mountain({
             trails={shown}
             selectedTrail={selected}
             onSelectTrail={onSelect}
+            onClearSelection={()=>onSelect(null)}
+            lockCamera
           />
           <div className="map-underbar">
             <span>● Green &nbsp; ■ Blue &nbsp; ◆ Black &nbsp; ◆◆ Expert</span>
-            <span>Tap a run · pinch to zoom</span>
+            <span>Tap a run to focus · tap beside it to return</span>
           </div>
         </section>
         <aside className="trail-panel">
@@ -231,7 +233,7 @@ export function Mountain({
               <MiniMountain resortId={resortId} />
               <p className="eyebrow">{shown.length} MAPPED RUNS</p>
               <h2>Pick your line.</h2>
-              <p>Tap a trail to focus it. Labels appear as you zoom in.</p>
+              <p>Choose a run to focus its route. Tap beside it or use All runs to return.</p>
               {ranked[0] && (
                 <button
                   className="primary"

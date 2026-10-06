@@ -10,7 +10,8 @@
     "typecheck": "tsc -b --pretty false",
     "data:import": "python3 scripts/import-osm.py",
     "test": "node scripts/test.mjs && node scripts/live-test.mjs",
-    "test:ui": "node scripts/live-smoke.mjs"
+    "test:ui": "node scripts/live-smoke.mjs",
+    "test:design": "node scripts/design-smoke.mjs"
   },
   "dependencies": {
     "maplibre-gl": "^4.7.1",

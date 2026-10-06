@@ -13,6 +13,8 @@ export type GpsFix = {
 };
 export type LiveWeather = {
   snowing: boolean;
+  snowfallRate: number | null;
+  windDirection: number | null;
   temperature: number | null;
   snowfall: number | null;
   wind: number | null;

@@ -59,7 +59,7 @@ try {
     "Three fixed illustrated mountain choices",
   );
   ok(
-    (await page.locator(".range-scene canvas").count()) === 0,
+    (await page.locator(".range-scene .maplibregl-canvas").count()) === 0,
     "Home has no pannable or zoomable map",
   );
   await page
@@ -71,7 +71,7 @@ try {
       .isVisible(),
     "Mountain selector opens matching Explore screen",
   );
-  await page.getByRole("button", { name: "Simple map", exact: true }).click();
+  await page.getByRole("button", { name: "Runs only", exact: true }).click();
   ok(
     await page
       .getByRole("group", { name: "Interactive trail map for Grouse Mountain" })

@@ -66,6 +66,8 @@ export function RunMap({
   trails = [],
   selectedTrail,
   onSelectTrail,
+  onClearSelection,
+  lockCamera = false,
   track = [],
   rider,
 }: {
@@ -73,15 +75,21 @@ export function RunMap({
   trails?: SkiRun[];
   selectedTrail?: SkiRun | null;
   onSelectTrail?: (t: SkiRun) => void;
+  onClearSelection?: () => void;
+  lockCamera?: boolean;
   track?: Sample[];
   rider?: Sample;
 }) {
   const container = useRef<HTMLDivElement>(null),
     mapRef = useRef<MapType | null>(null),
     callbacks = useRef(onSelectTrail),
+    clearCallback = useRef(onClearSelection),
+    selectedRef = useRef(selectedTrail),
     trailRef = useRef(trails),
     fitted = useRef(false);
   callbacks.current = onSelectTrail;
+  clearCallback.current = onClearSelection;
+  selectedRef.current = selectedTrail;
   trailRef.current = trails;
   const [loaded, setLoaded] = useState(false),
     [offline, setOffline] = useState(false),
@@ -103,6 +111,12 @@ export function RunMap({
         touchPitch: false,
         maxPitch: 0,
         renderWorldCopies: false,
+        scrollZoom: !lockCamera,
+        boxZoom: !lockCamera,
+        doubleClickZoom: !lockCamera,
+        dragPan: !lockCamera,
+        touchZoomRotate: !lockCamera,
+        keyboard: !lockCamera,
       });
     } catch {
       setOffline(true);
@@ -114,10 +128,11 @@ export function RunMap({
       new maplibregl.AttributionControl({ compact: false }),
       "bottom-left",
     );
-    m.addControl(
-      new maplibregl.NavigationControl({ showCompass: false }),
-      "top-right",
-    );
+    if (!lockCamera)
+      m.addControl(
+        new maplibregl.NavigationControl({ showCompass: false }),
+        "top-right",
+      );
     m.addControl(
       new maplibregl.ScaleControl({ maxWidth: 75, unit: "metric" }),
       "bottom-right",
@@ -250,6 +265,11 @@ export function RunMap({
       );
       if (t) callbacks.current?.(t);
     });
+    m.on("click", (e) => {
+      if (!m.getLayer("trail-hit")) return;
+      if (!m.queryRenderedFeatures(e.point, { layers: ["trail-hit"] }).length)
+        clearCallback.current?.();
+    });
     m.on("mouseenter", "trail-hit", () => {
       m.getCanvas().style.cursor = "pointer";
     });
@@ -261,7 +281,24 @@ export function RunMap({
       if (!disposed && ++errors > 3)
         setNotice("Map detail unavailable · your run geometry is still shown.");
     });
-    const observer = new ResizeObserver(() => m.resize());
+    const observer = new ResizeObserver(() => {
+      m.resize();
+      const t = selectedRef.current;
+      const visible = t ? [t] : trailRef.current;
+      if (!visible.length) return;
+      const bounds = new maplibregl.LngLatBounds();
+      visible.forEach((t) =>
+        (t.geometry.type === "LineString"
+          ? t.geometry.coordinates
+          : t.geometry.coordinates.flat()
+        ).forEach((p) => bounds.extend([p[0], p[1]])),
+      );
+      m.fitBounds(bounds, {
+        padding: t ? 65 : 45,
+        maxZoom: t ? 16 : 15,
+        duration: 0,
+      });
+    });
     observer.observe(container.current);
     return () => {
       disposed = true;
@@ -269,7 +306,7 @@ export function RunMap({
       m.remove();
       mapRef.current = null;
     };
-  }, [resort.id, offline]);
+  }, [resort.id, offline, lockCamera]);
   useEffect(() => {
     const m = mapRef.current;
     if (loaded && m?.getSource("trails"))
@@ -287,7 +324,12 @@ export function RunMap({
     m.setPaintProperty(
       "trail-lines",
       "line-opacity",
-      id ? ["case", ["==", ["get", "id"], id], 1, 0.28] : 0.85,
+      id ? ["case", ["==", ["get", "id"], id], 1, 0.13] : 0.85,
+    );
+    m.setPaintProperty(
+      "trail-halo",
+      "line-opacity",
+      id ? ["case", ["==", ["get", "id"], id], 0.9, 0.12] : 0.8,
     );
     if (selectedTrail) {
       const bounds = new maplibregl.LngLatBounds();
@@ -302,8 +344,23 @@ export function RunMap({
           ? 0
           : 450,
       });
+    } else if (trails.length && !track.length) {
+      const bounds = new maplibregl.LngLatBounds();
+      trails.forEach((t) =>
+        (t.geometry.type === "LineString"
+          ? t.geometry.coordinates
+          : t.geometry.coordinates.flat()
+        ).forEach((p) => bounds.extend([p[0], p[1]])),
+      );
+      m.fitBounds(bounds, {
+        padding: 45,
+        maxZoom: 15,
+        duration: matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? 0
+          : 450,
+      });
     }
-  }, [selectedTrail, loaded]);
+  }, [selectedTrail, loaded, trails]);
   useEffect(() => {
     const m = mapRef.current;
     if (!loaded || !m?.getSource("track")) return;
@@ -376,32 +433,60 @@ export function RunMap({
       { enableHighAccuracy: true, timeout: 15000 },
     );
   };
-  if (offline)
-    return (
-      <OfflineTrailMap
-        resort={resort}
-        trails={trails}
-        selectedTrail={selectedTrail || null}
-        onSelectTrail={onSelectTrail || (() => {})}
-        rider={rider || track.at(-1)}
-        track={track}
-      />
-    );
-  return (
-    <div className="run-map">
-      <div
-        className="run-canvas"
-        ref={container}
-        aria-label={`Run map for ${resort.name}`}
-      />
-      <div className="run-map-tools">
-        <button onClick={locate} aria-label="Locate me">
-          <Icon name="target" size={19} />
+  const controls = (
+    <div className="map-toolbar">
+      <div className="map-view-switch" role="group" aria-label="Map appearance">
+        <button
+          aria-pressed={!offline}
+          onClick={() => {
+            setNotice("");
+            setOffline(false);
+          }}
+        >
+          Map detail
+        </button>
+        <button aria-pressed={offline} onClick={() => setOffline(true)}>
+          Runs only
         </button>
       </div>
-      <button className="map-fallback-button" onClick={() => setOffline(true)}>
-        Simple map
-      </button>
+      {selectedTrail && onClearSelection && (
+        <button className="map-all-runs" onClick={onClearSelection}>
+          <Icon name="back" size={15} />
+          All runs
+        </button>
+      )}
+    </div>
+  );
+  return (
+    <div
+      className={`run-map ${offline ? "is-simple" : ""} ${lockCamera ? "is-guided" : ""}`}
+    >
+      {offline ? (
+        <OfflineTrailMap
+          resort={resort}
+          trails={trails}
+          selectedTrail={selectedTrail || null}
+          onSelectTrail={onSelectTrail || (() => {})}
+          rider={rider || track.at(-1)}
+          track={track}
+          lockCamera={lockCamera}
+          onClearSelection={onClearSelection}
+        />
+      ) : (
+        <div
+          className="run-canvas"
+          ref={container}
+          aria-label={`Run map for ${resort.name}`}
+        />
+      )}
+      {controls}
+      {!lockCamera && !offline && (
+        <div className="run-map-tools">
+          <button onClick={locate} aria-label="Locate me">
+            <Icon name="target" size={19} />
+          </button>
+        </div>
+      )}
       {notice && (
         <div className="map-notice" role="status">
           {notice}

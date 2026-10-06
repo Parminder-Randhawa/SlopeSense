@@ -96,8 +96,21 @@ try {
     sampleAt(pause.samples, 15).lat === pause.samples[1].lat,
     "Replay does not interpolate across gaps",
   );
-  const noisyResume=processGps([fix(0),fix(1,49.00005),fix(4,49.0008,-123,{accuracy:100,breakBefore:true}),fix(5,49.0009),fix(6,49.00095)],[]);
-  ok(noisyResume.samples[2].breakBefore && noisyResume.samples[2].distance===noisyResume.samples[1].distance,'Pause boundary survives a rejected first resumed fix');
+  const noisyResume = processGps(
+    [
+      fix(0),
+      fix(1, 49.00005),
+      fix(4, 49.0008, -123, { accuracy: 100, breakBefore: true }),
+      fix(5, 49.0009),
+      fix(6, 49.00095),
+    ],
+    [],
+  );
+  ok(
+    noisyResume.samples[2].breakBefore &&
+      noisyResume.samples[2].distance === noisyResume.samples[1].distance,
+    "Pause boundary survives a rejected first resumed fix",
+  );
   const altitude = processGps(
     [
       fix(0, 49, -123, { altitude: 1000, altitudeAccuracy: 3 }),
@@ -191,6 +204,50 @@ try {
   assert.throws(() => parseWeather({ current: { temperature_2m: 10 } }, base));
   checks++;
   console.log("✓ Invalid weather payload rejected");
+  const { snowMotion } = await server.ssrLoadModule(
+    "/src/components/MountainSnow.tsx",
+  );
+  const snowData = {
+    ...data,
+    current: {
+      ...data.current,
+      weather_code: 73,
+      snowfall: 0.2,
+      interval: 900,
+      wind_direction_10m: 270,
+    },
+  };
+  const snowNow = parseWeather(snowData, base);
+  ok(
+    snowNow.snowfallRate === 0.8,
+    "Current snowfall interval converted to cm/hour",
+  );
+  const heavy = parseWeather(
+    { ...snowData, current: { ...snowData.current, snowfall: 0.8 } },
+    base,
+  );
+  ok(
+    snowMotion(heavy).count > snowMotion(snowNow).count &&
+      snowMotion(heavy).fall > snowMotion(snowNow).fall,
+    "Heavier current snowfall increases density and modestly increases speed",
+  );
+  ok(
+    snowMotion({ ...snowNow, stale: true }).count === 0,
+    "Stale snowfall never animates",
+  );
+  ok(
+    snowMotion({ ...snowNow, snowfallRate: null }).count === 0,
+    "Unknown snowfall intensity never invents precipitation",
+  );
+  ok(
+    snowMotion({ ...snowNow, snowfallRate: 0 }).count === 0,
+    "Zero current snowfall produces no particles despite historical accumulation",
+  );
+  ok(
+    snowMotion({ ...snowNow, wind: 40 }).drift >
+      snowMotion({ ...snowNow, wind: 5 }).drift,
+    "Wind speed controls particle drift",
+  );
   const ranked = rankTrails(allTrails, demoProfile, [], emptyWeather());
   ok(
     ranked.every(

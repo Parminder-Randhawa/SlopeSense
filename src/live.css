@@ -2293,11 +2293,677 @@ body {
     );
   }
 }
-@media(max-width:700px){
-  .range-scene{height:720px;min-height:720px;}
-  .range-artwork{height:590px;}
-  .illustrated-mountain.grouse{top:30%;}
-  .illustrated-mountain.cypress{top:48%;}
-  .illustrated-mountain.seymour{top:54%;}
-  .art-caption{bottom:208px;}
+@media (max-width: 700px) {
+  .range-scene {
+    height: 720px;
+    min-height: 720px;
+  }
+  .range-artwork {
+    height: 590px;
+  }
+  .illustrated-mountain.grouse {
+    top: 30%;
+  }
+  .illustrated-mountain.cypress {
+    top: 48%;
+  }
+  .illustrated-mountain.seymour {
+    top: 54%;
+  }
+  .art-caption {
+    bottom: 208px;
+  }
 }
+/* Responsive composition: render the illustration at its native aspect ratio. */
+html {
+  scrollbar-gutter: stable;
+  scroll-padding-bottom: 100px;
+}
+* {
+  box-sizing: border-box;
+}
+button,
+a,
+input,
+select {
+  touch-action: manipulation;
+}
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #c9e9d7;
+  outline-offset: 4px;
+}
+.live-shell .home-content {
+  max-width: 1320px;
+  padding: 0 24px;
+}
+.range-scene {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.4fr);
+  grid-template-areas: "intro art" "next art";
+  gap: 28px 20px;
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  padding: 36px 24px;
+  background: #10191c;
+  border-radius: 0;
+  overflow: visible;
+}
+.range-intro {
+  grid-area: intro;
+  position: static;
+  align-self: end;
+  padding: 0;
+  pointer-events: auto;
+}
+.range-intro h1 {
+  font-size: clamp(40px, 4.4vw, 66px);
+  margin: 18px 0;
+}
+.range-intro > p:last-child {
+  line-height: 1.6;
+}
+.range-coordinates {
+  display: none;
+}
+.illustrated-range {
+  grid-area: art;
+  position: relative;
+  inset: auto;
+  width: 100%;
+  max-width: 700px;
+  aspect-ratio: 1;
+  margin: auto;
+  overflow: hidden;
+  isolation: isolate;
+}
+.range-artwork {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  opacity: 1;
+  mask-image: radial-gradient(
+    ellipse 74% 72% at 50% 47%,
+    #000 49%,
+    transparent 80%
+  );
+}
+.illustrated-range:after {
+  display: none;
+}
+.mountain-snow-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.illustrated-mountain {
+  width: 150px;
+  z-index: 2;
+}
+.illustrated-mountain.grouse {
+  left: 61%;
+  top: 29%;
+}
+.illustrated-mountain.cypress {
+  left: 23%;
+  top: 43%;
+}
+.illustrated-mountain.seymour {
+  left: 78%;
+  top: 63%;
+}
+.illustrated-pin {
+  padding: 10px 12px;
+  gap: 5px;
+  background: #101a2080;
+  border: 1px solid #e7efed38;
+  border-radius: 9px;
+  backdrop-filter: none;
+  box-shadow: 0 3px 16px #04100b25;
+  text-shadow: 0 1px 5px #0009;
+}
+.illustrated-pin:hover,
+.illustrated-pin:focus-visible {
+  transform: none;
+  border-color: #f0f4ee;
+  background: #17252bdd;
+}
+.illustrated-pin-name {
+  font-size: 15px;
+  font-weight: 600;
+}
+.illustrated-weather {
+  font-size: 13px;
+}
+.illustrated-weather > span {
+  font-size: 10px;
+  max-width: 105px;
+}
+.illustrated-pin > small {
+  font-size: 9px;
+}
+.art-caption {
+  right: 0;
+  left: 0;
+  text-align: center;
+  bottom: 7%;
+  font-size: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #9eafa9;
+}
+.range-bottom {
+  grid-area: next;
+  position: static;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 22px;
+  pointer-events: auto;
+}
+.range-next {
+  padding-top: 20px;
+  border-top: 1px solid #c9dbce22;
+}
+.next-run-title h2 {
+  font-size: 28px;
+}
+.range-next > small {
+  line-height: 1.5;
+}
+.range-stats {
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.range-stats > .primary {
+  grid-column: 1/-1;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+}
+.range-stats strong {
+  font-size: 26px;
+}
+.home-shortcuts {
+  padding-top: 0;
+}
+.start-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 80px minmax(0, 1fr);
+  justify-items: center;
+  align-items: center;
+  gap: 16px;
+  max-width: 450px;
+  margin: 24px auto;
+}
+.start-row > span {
+  min-width: 0;
+  max-width: 100%;
+  text-wrap: balance;
+}
+.record-start {
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  padding: 0;
+  border: 1px solid #ffffff30;
+  box-shadow:
+    0 0 0 7px #e8a47e0a,
+    0 7px 20px #0002;
+}
+.record-start svg {
+  display: block;
+  margin: 0;
+  transform: translateX(1px);
+  width: 26px;
+  height: 26px;
+}
+.record-start:active {
+  transform: scale(0.96);
+}
+.picker-backdrop {
+  overscroll-behavior: contain;
+}
+.run-picker {
+  max-height: min(760px, calc(100dvh - 48px));
+}
+.run-picker header {
+  flex-shrink: 0;
+}
+.run-picker .resort-switch {
+  flex-shrink: 0;
+}
+.picker-runs {
+  scrollbar-width: thin;
+  scrollbar-color: #60736c transparent;
+}
+.picker-runs > button {
+  min-height: 68px;
+  padding: 14px 10px;
+  border-radius: 8px;
+}
+.picker-runs > button:hover {
+  background: #cce3d510;
+}
+.run-picker input {
+  font-size: 16px;
+}
+.run-picker .resort-switch button {
+  min-height: 44px;
+}
+.map-toolbar {
+  position: absolute;
+  z-index: 4;
+  left: 12px;
+  right: 12px;
+  top: 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+.map-toolbar button {
+  pointer-events: auto;
+  min-height: 40px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+.map-view-switch {
+  display: flex;
+  border-radius: 10px;
+  background: #ffffffed;
+  box-shadow: 0 2px 12px #142b2020;
+  padding: 3px;
+  gap: 2px;
+  border: 1px solid #263b2620;
+}
+.map-view-switch button {
+  padding: 0 12px;
+  border-radius: 7px;
+  color: #44564c;
+  min-height: 34px;
+}
+.map-view-switch button[aria-pressed="true"] {
+  background: #253b32;
+  color: #fff;
+}
+.map-all-runs {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #fff;
+  color: #243b31;
+  padding: 0 12px;
+  border-radius: 9px;
+  box-shadow: 0 2px 12px #142b201f;
+}
+.run-map .terrain-map {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  border: 0;
+  border-radius: inherit;
+}
+.run-map .map-north,
+.run-map .map-difficulty,
+.run-map .map-caption {
+  display: none;
+}
+.run-map .terrain-map .map-attribution {
+  font-size: 9px;
+}
+.run-map .maplibregl-ctrl-top-right {
+  top: 52px;
+}
+.run-map-tools {
+  top: 140px;
+}
+.run-map .map-controls {
+  top: 72px;
+  bottom: auto;
+}
+.run-map .map-notice {
+  pointer-events: none;
+  max-width: calc(100% - 24px);
+  font-size: 10px;
+  line-height: 1.5;
+}
+.run-map .terrain-canvas {
+  touch-action: pan-y;
+}
+.live-explore .run-map {
+  height: clamp(420px, 60vh, 660px);
+}
+.map-underbar {
+  flex-wrap: wrap;
+  gap: 8px;
+  line-height: 1.5;
+}
+.record-title,
+.mountain-live-heading {
+  flex-wrap: wrap;
+}
+.record-title > .secondary {
+  margin-left: auto;
+}
+.record-console {
+  border-radius: 0 0 20px 20px;
+}
+.record-map-wrap .run-map {
+  border-radius: 18px 18px 0 0;
+}
+@media (min-width: 901px) and (max-width: 1100px) {
+  .range-scene {
+    grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.3fr);
+    padding: 28px 0;
+  }
+  .range-intro h1 {
+    font-size: 46px;
+  }
+  .live-explore {
+    grid-template-columns: minmax(0, 1fr) 290px;
+  }
+}
+@media (max-width: 900px) {
+  .live-shell .home-content {
+    padding: 0;
+  }
+  .range-scene {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    gap: 0;
+  }
+  .range-intro {
+    order: 0;
+    align-self: stretch;
+    padding: 28px 24px 0;
+  }
+  .range-intro h1 {
+    font-size: 42px;
+    margin: 12px 0 10px;
+  }
+  .range-intro h1 br {
+    display: none;
+  }
+  .range-intro h1 em:before {
+    content: " ";
+  }
+  .illustrated-range {
+    order: 1;
+    max-width: 640px;
+    width: 100%;
+    margin: -10px auto 0;
+    flex-shrink: 0;
+  }
+  .range-bottom {
+    order: 2;
+    padding: 0 24px 28px;
+    margin-top: -25px;
+    z-index: 3;
+    gap: 18px;
+  }
+  .range-next {
+    padding-top: 0;
+    border-top: 0;
+  }
+  .range-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 16px;
+    align-items: center;
+  }
+  .range-stats > .primary {
+    grid-column: auto;
+    width: auto;
+    min-height: 46px;
+  }
+  .range-intro .eyebrow {
+    font-size: 9px;
+  }
+  .home-shortcuts {
+    padding: 0 24px 24px;
+  }
+  .live-explore {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .live-explore .trail-panel {
+    min-width: 0;
+  }
+  .live-explore .run-map {
+    height: 440px;
+  }
+  .illustrated-mountain {
+    width: 140px;
+  }
+}
+@media (max-width: 600px) {
+  .range-intro {
+    padding: 24px 20px 0;
+  }
+  .range-intro h1 {
+    font-size: 36px;
+    letter-spacing: -0.055em;
+  }
+  .range-intro > p:last-child {
+    font-size: 12px;
+  }
+  .illustrated-range {
+    margin: 0 auto;
+  }
+  .illustrated-mountain {
+    width: 119px;
+  }
+  .illustrated-mountain.grouse {
+    left: 62%;
+    top: 26%;
+  }
+  .illustrated-mountain.cypress {
+    left: 22%;
+    top: 43%;
+  }
+  .illustrated-mountain.seymour {
+    left: 80%;
+    top: 66%;
+  }
+  .illustrated-pin {
+    padding: 9px;
+    gap: 4px;
+  }
+  .illustrated-pin-name {
+    font-size: 13px;
+  }
+  .illustrated-weather {
+    font-size: 12px;
+    gap: 6px;
+  }
+  .illustrated-weather > span {
+    font-size: 9px;
+    max-width: 70px;
+  }
+  .illustrated-pin > small {
+    font-size: 8px;
+  }
+  .art-caption {
+    font-size: 6px;
+    bottom: 4%;
+  }
+  .range-bottom {
+    margin-top: 0;
+    padding: 12px 20px 24px;
+  }
+  .range-stats {
+    gap: 10px;
+  }
+  .range-stats strong {
+    font-size: 23px;
+  }
+  .range-stats > .primary {
+    padding: 10px 12px;
+    font-size: 11px;
+  }
+  .range-next .eyebrow {
+    font-size: 8px;
+  }
+  .home-shortcuts {
+    padding: 0 20px 24px;
+  }
+  .start-row {
+    grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr);
+    gap: 12px;
+    margin: 20px auto;
+  }
+  .record-start {
+    width: 72px;
+    height: 72px;
+    min-width: 72px;
+  }
+  .start-row > span {
+    font-size: 11px;
+  }
+  .run-picker {
+    max-height: calc(100dvh - 24px);
+    padding: 20px 16px max(22px, env(safe-area-inset-bottom));
+  }
+  .map-toolbar {
+    left: 10px;
+    right: 10px;
+    top: 10px;
+    gap: 6px;
+  }
+  .map-view-switch button {
+    padding: 0 9px;
+    font-size: 10px;
+  }
+  .map-all-runs {
+    padding: 0 9px;
+    font-size: 10px !important;
+  }
+  .live-explore .run-map {
+    height: 390px;
+  }
+  .record-title h1 {
+    font-size: 24px;
+  }
+  .record-title > .secondary {
+    font-size: 10px;
+    min-height: 40px;
+  }
+  .record-metrics {
+    gap: 10px;
+  }
+  .profile-layout,
+  .progress-grid {
+    min-width: 0;
+  }
+  .summary-metrics {
+    min-width: 0;
+  }
+  .playback-bar {
+    gap: 10px;
+  }
+}
+@media (max-width: 360px) {
+  .range-intro h1 {
+    font-size: 32px;
+  }
+  .illustrated-mountain {
+    width: 106px;
+  }
+  .illustrated-pin-name {
+    font-size: 12px;
+  }
+  .illustrated-weather > span {
+    max-width: 58px;
+  }
+  .illustrated-pin {
+    padding: 8px 7px;
+  }
+  .range-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .range-stats > .primary {
+    grid-column: 1/-1;
+    width: 100%;
+  }
+  .map-view-switch button {
+    padding: 0 7px;
+  }
+  .map-all-runs {
+    gap: 3px;
+    padding: 0 7px;
+  }
+  .record-title > .secondary {
+    margin-left: 0;
+  }
+  .record-title {
+    gap: 10px;
+  }
+}
+
+.range-stats .primary {
+  justify-content: center !important;
+  justify-self: stretch;
+}
+.range-stats {
+  border-left: 0;
+  padding-left: 0;
+}
+.illustrated-pin {
+  background: #101c22d9;
+  border-color: #e1eee721;
+  text-shadow: none;
+}
+.illustrated-weather {
+  position: absolute;
+  right: 11px;
+  top: 12px;
+}
+.illustrated-weather > span {
+  display: none;
+}
+.illustrated-pin-name {
+  padding-right: 26px;
+}
+.illustrated-pin-name svg {
+  display: none;
+}
+.illustrated-pin > small {
+  white-space: nowrap;
+}
+.illustrated-pin {
+  padding-right: 11px;
+}
+.mini-mountain {
+  background-image: url("/assets/north-shore-detailed.png");
+}
+.run-picker .icon-button {
+  flex-shrink: 0;
+}
+@media (max-width: 600px) {
+  .illustrated-weather {
+    top: 10px;
+    right: 8px;
+  }
+  .illustrated-pin-name {
+    padding-right: 21px;
+  }
+  .illustrated-pin-name {
+    font-size: 12px;
+  }
+  .illustrated-pin {
+    padding-right: 8px;
+  }
+}
+
+.live-shell .primary{justify-content:center;gap:10px;}.live-shell .primary>svg:last-child{margin-left:0;}.live-shell .secondary{gap:10px;}.live-shell .record-start svg{margin:0;}
+
+.run-map.is-guided .maplibregl-canvas-container,.run-map.is-guided canvas{touch-action:pan-y!important;}

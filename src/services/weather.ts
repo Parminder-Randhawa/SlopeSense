@@ -5,6 +5,8 @@ import { conditions } from "../data/conditions";
 export type WeatherSet = Record<ResortId, LiveWeather>;
 export const unknownWeather = (): LiveWeather => ({
   snowing: false,
+  snowfallRate: null,
+  windDirection: null,
   temperature: null,
   snowfall: null,
   wind: null,
@@ -37,6 +39,8 @@ export function demoWeather(): WeatherSet {
         observedAt: null,
         modelled: false,
         snowing: r.id === "seymour",
+        snowfallRate: r.id === "seymour" ? 0.8 : 0,
+        windDirection: 245,
       },
     ]),
   ) as WeatherSet;
@@ -87,7 +91,21 @@ export function parseWeather(data: any, now = Date.now()): LiveWeather {
   return {
     ...unknownWeather(),
     available: true,
-    snowing: [71,73,75,77,85,86].includes(c.weather_code),
+    snowing: [71, 73, 75, 77, 85, 86].includes(c.weather_code),
+    snowfallRate:
+      finite(c.snowfall) &&
+      c.snowfall >= 0 &&
+      finite(c.interval) &&
+      c.interval > 0 &&
+      c.interval <= 3600
+        ? (c.snowfall * 3600) / c.interval
+        : null,
+    windDirection:
+      finite(c.wind_direction_10m) &&
+      c.wind_direction_10m >= 0 &&
+      c.wind_direction_10m <= 360
+        ? c.wind_direction_10m
+        : null,
     temperature: c.temperature_2m,
     wind: finite(c.wind_speed_10m) ? c.wind_speed_10m : null,
     snowfall:
@@ -130,7 +148,8 @@ export async function fetchWeather(signal: AbortSignal): Promise<WeatherSet> {
   const params = new URLSearchParams({
     latitude: resorts.map((r) => r.center.lat).join(","),
     longitude: resorts.map((r) => r.center.lng).join(","),
-    current: "temperature_2m,weather_code,wind_speed_10m",
+    current:
+      "temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,snowfall",
     hourly: "snowfall,visibility",
     past_days: "1",
     forecast_days: "1",

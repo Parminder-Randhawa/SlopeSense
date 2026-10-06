@@ -19,6 +19,8 @@ type Props = {
   recommendedId?: string;
   rider?: Sample;
   compact?: boolean;
+  lockCamera?: boolean;
+  onClearSelection?: () => void;
   track?: Sample[];
 };
 export function OfflineTrailMap({
@@ -29,6 +31,8 @@ export function OfflineTrailMap({
   recommendedId,
   rider,
   compact,
+  lockCamera = false,
+  onClearSelection,
   track = emptyTrack,
 }: Props) {
   const [view, setView] = useState({ x: 0, y: 0, scale: 1 });
@@ -133,8 +137,12 @@ export function OfflineTrailMap({
         role="group"
         aria-label={`Interactive trail map for ${resort.name}`}
         className="terrain-canvas"
-        onWheel={(e) => zoom(e.deltaY < 0 ? 1.1 : 0.91)}
+        onWheel={
+          lockCamera ? undefined : (e) => zoom(e.deltaY < 0 ? 1.1 : 0.91)
+        }
+        onClick={() => onClearSelection?.()}
         onPointerDown={(e) => {
+          if (lockCamera) return;
           pointers.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
           moved.current = false;
         }}
@@ -191,7 +199,8 @@ export function OfflineTrailMap({
                 tabIndex={0}
                 aria-label={`Select ${trail.name}, ${trail.difficulty}`}
                 className="map-trail"
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   if (!moved.current) onSelectTrail(trail);
                 }}
                 onKeyDown={(e) => {
@@ -216,12 +225,12 @@ export function OfflineTrailMap({
                   fill="none"
                   stroke={colors[trail.difficulty]}
                   strokeWidth={active ? 4 : 2.5}
-                  opacity={selectedTrail && !active ? 0.5 : 0.95}
+                  opacity={selectedTrail && !active ? 0.13 : 0.95}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
                 <path d={d} fill="none" stroke="transparent" strokeWidth="18" />
-                <text
+                <text pointerEvents="none"
                   x={label[0] + 8}
                   y={label[1] - 7}
                   fill={active ? "#fff" : "#bfcecc"}
@@ -266,19 +275,10 @@ export function OfflineTrailMap({
               />
               <circle
                 r={13 / Math.sqrt(view.scale)}
-                fill="#d0f4e6"
-                stroke="#142c27"
+                fill="#338eda"
+                stroke="#ffffff"
                 strokeWidth="3"
               />
-              <g
-                stroke="#163b33"
-                fill="none"
-                strokeWidth="2"
-                strokeLinecap="round"
-              >
-                <circle cx="1" cy="-5" r="2" fill="#163b33" />
-                <path d="m1-2-3 5 5 2m-4-5 6 1m-7 3-3 2M-7 8q7 4 14-1" />
-              </g>
             </g>
           )}
         </g>
@@ -291,20 +291,22 @@ export function OfflineTrailMap({
         <span>N</span>
         <Icon name="compass" size={28} />
       </div>
-      <div className="map-controls">
-        <button onClick={() => zoom(1.3)} aria-label="Zoom in">
-          <Icon name="plus" />
-        </button>
-        <button onClick={() => zoom(1 / 1.3)} aria-label="Zoom out">
-          <Icon name="minus" />
-        </button>
-        <button
-          onClick={() => setView({ x: 0, y: 0, scale: 1 })}
-          aria-label="Reset map view"
-        >
-          <Icon name="target" />
-        </button>
-      </div>
+      {!lockCamera && (
+        <div className="map-controls">
+          <button onClick={() => zoom(1.3)} aria-label="Zoom in">
+            <Icon name="plus" />
+          </button>
+          <button onClick={() => zoom(1 / 1.3)} aria-label="Zoom out">
+            <Icon name="minus" />
+          </button>
+          <button
+            onClick={() => setView({ x: 0, y: 0, scale: 1 })}
+            aria-label="Reset map view"
+          >
+            <Icon name="target" />
+          </button>
+        </div>
+      )}
       <div className="map-attribution">
         <a
           href="https://www.openstreetmap.org/copyright"

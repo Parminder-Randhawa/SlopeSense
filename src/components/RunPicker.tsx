@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
+import { useState, useEffect, useRef } from "react";
 import { allTrails } from "../data/demo";
 import { resorts } from "../data/resorts";
 import type { ResortId } from "../types/resort";
@@ -13,13 +14,20 @@ export function RunPicker({
   onPick: (id: string) => void;
   onClose: () => void;
 }) {
+  const closeButton = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     const previous = document.activeElement as HTMLElement;
-    const overflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    const y = window.scrollY;
+    const previousStyle = document.body.getAttribute("style");
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${y}px`;
+    document.body.style.width = "100%";
+    closeButton.current?.focus({ preventScroll: true });
     return () => {
-      document.body.style.overflow = overflow;
-      previous?.focus();
+      if (previousStyle === null) document.body.removeAttribute("style");
+      else document.body.setAttribute("style", previousStyle);
+      window.scrollTo(0, y);
+      previous?.focus({ preventScroll: true });
     };
   }, []);
   const [resort, setResort] = useState<ResortId>(
@@ -31,7 +39,7 @@ export function RunPicker({
       t.resortId === resort &&
       t.name.toLowerCase().includes(search.toLowerCase()),
   );
-  return (
+  return createPortal(
     <div className="picker-backdrop" onClick={onClose}>
       <section
         className="run-picker"
@@ -63,6 +71,7 @@ export function RunPicker({
             <h2 id="picker-title">Choose a run</h2>
           </div>
           <button
+            ref={closeButton}
             className="icon-button"
             aria-label="Close run picker"
             onClick={onClose}
@@ -75,14 +84,16 @@ export function RunPicker({
             <button
               key={r.id}
               className={resort === r.id ? "active" : ""}
-              onClick={() => setResort(r.id)}
+              onClick={() => {
+                setResort(r.id);
+                setSearch("");
+              }}
             >
               {r.shortName}
             </button>
           ))}
         </div>
         <input
-          autoFocus
           aria-label="Search runs"
           placeholder="Search runs…"
           value={search}
@@ -113,6 +124,7 @@ export function RunPicker({
           )}
         </div>
       </section>
-    </div>
+    </div>,
+    document.body,
   );
 }

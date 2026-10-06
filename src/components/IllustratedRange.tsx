@@ -1,6 +1,5 @@
-import type { CSSProperties } from "react";
 import { resorts } from "../data/resorts";
-import { mountainInfo } from "../data/mountains";
+import { MountainSnow } from "./MountainSnow";
 import type { ResortId } from "../types/resort";
 import type { WeatherSet } from "../services/weather";
 import { Icon } from "./Icon";
@@ -18,60 +17,50 @@ export function IllustratedRange({
     >
       <img
         className="range-artwork"
-        src="/assets/north-shore-diorama.png"
-        alt="Illustrated three-mountain range viewed from above"
+        src="/assets/north-shore-detailed.png"
+        width="1254"
+        height="1254"
+        decoding="async"
+        alt="Illustrated Cypress with its Olympic rings, Grouse with its summit turbine, and Seymour’s wooded ridge"
       />
-      <div className="range-mist" aria-hidden="true" />
+      <MountainSnow weather={weather} />
       {resorts.map((r) => {
         const c = weather[r.id],
           snow = c.snowing && !c.stale;
         return (
-          <div
-            className={`illustrated-mountain ${r.id}`}
-            key={r.id}
-            style={
-              { "--mountain-color": mountainInfo[r.id].color } as CSSProperties
-            }
-          >
-            {snow && (
-              <div className="mountain-snow" aria-hidden="true">
-                {Array.from({ length: 16 }, (_, i) => (
-                  <i
-                    key={i}
-                    style={{
-                      left: `${(i * 23) % 100}%`,
-                      animationDelay: `${-(i % 7) * 0.7}s`,
-                      animationDuration: `${3 + (i % 4)}s`,
-                    }}
-                  />
-                ))}
-              </div>
-            )}
+          <div className={`illustrated-mountain ${r.id}`} key={r.id}>
             <button
               className="illustrated-pin"
               onClick={() => onMountain(r.id)}
               aria-label={`Explore ${r.name}`}
             >
-              <span className="mountain-beacon" />
               <span className="illustrated-pin-name">
                 {r.shortName}
                 <Icon name="chevron" size={13} />
               </span>
               <span className="illustrated-weather">
                 {c.temperature === null ? "—" : `${Math.round(c.temperature)}°`}
-                <span>{snow ? "Snowing" : c.description}</span>
+                {snow && <span>Snowing</span>}
               </span>
               <small>
                 {c.snowfall === null
-                  ? "Snow total unavailable"
+                  ? "Snow unavailable"
                   : `${c.snowfall} cm / 24h`}
-                {c.simulated ? " · demo" : c.stale ? " · cached" : " · est."}
+                {c.snowfall === null
+                  ? ""
+                  : c.simulated
+                    ? " · demo"
+                    : c.stale
+                      ? " · cached"
+                      : " · est."}
               </small>
             </button>
           </div>
         );
       })}
-      <span className="art-caption">ILLUSTRATED TERRAIN</span>
+      <span className="art-caption">
+        Illustrated winter terrain · select a mountain
+      </span>
     </div>
   );
 }

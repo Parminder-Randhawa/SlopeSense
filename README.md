@@ -17,7 +17,8 @@ Open **http://127.0.0.1:5173/**. Use the same address each time: `localhost` and
 pnpm build       # TypeScript + production bundle
 pnpm preview     # Preview the production build
 pnpm test        # Recommendation, geometry, GPS, and weather tests
-pnpm test:ui     # Browser regression suite; dev server required
+pnpm test:ui     # Browser recording regression suite; dev server required
+pnpm test:design # Layout + interaction checks at five widths; defaults to port 5173
 ```
 
 The UI suite defaults to `http://127.0.0.1:5174`. Set `SLOPESENSE_URL=http://127.0.0.1:5173` to test the normal server. On macOS it uses installed Google Chrome. Elsewhere provide `CHROME_PATH` or adjust the test launcher for installed Playwright Chromium. Browser tests use isolated profiles and synthetic location callbacks; they do not overwrite the user's saved rides.
@@ -26,8 +27,8 @@ Google login and Tiger Cloud are deferred. The local app has no dependency on ei
 
 ## Using the app
 
-- **Home:** a fixed, realistic terrain illustration inspired by the North Shore, with three interactive mountain markers and no zoom or pan. Select Cypress, Grouse, or Mt Seymour to open that mountain. The suggested run respects your explicit difficulty ceiling. Snow particles appear only on mountains with a current snowfall weather code (or the explicitly labelled demo scenario). Stale data does not animate.
-- **Explore:** a quiet OpenStreetMap cartographic basemap, difficulty filters, selected-run focus, zoom-dependent labels, location control, and links to official resort reports. Tap a line or choose a run from the list. A trail-only map remains available when external map detail cannot load.
+- **Home:** a fixed, realistic terrain illustration inspired by the North Shore, with three compact mountain labels and no zoom or pan. Select Cypress, Grouse, or Mt Seymour to open that mountain. The suggested run respects your explicit difficulty ceiling. Snow density and a restrained fall-speed increase follow current snowfall intensity (cm/hour); wind controls drift. Stale, zero, or unknown intensity does not animate. Reduced-motion preferences disable particles. The demo has a separately labelled winter scenario.
+- **Explore:** a quiet OpenStreetMap cartographic basemap, difficulty filters, guided selected-run focus, collision-aware labels, and links to official resort reports. Tap a line or choose a run from the list. Choose Map detail or Runs only in the same reversible control. In Explore, free pan/zoom is disabled: selecting a run fits it, and tapping empty space or All runs returns to the overview. Recording/replay maps retain navigation controls.
 - **Record:** choose skiing or snowboarding in Profile, then auto detection or a specific run. Press Start to request device location. Pause, resume, finish, add optional feedback, and save. The active recorder survives in-app navigation. A recovered draft requires an explicit Resume after reload.
 - **Rides & replays:** play, pause, scrub and change replay speed; inspect actual route samples and calculated metrics, compare repeated runs, or export GPX. Unmatched activities remain valid recordings and do not receive an invented mountain or trail.
 - **Progress:** distance by week, saved ride totals, mapped terrain experience, and experimental movement-pattern summaries.
@@ -43,6 +44,7 @@ Demo mode feeds synthetic positions along real OSM geometry through the same GPS
 | Run basemap | OpenStreetMap standard cartographic tiles; desaturated so selected runs stand out |
 | Trails | 37 named OSM trails: Cypress 12, Grouse 13, Seymour 12; snapshot Oct 3, 2026 |
 | Current weather | Open-Meteo forecast model at each mountain's mapped centre; refresh every 10 minutes |
+| Animated snow | Current snowfall accumulation divided by the provider interval, expressed in cm/hour; a visual intensity mapping, not a physical simulation |
 | Last 24h snowfall | Sum of the previous 24 complete hourly model values, in cm; not a measured resort snow stake |
 | Live movement | Browser Geolocation API, with explicit permission on Start |
 | Speed, distance, descent | Calculated from accepted position / altitude observations |
@@ -100,3 +102,7 @@ The project intentionally avoids requesting Google or Tiger Data credentials for
 `pnpm test` covers the existing recommendation/telemetry invariants and new GPS filtering, missing altitude, pauses, ambiguous matching, weather freshness, incomplete hourly data, continuous source chains, and disjoint geometry. `pnpm test:ui` covers live default, offline maps, manual selection, location denial, draft recovery, successful real/demo saves, history separation, export, empty-recording rejection, and responsive overflow checks.
 
 The browser suite uses controlled GPS fixtures; an outdoor device field test is still needed to assess real sensor quality. Runtime provider requests and the map presentation are verified separately from deterministic outage tests.
+
+### Design verification
+
+`pnpm test:design` checks 320, 390, 768, 1024 and 1440 pixel widths, uncropped artwork, centered Record controls, stable modal opening/closing, map focus/overview and reversible map appearance. The source illustration is rendered at native aspect and capped at 700 CSS pixels to avoid the previous oversized crop. It includes illustrative Cypress Olympic rings, Grouse’s summit turbine, and Seymour’s rolling ridge; landmark placement is artistic, not navigation data.
