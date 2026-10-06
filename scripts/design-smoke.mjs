@@ -26,8 +26,20 @@ try {
       : page.getByRole("navigation", { name: "Main navigation" });
     await main.getByRole("button", { name, exact: true }).click();
   };
-  for (const width of [320, 390, 768, 1024, 1440]) {
-    await page.setViewportSize({ width, height: width <= 600 ? 844 : 900 });
+  for (const width of [320, 375, 390, 430, 768, 1024, 1440, 1920]) {
+    await page.setViewportSize({
+      width,
+      height:
+        width === 375
+          ? 667
+          : width === 430
+            ? 932
+            : width === 1920
+              ? 1080
+              : width <= 600
+                ? 844
+                : 900,
+    });
     await nav("Home");
     await page.getByRole("heading", { name: "Find your next line." }).waitFor();
     check(
@@ -40,12 +52,70 @@ try {
       (await page.locator(".mountain-beacon").count()) === 0,
       `${width}px has no colored mountain pointers`,
     );
+    const scene = await page.locator(".range-scene").boundingBox();
+    const backdrop = await page.locator(".illustrated-range").boundingBox();
+    check(
+      Math.abs(backdrop.width - scene.width) < 2 &&
+        Math.abs(
+          scene.width -
+            (await page.evaluate(
+              () => document.body.getBoundingClientRect().width,
+            )),
+        ) < 2 &&
+        Math.abs(backdrop.height - (await page.evaluate(() => innerHeight))) <
+          2 &&
+        Math.abs(backdrop.x) < 2,
+      `${width}px mountain backdrop fills the home screen edge to edge`,
+    );
     const art = await page.locator(".range-artwork").boundingBox();
     check(
-      Math.abs(art.width - art.height) < 2 && art.width <= 950,
-      `${width}px immersive artwork keeps native aspect`,
+      Math.abs(art.width - scene.width) < 2 &&
+        Math.abs(art.height - backdrop.height) < 2 &&
+        (await page
+          .locator(".range-artwork")
+          .evaluate((img) => getComputedStyle(img).objectFit)) === "cover",
+      `${width}px image covers the complete scene without a square frame`,
+    );
+    for (const name of ["Cypress Mountain", "Grouse Mountain", "Mt Seymour"]) {
+      const pin = await page
+        .getByRole("button", { name: `Explore ${name}`, exact: true })
+        .boundingBox();
+      check(
+        pin &&
+          pin.x >= 0 &&
+          pin.x + pin.width <= width &&
+          pin.y >= 0 &&
+          pin.y + pin.height <= backdrop.height,
+        `${width}px ${name} selection stays within the mountain scene`,
+      );
+    }
+    const intro = await page.locator(".range-intro").boundingBox();
+    const pins = await page.locator(".illustrated-pin").all();
+    const clearHeading = (
+      await Promise.all(pins.map((pin) => pin.boundingBox()))
+    ).every(
+      (pin) =>
+        pin.x + pin.width <= intro.x ||
+        pin.x >= intro.x + intro.width ||
+        pin.y + pin.height <= intro.y ||
+        pin.y >= intro.y + intro.height,
+    );
+    check(
+      clearHeading,
+      `${width}px mountain selections remain clear of the heading`,
     );
     if (width <= 600) {
+      await page.locator(".home-shortcuts").scrollIntoViewIfNeeded();
+      check(
+        await page
+          .locator(".range-artwork")
+          .evaluate(
+            (img) =>
+              img.currentSrc.endsWith("north-shore-portrait.png") &&
+              img.naturalWidth >= img.getBoundingClientRect().width * 2,
+          ),
+        `${width}px uses the sharp portrait artwork`,
+      );
       check(
         await page.evaluate(
           () =>
@@ -54,6 +124,14 @@ try {
             document.querySelector(".bottom-nav").getBoundingClientRect().top,
         ),
         `${width}px home replay links remain above fixed navigation`,
+      );
+    }
+    if (width <= 600) {
+      check(
+        await page
+          .locator(".home-page")
+          .evaluate((el) => getComputedStyle(el).touchAction === "pan-y"),
+        `${width}px home allows scrolling without pinch or double-tap zoom`,
       );
     }
     await nav("Record");
@@ -102,6 +180,20 @@ try {
           () => document.documentElement.scrollWidth <= innerWidth,
         ),
         `${width}px ${name} fits viewport`,
+      );
+    }
+    if (width <= 900) {
+      check(
+        await page
+          .locator(
+            "input:not([type=range]):not([type=checkbox]):not([type=radio]), select, textarea",
+          )
+          .evaluateAll((fields) =>
+            fields.every(
+              (el) => parseFloat(getComputedStyle(el).fontSize) >= 16,
+            ),
+          ),
+        `${width}px form fields avoid mobile focus zoom`,
       );
     }
     await nav("Home");

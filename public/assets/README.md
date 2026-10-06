@@ -15,6 +15,10 @@ The final refinement replaced repetitive conical trees with an irregular continu
 
 ## October 6 refinement
 
-`north-shore-detailed.png` was edited using the built-in image-generation tool, with the earlier image as its edit target. Native output is 1254 × 1254; the UI preserves its aspect ratio and avoids enlarged crops. The request for a larger generated resolution did not change the tool’s native output size. Cypress’s physical Olympic rings and Grouse’s Eye of the Wind are included as illustrative landmarks. The exact refinement prompt is `artwork-refinement-prompt.txt`.
+`north-shore-detailed.png` was edited using the built-in image-generation tool, with the earlier image as its edit target. Native output is 1254 × 1254; the source retains its native proportions. The home now uses cover cropping on desktop and a separate portrait composition on phones. The request for a larger generated resolution did not change the tool’s native output size. Cypress’s physical Olympic rings and Grouse’s Eye of the Wind are included as illustrative landmarks. The exact refinement prompt is `artwork-refinement-prompt.txt`.
 
 Additional landmark references: [Cypress history](https://www.cypressmountain.com/our-history), [Grouse Eye of the Wind](https://www.grousemountain.com/press_releases/the-eye-of-the-wind-welcomes-the-world), [Seymour trail map](https://mtseymour.ca/the-mountain/trail-map).
+
+## Full-screen portrait adaptation
+
+`north-shore-portrait.png` was edited from the detailed artwork using the built-in image-generation tool on October 6, 2026. It recomposes all three mountains within a single full-bleed portrait background; it is not a separate square overlay. Native output is 887 × 1774. The lossless PNG is served at its original resolution, without artificial enlargement or compression. The tool did not deliver the requested larger dimensions. The active `<picture>` selects this portrait asset on phones and keeps the original detailed asset on wider screens. The exact final prompt is in `artwork-portrait-prompt.txt`.

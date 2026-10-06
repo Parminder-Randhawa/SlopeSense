@@ -23,12 +23,24 @@ export function snowMotion(weather: LiveWeather) {
       -Math.sin(((weather.windDirection || 0) * Math.PI) / 180) * wind * 0.65,
   };
 }
-const zones: [ResortId, number, number, number, number][] = [
+const landscapeZones: [ResortId, number, number, number, number][] = [
   ["cypress", 0.25, 0.55, 0.27, 0.24],
   ["grouse", 0.59, 0.31, 0.27, 0.25],
   ["seymour", 0.79, 0.65, 0.23, 0.24],
 ];
-export function MountainSnow({ weather }: { weather: WeatherSet }) {
+const portraitZones: [ResortId, number, number, number, number][] = [
+  ["cypress", 0.24, 0.43, 0.24, 0.1],
+  ["grouse", 0.58, 0.3, 0.24, 0.12],
+  ["seymour", 0.77, 0.55, 0.22, 0.1],
+];
+export function MountainSnow({
+  weather,
+  portrait = false,
+}: {
+  weather: WeatherSet;
+  portrait?: boolean;
+}) {
+  const zones = portrait ? portraitZones : landscapeZones;
   const canvas = useRef<HTMLCanvasElement>(null);
   const signature = JSON.stringify(
     zones.map(([id]) => snowMotion(weather[id])),
@@ -134,7 +146,7 @@ export function MountainSnow({ weather }: { weather: WeatherSet }) {
       reduced.removeEventListener("change", sync);
       document.removeEventListener("visibilitychange", sync);
     };
-  }, [signature]);
+  }, [signature, portrait]);
   return (
     <canvas ref={canvas} className="mountain-snow-canvas" aria-hidden="true" />
   );

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { resorts } from "../data/resorts";
 import { MountainSnow } from "./MountainSnow";
 import type { ResortId } from "../types/resort";
@@ -10,20 +11,36 @@ export function IllustratedRange({
   weather: WeatherSet;
   onMountain: (id: ResortId) => void;
 }) {
+  const [portrait, setPortrait] = useState(
+    () => matchMedia("(max-width: 600px)").matches,
+  );
   return (
     <div
       className="illustrated-range"
       aria-label="Choose your North Shore mountain"
     >
-      <img
-        className="range-artwork"
-        src="/assets/north-shore-detailed.png"
-        width="1254"
-        height="1254"
-        decoding="async"
-        alt="Illustrated Cypress with its Olympic rings, Grouse with its summit turbine, and Seymour’s wooded ridge"
-      />
-      <MountainSnow weather={weather} />
+      <picture>
+        <source
+          media="(max-width: 600px)"
+          srcSet="/assets/north-shore-portrait.png"
+        />
+        <img
+          className="range-artwork"
+          src="/assets/north-shore-detailed.png"
+          width="1254"
+          height="1254"
+          decoding="async"
+          fetchPriority="high"
+          onLoad={(event) =>
+            setPortrait(
+              event.currentTarget.naturalHeight >
+                event.currentTarget.naturalWidth * 1.5,
+            )
+          }
+          alt="Illustrated Cypress with its Olympic rings, Grouse with its summit turbine, and Seymour’s wooded ridge"
+        />
+      </picture>
+      <MountainSnow weather={weather} portrait={portrait} />
       {resorts.map((r) => {
         const c = weather[r.id],
           snow = c.snowing && !c.stale;
