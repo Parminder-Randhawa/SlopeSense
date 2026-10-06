@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.vite/
+test-results/
+playwright-report/
+coverage/
+pnpm-lock.yaml
+src/data/*.geojson
+public/assets/
+*.tsbuildinfo
+.env*

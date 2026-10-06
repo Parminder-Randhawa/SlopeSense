@@ -76,7 +76,13 @@ export function ActivityPage({
             />
             <Metric value={summary.stops} label="Detected stops" />
           </div>
-          {selected.telemetry.length > 1 && <ReplayPlayer key={selected.id} activity={selected} comparison={compare}/>}
+          {selected.telemetry.length > 1 && (
+            <ReplayPlayer
+              key={selected.id}
+              activity={selected}
+              comparison={compare}
+            />
+          )}
           <p className="fine-print">
             {selected.simulated
               ? "This ride uses simulated GPS fixes and elevation."
@@ -179,7 +185,10 @@ export function ActivityPage({
                     label="Tracked time"
                   />
                 </div>
-                <span className="ride-replay-action"><Icon name="play" size={17} />Replay</span>
+                <span className="ride-replay-action">
+                  <Icon name="play" size={17} />
+                  Replay
+                </span>
               </button>
             );
           })}

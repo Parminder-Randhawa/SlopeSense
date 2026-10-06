@@ -230,7 +230,8 @@ export function OfflineTrailMap({
                   strokeLinejoin="round"
                 />
                 <path d={d} fill="none" stroke="transparent" strokeWidth="18" />
-                <text pointerEvents="none"
+                <text
+                  pointerEvents="none"
                   x={label[0] + 8}
                   y={label[1] - 7}
                   fill={active ? "#fff" : "#bfcecc"}

@@ -2964,6 +2964,21 @@ a:focus-visible {
   }
 }
 
-.live-shell .primary{justify-content:center;gap:10px;}.live-shell .primary>svg:last-child{margin-left:0;}.live-shell .secondary{gap:10px;}.live-shell .record-start svg{margin:0;}
+.live-shell .primary {
+  justify-content: center;
+  gap: 10px;
+}
+.live-shell .primary > svg:last-child {
+  margin-left: 0;
+}
+.live-shell .secondary {
+  gap: 10px;
+}
+.live-shell .record-start svg {
+  margin: 0;
+}
 
-.run-map.is-guided .maplibregl-canvas-container,.run-map.is-guided canvas{touch-action:pan-y!important;}
+.run-map.is-guided .maplibregl-canvas-container,
+.run-map.is-guided canvas {
+  touch-action: pan-y !important;
+}

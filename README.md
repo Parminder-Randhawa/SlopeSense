@@ -4,10 +4,10 @@ A mobile-first North Shore ski and snowboard app that runs locally without an ac
 
 ## Run locally
 
-Use Node.js 20.19+ (Node 22 or 24 recommended) and pnpm.
+Use Node.js 24 (`nvm use`) and the pnpm version pinned in `package.json`.
 
 ```sh
-pnpm install
+pnpm install --frozen-lockfile
 pnpm dev
 ```
 
@@ -18,38 +18,39 @@ pnpm build       # TypeScript + production bundle
 pnpm preview     # Preview the production build
 pnpm test        # Recommendation, geometry, GPS, and weather tests
 pnpm test:ui     # Browser recording regression suite; dev server required
-pnpm test:design # Layout + interaction checks at five widths; defaults to port 5173
+pnpm test:design # Layout + interaction checks at five widths; dev server required
+pnpm check       # Full local CI checks, including production browser tests
 ```
 
-The UI suite defaults to `http://127.0.0.1:5174`. Set `SLOPESENSE_URL=http://127.0.0.1:5173` to test the normal server. On macOS it uses installed Google Chrome. Elsewhere provide `CHROME_PATH` or adjust the test launcher for installed Playwright Chromium. Browser tests use isolated profiles and synthetic location callbacks; they do not overwrite the user's saved rides.
+The browser suites use isolated profiles and synthetic location callbacks. `pnpm test:browser` runs both suites against a temporary server for the production bundle; it does not overwrite your saved rides. It uses installed macOS Chrome or Playwright Chromium on other systems. Install once with `pnpm exec playwright install chromium`; `CHROME_PATH` can select a custom browser.
 
 Google login and Tiger Cloud are deferred. The local app has no dependency on either and does not claim Tiger Data integration. No `.env` configuration is needed. Keep any existing credentials private; `.env` files are ignored by Git.
 
 ## Using the app
 
 - **Home:** a fixed, realistic terrain illustration inspired by the North Shore, with three compact mountain labels and no zoom or pan. Select Cypress, Grouse, or Mt Seymour to open that mountain. The suggested run respects your explicit difficulty ceiling. Snow density and a restrained fall-speed increase follow current snowfall intensity (cm/hour); wind controls drift. Stale, zero, or unknown intensity does not animate. Reduced-motion preferences disable particles. The demo has a separately labelled winter scenario.
-- **Explore:** a quiet OpenStreetMap cartographic basemap, difficulty filters, guided selected-run focus, collision-aware labels, and links to official resort reports. Tap a line or choose a run from the list. Choose Map detail or Runs only in the same reversible control. In Explore, free pan/zoom is disabled: selecting a run fits it, and tapping empty space or All runs returns to the overview. Recording/replay maps retain navigation controls.
+- **Explore:** a dark OpenFreeMap vector basemap with OpenStreetMap context, difficulty filters, guided selected-run focus, collision-aware labels, and links to official resort reports. Tap a line or choose a run from the list. In Explore, free pan/zoom is disabled: selecting a run fits it, and tapping empty space or All runs returns to the overview. Recording/replay maps retain navigation controls.
 - **Record:** choose skiing or snowboarding in Profile, then auto detection or a specific run. Press Start to request device location. Pause, resume, finish, add optional feedback, and save. The active recorder survives in-app navigation. A recovered draft requires an explicit Resume after reload.
 - **Rides & replays:** play, pause, scrub and change replay speed; inspect actual route samples and calculated metrics, compare repeated runs, or export GPX. Unmatched activities remain valid recordings and do not receive an invented mountain or trail.
 - **Progress:** distance by week, saved ride totals, mapped terrain experience, and experimental movement-pattern summaries.
-- **Profile / Settings:** edit preferences, export a JSON backup, and enable **Demo mode** for the hackathon. Live mode is the default. A mode change is disabled while a draft exists.
+- **Profile / Settings:** edit preferences, export a JSON backup, and try the sample profile using the small **Demo mode** control at the bottom of Settings. Live mode is the default. A mode change is disabled while a draft exists.
 
-Demo mode feeds synthetic positions along real OSM geometry through the same GPS filtering, run matching, recording, persistence, and analytics code as live rides. It advances simulated time at 10×. Synthetic weather is clearly labelled. Demo and real histories are stored separately by provenance and never combined in recommendations or progress. Demo starts with Alex’s complete profile, six completed rides across the three mountains, feedback, progress statistics and playable replays. These sample rides never appear in the live profile.
+Demo mode feeds synthetic positions along real OSM geometry through the same GPS filtering, run matching, recording, persistence, and analytics code as live rides. It advances simulated time at 10×. Synthetic weather is clearly labelled. Demo and real histories are stored separately by provenance and never combined in recommendations or progress. Demo starts with Alex’s complete profile, eighteen completed rides over eight weeks across the three mountains, feedback, progress statistics and playable replays. These sample rides never appear in the live profile.
 
 ## What is real, modelled, and unknown
 
-| Data | Source / meaning |
-| --- | --- |
-| Home artwork | Generated realistic illustration informed by mountain references; stylized layout, not a surveyed navigation map |
-| Run basemap | OpenStreetMap standard cartographic tiles; desaturated so selected runs stand out |
-| Trails | 37 named OSM trails: Cypress 12, Grouse 13, Seymour 12; snapshot Oct 3, 2026 |
-| Current weather | Open-Meteo forecast model at each mountain's mapped centre; refresh every 10 minutes |
-| Animated snow | Current snowfall accumulation divided by the provider interval, expressed in cm/hour; a visual intensity mapping, not a physical simulation |
-| Last 24h snowfall | Sum of the previous 24 complete hourly model values, in cm; not a measured resort snow stake |
-| Live movement | Browser Geolocation API, with explicit permission on Start |
-| Speed, distance, descent | Calculated from accepted position / altitude observations |
-| Rider preferences / feedback | Entered by the rider |
-| Open lifts, open runs, daily grooming, surface quality | **Unverified**; follow the linked official mountain report |
+| Data                                                   | Source / meaning                                                                                                                            |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Home artwork                                           | Generated realistic illustration informed by mountain references; stylized layout, not a surveyed navigation map                            |
+| Run basemap                                            | OpenFreeMap dark vector tiles; bright run overlays and faint unselected runs                                                                |
+| Trails                                                 | 37 named OSM trails: Cypress 12, Grouse 13, Seymour 12; snapshot Oct 3, 2026                                                                |
+| Current weather                                        | Open-Meteo forecast model at each mountain's mapped centre; refresh every 10 minutes                                                        |
+| Animated snow                                          | Current snowfall accumulation divided by the provider interval, expressed in cm/hour; a visual intensity mapping, not a physical simulation |
+| Last 24h snowfall                                      | Sum of the previous 24 complete hourly model values, in cm; not a measured resort snow stake                                                |
+| Live movement                                          | Browser Geolocation API, with explicit permission on Start                                                                                  |
+| Speed, distance, descent                               | Calculated from accepted position / altitude observations                                                                                   |
+| Rider preferences / feedback                           | Entered by the rider                                                                                                                        |
+| Open lifts, open runs, daily grooming, surface quality | **Unverified**; follow the linked official mountain report                                                                                  |
 
 There is no invented open/closed feed, avalanche assessment, surveyed trail vertical, or forecast-based claim of actual snow quality. Weather is excluded from live run-fit scoring; the remaining terrain/history weights are renormalized. Missing weather displays unavailable; previously retrieved weather is explicitly labelled cached when refresh fails. The winter home illustration is decorative and does not depict current snow coverage.
 
@@ -70,7 +71,7 @@ Difficulty filters reduce clutter. Selecting a trail dims the others and focuses
 - Drafts and completed activities use browser IndexedDB. Finishing writes the activity and clears the draft in one transaction. Preferences and last weather response use localStorage. Storage failures remain visible. Drafts can be exported before saving.
 - GPS routes are not uploaded to a server. Basemap providers receive requests for the map area viewed; Open-Meteo receives the three public resort coordinates. Clearing browser data removes local history; export backups first.
 
-Movement-pattern labels are transparent hackathon heuristics, not validated sporting skill or safety assessments. Maximum speed never determines skill. Steep-section evidence is restricted to the explicitly simulated demo; live GPS slope is not promoted into a terrain-skill claim.
+Movement-pattern labels are experimental heuristics, not validated sporting skill or safety assessments. Maximum speed never determines skill. Steep-section evidence is restricted to the explicitly simulated demo; live GPS slope is not promoted into a terrain-skill claim.
 
 ## Architecture
 
@@ -93,8 +94,8 @@ The project intentionally avoids requesting Google or Tiger Data credentials for
 ## Sources and image attribution
 
 - [OpenStreetMap contributors](https://www.openstreetmap.org/copyright), ODbL 1.0. Individual way links appear in trail details. `scripts/import-osm.py` documents the original import.
-- [Open-Meteo weather API](https://open-meteo.com/en/docs). The no-key endpoint is appropriate for this non-commercial local hackathon app; review provider terms before commercial deployment.
-- Standard OpenStreetMap tiles follow the [tile usage policy](https://operations.osmfoundation.org/policies/tiles/): visible attribution, normal browser caching, no offline tile downloads or bulk prefetch. A larger public deployment should use an appropriate hosted or self-hosted tile service.
+- [Open-Meteo weather API](https://open-meteo.com/en/docs). The no-key endpoint is appropriate for this non-commercial personal app; review provider terms before commercial deployment.
+- Dark map detail uses [OpenFreeMap](https://openfreemap.org/quick_start/) with visible OpenFreeMap, OpenMapTiles and OpenStreetMap attribution. Tile requests use normal browser caching; the app does not bulk-download tiles. Provider limits and terms apply to deployment.
 - Artwork process and geographic references: [`public/assets/README.md`](public/assets/README.md). No satellite imagery or mountain photographs are served by the active UI.
 
 ## Validation
@@ -105,4 +106,8 @@ The browser suite uses controlled GPS fixtures; an outdoor device field test is 
 
 ### Design verification
 
-`pnpm test:design` checks 320, 390, 768, 1024 and 1440 pixel widths, uncropped artwork, centered Record controls, stable modal opening/closing, map focus/overview and reversible map appearance. The source illustration is rendered at native aspect and capped at 700 CSS pixels to avoid the previous oversized crop. It includes illustrative Cypress Olympic rings, Grouse’s summit turbine, and Seymour’s rolling ridge; landmark placement is artistic, not navigation data.
+`pnpm test:design` checks 320, 390, 768, 1024 and 1440 pixel widths, uncropped artwork, centered Record controls, stable modal opening/closing, map focus/overview and the small Settings demo control. The home scene fills the page with overlaid controls. The source illustration is rendered at native aspect and capped at 950 CSS pixels to avoid the previous oversized crop. It includes illustrative Cypress Olympic rings, Grouse’s summit turbine, and Seymour’s rolling ridge; landmark placement is artistic, not navigation data.
+
+## Development workflow
+
+Use focused feature branches and commits, push them for review, and merge through pull requests after **Project checks** passes. `pnpm check` runs formatting, types, engine tests, a production build and both isolated browser suites. GitHub Actions runs these checks on every push and pull request and saves screenshots; Dependabot proposes dependency updates. See [CONTRIBUTING.md](CONTRIBUTING.md) for local setup, review expectations and recommended `main` protection.

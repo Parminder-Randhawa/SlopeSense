@@ -1,6 +1,11 @@
 import type { CSSProperties, ReactNode } from "react";
 const paths: Record<string, ReactNode> = {
-  record: <><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></>,
+  record: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <circle cx="12" cy="12" r="5" />
+    </>
+  ),
   mountain: (
     <>
       <path d="m2 20 7-14 5 8 3-5 5 11H2Z" />
