@@ -1,7 +1,8 @@
 import { useEffect, useRef } from "react";
 import type { WeatherSet } from "../services/weather";
 import type { LiveWeather } from "../types/live";
-import type { ResortId } from "../types/resort";
+import { homeArtwork, type ArtworkFrame } from "../data/homeArtwork";
+import { resorts } from "../data/resorts";
 /** Visual mapping, not a physical snowfall simulation. Rate is cm/hour. */
 export function snowMotion(weather: LiveWeather) {
   const rate = weather.snowfallRate;
@@ -17,30 +18,22 @@ export function snowMotion(weather: LiveWeather) {
   const intensity = Math.min(1, Math.log1p(rate) / Math.log(5));
   const wind = Math.min(60, Math.max(0, weather.wind || 0));
   return {
-    count: Math.round(12 + intensity * 100),
+    count: Math.round(24 + intensity * 180),
     fall: 13 + intensity * 12,
     drift:
       -Math.sin(((weather.windDirection || 0) * Math.PI) / 180) * wind * 0.65,
   };
 }
-const landscapeZones: [ResortId, number, number, number, number][] = [
-  ["cypress", 0.25, 0.55, 0.27, 0.24],
-  ["grouse", 0.59, 0.31, 0.27, 0.25],
-  ["seymour", 0.79, 0.65, 0.23, 0.24],
-];
-const portraitZones: [ResortId, number, number, number, number][] = [
-  ["cypress", 0.24, 0.43, 0.24, 0.1],
-  ["grouse", 0.58, 0.3, 0.24, 0.12],
-  ["seymour", 0.77, 0.55, 0.22, 0.1],
-];
 export function MountainSnow({
   weather,
-  portrait = false,
+  frame = "wide",
 }: {
   weather: WeatherSet;
-  portrait?: boolean;
+  frame?: ArtworkFrame;
 }) {
-  const zones = portrait ? portraitZones : landscapeZones;
+  const zones = resorts.map(
+    (r) => [r.id, ...homeArtwork[frame].mountains[r.id].glow] as const,
+  );
   const canvas = useRef<HTMLCanvasElement>(null);
   const signature = JSON.stringify(
     zones.map(([id]) => snowMotion(weather[id])),
@@ -51,7 +44,7 @@ export function MountainSnow({
     const ctx = el.getContext("2d");
     if (!ctx) return;
     const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-    let frame = 0,
+    let animationFrame = 0,
       last = 0,
       width = 1,
       height = 1,
@@ -76,7 +69,10 @@ export function MountainSnow({
       const box = el.getBoundingClientRect();
       width = Math.max(1, box.width);
       height = Math.max(1, box.height);
-      const dpr = Math.min(devicePixelRatio || 1, 2);
+      const dpr = Math.min(
+        devicePixelRatio || 1,
+        frame === "portrait" || frame === "tall" ? 3 : 2,
+      );
       el.width = Math.round(width * dpr);
       el.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -96,24 +92,24 @@ export function MountainSnow({
           if (p.x < -1) p.x = 1;
           const edge = Math.max(0, 1 - p.x * p.x - p.y * p.y);
           if (!edge) continue;
-          ctx.globalAlpha = edge * (0.2 + p.depth * 0.38);
+          ctx.globalAlpha = edge * (0.28 + p.depth * 0.55);
           ctx.fillStyle = "#eaf2f4";
           ctx.beginPath();
           ctx.ellipse(
             (f.x + p.x * f.rx) * width,
             (f.y + p.y * f.ry) * height,
-            0.45 + p.depth * 0.65,
-            0.6 + p.depth * 0.85,
+            0.65 + p.depth * 1.1,
+            0.9 + p.depth * 1.35,
             0,
             0,
             Math.PI * 2,
           );
           ctx.fill();
         }
-      frame = requestAnimationFrame(tick);
+      animationFrame = requestAnimationFrame(tick);
     };
     const sync = () => {
-      cancelAnimationFrame(frame);
+      cancelAnimationFrame(animationFrame);
       ctx.clearRect(0, 0, width, height);
       if (
         !reduced.matches &&
@@ -122,7 +118,7 @@ export function MountainSnow({
         fields.some((f) => f.count)
       ) {
         last = performance.now();
-        frame = requestAnimationFrame(tick);
+        animationFrame = requestAnimationFrame(tick);
       }
     };
     const resizeObserver = new ResizeObserver(() => {
@@ -140,13 +136,13 @@ export function MountainSnow({
     resize();
     sync();
     return () => {
-      cancelAnimationFrame(frame);
+      cancelAnimationFrame(animationFrame);
       resizeObserver.disconnect();
       observer.disconnect();
       reduced.removeEventListener("change", sync);
       document.removeEventListener("visibilitychange", sync);
     };
-  }, [signature, portrait]);
+  }, [signature, frame]);
   return (
     <canvas ref={canvas} className="mountain-snow-canvas" aria-hidden="true" />
   );

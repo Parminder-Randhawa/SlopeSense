@@ -26,22 +26,49 @@ try {
       : page.getByRole("navigation", { name: "Main navigation" });
     await main.getByRole("button", { name, exact: true }).click();
   };
-  for (const width of [320, 375, 390, 430, 768, 1024, 1440, 1920]) {
+  for (const width of [
+    320, 375, 390, 430, 525, 768, 844, 1024, 1440, 1920, 2560,
+  ]) {
     await page.setViewportSize({
       width,
       height:
-        width === 375
-          ? 667
-          : width === 430
-            ? 932
-            : width === 1920
-              ? 1080
-              : width <= 600
-                ? 844
-                : 900,
+        width === 320
+          ? 568
+          : width === 525
+            ? 1666
+            : width === 844
+              ? 390
+              : width === 2560
+                ? 1080
+                : width === 375
+                  ? 667
+                  : width === 430
+                    ? 932
+                    : width === 1920
+                      ? 1080
+                      : width <= 600
+                        ? 844
+                        : 900,
     });
     await nav("Home");
     await page.getByRole("heading", { name: "Find your next line." }).waitFor();
+    await page.waitForFunction(() => {
+      const img = document.querySelector(".range-artwork");
+      const expected =
+        innerWidth / innerHeight <= 0.36
+          ? "tall"
+          : innerWidth <= innerHeight
+            ? "portrait"
+            : innerHeight <= 500 || innerWidth / innerHeight <= 1.4
+              ? "medium"
+              : "wide";
+      return (
+        img.complete &&
+        img.naturalWidth > 0 &&
+        img.currentSrc.endsWith(`north-shore-${expected}-v2.png`) &&
+        document.querySelector(".illustrated-range").dataset.frame === expected
+      );
+    });
     check(
       await page.evaluate(
         () => document.documentElement.scrollWidth <= innerWidth,
@@ -81,6 +108,20 @@ try {
         .getByRole("button", { name: `Explore ${name}`, exact: true })
         .boundingBox();
       check(
+        await page
+          .getByRole("button", { name: `Explore ${name}`, exact: true })
+          .evaluate((button) => {
+            const name = button.querySelector(".illustrated-pin-name"),
+              weather = button.querySelector(".illustrated-weather");
+            const range = document.createRange();
+            range.selectNode(name.firstChild);
+            const text = range.getBoundingClientRect(),
+              temperature = weather.getBoundingClientRect();
+            return text.height < 23 && text.right + 2 <= temperature.left;
+          }),
+        `${width}px ${name} name and temperature stay aligned without wrapping`,
+      );
+      check(
         pin &&
           pin.x >= 0 &&
           pin.x + pin.width <= width &&
@@ -89,6 +130,61 @@ try {
         `${width}px ${name} selection stays within the mountain scene`,
       );
     }
+    const visibleTerrain = await page.evaluate(() => {
+      const img = document.querySelector(".range-artwork"),
+        box = img.getBoundingClientRect();
+      const scale = Math.max(
+        box.width / img.naturalWidth,
+        box.height / img.naturalHeight,
+      );
+      const w = img.naturalWidth * scale,
+        h = img.naturalHeight * scale;
+      const position = getComputedStyle(img)
+        .objectPosition.split(" ")
+        .map((s) => parseFloat(s) / 100);
+      const x = box.x + (box.width - w) * position[0],
+        y = box.y + (box.height - h) * position[1];
+      const header = Math.max(
+        ...[
+          ...document.querySelectorAll(
+            ".app-header, .weather-error, .mode-ribbon",
+          ),
+        ].map((el) => el.getBoundingClientRect().bottom),
+      );
+      const navigation = document.querySelector(".bottom-nav");
+      const floor = navigation?.getClientRects().length
+        ? navigation.getBoundingClientRect().top - 12
+        : innerHeight - 12;
+      const chips = [...document.querySelectorAll(".illustrated-pin")].map(
+        (el) => el.getBoundingClientRect(),
+      );
+      return [...document.querySelectorAll(".illustrated-mountain")].map(
+        (el) => ({
+          name: el.querySelector("button").getAttribute("aria-label"),
+          visible: [el.dataset.summit, el.dataset.landmark].every((point) => {
+            const [px, py] = point.split(",").map(Number);
+            return (
+              x + px * w >= 12 &&
+              x + px * w <= innerWidth - 12 &&
+              y + py * h >= header + 12 &&
+              y + py * h <= floor &&
+              chips.every(
+                (chip) =>
+                  x + px * w < chip.left - 4 ||
+                  x + px * w > chip.right + 4 ||
+                  y + py * h < chip.top - 4 ||
+                  y + py * h > chip.bottom + 4,
+              )
+            );
+          }),
+        }),
+      );
+    });
+    for (const mountain of visibleTerrain)
+      check(
+        mountain.visible,
+        `${width}px ${mountain.name} summit and landmark remain visible and clear of labels`,
+      );
     const intro = await page.locator(".range-intro").boundingBox();
     const pins = await page.locator(".illustrated-pin").all();
     const clearHeading = (
@@ -107,14 +203,21 @@ try {
     if (width <= 600) {
       await page.locator(".home-shortcuts").scrollIntoViewIfNeeded();
       check(
-        await page
-          .locator(".range-artwork")
-          .evaluate(
-            (img) =>
-              img.currentSrc.endsWith("north-shore-portrait.png") &&
-              img.naturalWidth >= img.getBoundingClientRect().width * 2,
-          ),
-        `${width}px uses the sharp portrait artwork`,
+        await page.locator(".range-artwork").evaluate((img) => {
+          const box = img.getBoundingClientRect();
+          const scale = Math.max(
+            box.width / img.naturalWidth,
+            box.height / img.naturalHeight,
+          );
+          const density = img.currentSrc.endsWith("tall-v2.png")
+            ? devicePixelRatio
+            : 2;
+          return (
+            1 / (scale * density) >= 0.9 &&
+            getComputedStyle(img).filter === "none"
+          );
+        }),
+        `${width}px source suits its frame without a blur filter`,
       );
       check(
         await page.evaluate(
@@ -197,7 +300,7 @@ try {
       );
     }
     await nav("Home");
-    await page.screenshot({ path: `${out}/home-${width}.png`, fullPage: true });
+    await page.screenshot({ path: `${out}/home-${width}.png` });
   }
   await page.setViewportSize({ width: 390, height: 844 });
   await nav("Explore");
@@ -307,6 +410,63 @@ try {
       .getByRole("button", { name: "Play replay", exact: true })
       .isVisible(),
     "Profile recent ride opens its replay",
+  );
+  await nav("Home");
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  const snowPixels = () => {
+    const c = document.querySelector(".mountain-snow-canvas");
+    const data = c.getContext("2d").getImageData(0, 0, c.width, c.height).data;
+    let count = 0,
+      hash = 0;
+    for (let i = 3; i < data.length; i += 4)
+      if (data[i]) {
+        count++;
+        hash = (hash + data[i] * (i + 1)) % 2147483647;
+      }
+    return { count, hash };
+  };
+  const snowSample = await page.waitForFunction(() => {
+    const c = document.querySelector(".mountain-snow-canvas");
+    const data = c.getContext("2d").getImageData(0, 0, c.width, c.height).data;
+    let count = 0,
+      hash = 0;
+    for (let i = 3; i < data.length; i += 4)
+      if (data[i]) {
+        count++;
+        hash = (hash + data[i] * (i + 1)) % 2147483647;
+      }
+    return count > 40 ? { count, hash } : false;
+  });
+  const firstSnow = await snowSample.jsonValue();
+  await snowSample.dispose();
+  check(
+    firstSnow.count > 40,
+    "Current demo snowfall creates visible snow particles",
+  );
+  await page.waitForFunction((previous) => {
+    const c = document.querySelector(".mountain-snow-canvas");
+    const data = c.getContext("2d").getImageData(0, 0, c.width, c.height).data;
+    let hash = 0,
+      count = 0;
+    for (let i = 3; i < data.length; i += 4)
+      if (data[i]) {
+        count++;
+        hash = (hash + data[i] * (i + 1)) % 2147483647;
+      }
+    return count > 40 && hash !== previous;
+  }, firstSnow.hash);
+  check(true, "Snowfall advances rather than remaining a static decoration");
+  await page.screenshot({ path: `${out}/home-demo-390.png` });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.waitForFunction(() => {
+    const c = document.querySelector(".mountain-snow-canvas");
+    const data = c.getContext("2d").getImageData(0, 0, c.width, c.height).data;
+    for (let i = 3; i < data.length; i += 4) if (data[i]) return false;
+    return true;
+  });
+  check(
+    (await page.evaluate(snowPixels)).count === 0,
+    "Reduced motion stops and clears snowfall",
   );
   check(errors.length === 0, `No runtime errors: ${errors.join("; ")}`);
   console.log(`${count} design checks passed.`);

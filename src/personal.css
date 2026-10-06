@@ -56,7 +56,7 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: 50% calc(var(--position-y, 0.5) * 100%);
   mask-image: none;
 }
 .home-page .range-intro {
@@ -420,9 +420,6 @@ a {
     font-size: 32px;
     margin: 12px 0 8px;
   }
-  .home-page .range-artwork {
-    object-position: center 45%;
-  }
   .home-page .range-bottom {
     inset: auto 20px 82px;
     display: flex;
@@ -497,77 +494,6 @@ html:has(.home-content)::-webkit-scrollbar {
   background: #10191cba;
   backdrop-filter: blur(12px);
 }
-.home-page .illustrated-range {
-  --image-width: max(100vw, 100svh);
-  --image-height: var(--image-width);
-}
-.home-page .mountain-snow-canvas {
-  width: var(--image-width);
-  height: var(--image-height);
-  left: calc((100% - var(--image-width)) / 2);
-  top: calc((100% - var(--image-height)) / 2);
-}
-.home-page .illustrated-mountain.grouse {
-  left: clamp(
-    80px,
-    calc((100% - var(--image-width)) / 2 + var(--image-width) * 0.61),
-    calc(100% - 80px)
-  );
-  top: clamp(
-    140px,
-    calc((100% - var(--image-height)) / 2 + var(--image-height) * 0.29),
-    calc(100% - 320px)
-  );
-}
-.home-page .illustrated-mountain.cypress {
-  left: clamp(
-    80px,
-    calc((100% - var(--image-width)) / 2 + var(--image-width) * 0.23),
-    calc(100% - 80px)
-  );
-  top: calc((100% - var(--image-height)) / 2 + var(--image-height) * 0.43);
-}
-.home-page .illustrated-mountain.seymour {
-  left: clamp(
-    80px,
-    calc((100% - var(--image-width)) / 2 + var(--image-width) * 0.78),
-    calc(100% - 80px)
-  );
-  top: calc((100% - var(--image-height)) / 2 + var(--image-height) * 0.63);
-}
-@media (max-width: 600px) {
-  .home-page .illustrated-range {
-    --image-width: max(100vw, 50svh);
-    --image-height: calc(var(--image-width) * 2);
-  }
-  .home-page .range-artwork {
-    object-position: center;
-  }
-  .home-page .illustrated-mountain.grouse {
-    left: calc((100% - var(--image-width)) / 2 + var(--image-width) * 0.58);
-    top: max(
-      228px,
-      calc((100% - var(--image-height)) / 2 + var(--image-height) * 0.3)
-    );
-  }
-  .home-page .illustrated-mountain.cypress {
-    left: clamp(
-      60px,
-      calc((100% - var(--image-width)) / 2 + var(--image-width) * 0.24),
-      calc(100% - 60px)
-    );
-    top: calc((100% - var(--image-height)) / 2 + var(--image-height) * 0.43);
-  }
-  .home-page .illustrated-mountain.seymour {
-    left: clamp(
-      60px,
-      calc((100% - var(--image-width)) / 2 + var(--image-width) * 0.77),
-      calc(100% - 60px)
-    );
-    top: calc((100% - var(--image-height)) / 2 + var(--image-height) * 0.55);
-  }
-}
-
 .live-shell:has(.home-content) {
   min-height: 100svh;
   display: flex;
@@ -602,20 +528,7 @@ html:has(.home-content)::-webkit-scrollbar {
   display: none;
 }
 .home-page .illustrated-range:after {
-  display: block;
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    #10191c70 0%,
-    #10191c15 30%,
-    transparent 48%,
-    #10191c70 76%,
-    #10191cc0 100%
-  );
+  display: none;
 }
 .home-page .range-intro {
   text-shadow: 0 2px 14px #07101290;
@@ -623,5 +536,212 @@ html:has(.home-content)::-webkit-scrollbar {
 @media (max-width: 900px) {
   .live-shell:has(.home-content) {
     padding-bottom: calc(64px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Match every overlay to the actual source aspect ratio instead of a square. */
+.home-page .illustrated-range {
+  --position-y: 0.5;
+  --image-width: max(100vw, calc(100svh * var(--image-aspect)));
+  --image-height: calc(var(--image-width) / var(--image-aspect));
+  --image-offset-y: calc((100% - var(--image-height)) * var(--position-y));
+}
+.home-page .mountain-lighting,
+.home-page .mountain-snow-canvas {
+  position: absolute;
+  width: var(--image-width);
+  height: var(--image-height);
+  left: calc((100% - var(--image-width)) / 2);
+  top: var(--image-offset-y);
+  pointer-events: none;
+}
+.home-page .mountain-lighting {
+  z-index: 1;
+}
+.home-page .mountain-snow-canvas {
+  z-index: 2;
+}
+.home-page .illustrated-mountain {
+  left: clamp(
+    80px,
+    calc(
+      (100% - var(--image-width)) / 2 + var(--image-width) * var(--mountain-x)
+    ),
+    calc(100% - 80px)
+  );
+  top: clamp(
+    180px,
+    calc(var(--image-offset-y) + var(--image-height) * var(--mountain-y)),
+    calc(100% - 140px)
+  );
+}
+.home-page .illustrated-mountain.grouse {
+  top: clamp(
+    235px,
+    calc(var(--image-offset-y) + var(--image-height) * var(--mountain-y)),
+    calc(100% - 140px)
+  );
+}
+.home-page .range-artwork {
+  opacity: 1;
+  filter: none;
+}
+.home-page .range-intro h1 {
+  color: #c0cec7;
+}
+.home-page .range-intro > p:last-child,
+.home-page .range-next .next-run-reason {
+  color: #9db2aa;
+}
+.home-page .range-intro .eyebrow,
+.home-page .range-next .eyebrow {
+  color: #9bb1a8;
+}
+.home-page .range-next .eyebrow {
+  width: fit-content;
+}
+.home-page .range-stats > div {
+  min-width: 0;
+  display: grid;
+  gap: 5px;
+}
+.home-page .range-stats strong {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  line-height: 1.1;
+  color: #c1d1c9;
+}
+.home-page .range-stats strong small {
+  font-size: 11px;
+  font-weight: 400;
+}
+.home-page .range-stats > .primary {
+  background: #8bb19c;
+  color: #11271b;
+}
+.home-page .illustrated-pin {
+  background: #091722db;
+  border-color: #c5ddce60;
+}
+.home-page .illustrated-pin:hover,
+.home-page .illustrated-pin:focus-visible {
+  background: #18352bea;
+  border-color: #e6f1e7;
+}
+.home-page .illustrated-pin-name > svg {
+  display: block;
+  opacity: 0.75;
+}
+@media (max-width: 600px) {
+  .home-page .illustrated-mountain {
+    left: clamp(
+      60px,
+      calc(
+        (100% - var(--image-width)) / 2 + var(--image-width) * var(--mountain-x)
+      ),
+      calc(100% - 60px)
+    );
+  }
+}
+@media (max-height: 700px) {
+  .home-page .illustrated-range {
+    --position-y: 0;
+  }
+}
+/* Keep mountain names, temperature and action affordance on separate tracks. */
+.home-page .illustrated-mountain {
+  width: 164px;
+}
+.home-page .illustrated-pin {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 5px 8px;
+  padding: 10px 12px;
+  min-height: 60px;
+  align-content: center;
+}
+.home-page .illustrated-pin-name {
+  padding-right: 0;
+  white-space: nowrap;
+  line-height: 1.2;
+}
+.home-page .illustrated-weather {
+  position: static;
+  align-self: center;
+  justify-self: end;
+}
+.home-page .illustrated-pin > small {
+  grid-column: 1 / -1;
+  padding-right: 18px;
+  font-size: 9px;
+}
+.home-page .illustrated-pin-name > svg {
+  position: absolute;
+  right: 11px;
+  bottom: 11px;
+}
+@media (max-width: 600px) {
+  .home-page .illustrated-mountain {
+    width: 140px;
+    left: clamp(
+      82px,
+      calc(
+        (100% - var(--image-width)) / 2 + var(--image-width) * var(--mountain-x)
+      ),
+      calc(100% - 82px)
+    );
+  }
+  .home-page .illustrated-pin {
+    padding: 10px;
+    gap: 5px 6px;
+  }
+}
+
+@media (max-height: 500px) and (min-aspect-ratio: 1/1) {
+  .home-page .illustrated-range {
+    --position-y: 0.2;
+  }
+  .home-page .range-scene {
+    min-height: 650px;
+  }
+}
+
+.home-page .illustrated-mountain.cypress {
+  top: clamp(
+    235px,
+    calc(var(--image-offset-y) + var(--image-height) * var(--mountain-y)),
+    calc(100% - 140px)
+  );
+}
+@media (max-width: 600px) and (max-height: 700px) {
+  .home-page .illustrated-range[data-frame="portrait"] .cypress {
+    left: 82px;
+    top: calc(var(--image-offset-y) + var(--image-height) * 0.58);
+  }
+  .home-page .range-intro {
+    inset: 12px 20px auto;
+  }
+  .home-page .range-intro h1 {
+    font-size: 28px;
+    margin: 10px 0 6px;
+  }
+}
+@media (max-height: 500px) and (min-aspect-ratio: 1/1) {
+  .home-page .illustrated-range[data-frame="medium"] .cypress {
+    left: 90px;
+    top: 235px;
+  }
+}
+
+@media (max-height: 500px) and (min-aspect-ratio: 1/1) {
+  .home-page .illustrated-range[data-frame="medium"] .seymour {
+    top: calc(100% - 75px);
+  }
+}
+
+@media (max-width: 600px) and (max-height: 700px) {
+  .home-page .illustrated-range[data-frame="portrait"] .grouse {
+    top: calc(var(--image-offset-y) + var(--image-height) * 0.33);
   }
 }

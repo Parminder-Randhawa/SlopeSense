@@ -11,7 +11,7 @@ References informed the broad forms: Cypress's Black Mountain / Mount Strachan b
 
 The final refinement replaced repetitive conical trees with an irregular continuous coastal forest canopy, softened lighting, removed bright boundary rings and retained broad rounded ski terrain. The exact final prompt is in `artwork-prompt.txt` alongside this file. The bundled map geometry remains independent of the illustration and comes from OpenStreetMap (ODbL).
 
-`mountain-winter.png` is the original project artwork, retained for compatibility with the original unused onboarding component. The active home screen now uses `north-shore-detailed.png`.
+`mountain-winter.png` is the original project artwork, retained for compatibility with the original unused onboarding component. The first version used `north-shore-detailed.png`; the active responsive compositions are listed below.
 
 ## October 6 refinement
 
@@ -21,4 +21,17 @@ Additional landmark references: [Cypress history](https://www.cypressmountain.co
 
 ## Full-screen portrait adaptation
 
-`north-shore-portrait.png` was edited from the detailed artwork using the built-in image-generation tool on October 6, 2026. It recomposes all three mountains within a single full-bleed portrait background; it is not a separate square overlay. Native output is 887 × 1774. The lossless PNG is served at its original resolution, without artificial enlargement or compression. The tool did not deliver the requested larger dimensions. The active `<picture>` selects this portrait asset on phones and keeps the original detailed asset on wider screens. The exact final prompt is in `artwork-portrait-prompt.txt`.
+`north-shore-portrait.png` was edited from the detailed artwork using the built-in image-generation tool on October 6, 2026. It recomposes all three mountains within a single full-bleed portrait background; it is not a separate square overlay. Native output is 887 × 1774. The lossless PNG is served at its original resolution, without artificial enlargement or compression. The tool did not deliver the requested larger dimensions. This earlier portrait remains in the repository; the active `<picture>` now selects the v2 assets by viewport shape. The exact final prompt is in `artwork-portrait-prompt.txt`.
+
+## Responsive framing, contrast and snowfall
+
+On October 6, 2026, the built-in image-generation tool adapted the artwork for four viewport shapes. All outputs are saved as lossless PNGs at the tool's native resolution. Larger pixel dimensions were requested, but the tool returned the dimensions below; source resolution remains a limit for Retina sharpness. Files have not been artificially upsampled. The more distant compositions and shape-specific selection reduce cover enlargement and keep all three illustrated summits visible.
+
+| Shape | Saved asset | Native resolution | Exact built-in edit prompt |
+| --- | --- | --- | --- |
+| Wide desktop | [north-shore-wide-v2.png](north-shore-wide-v2.png) | 1672 × 941 | [artwork-landscape-v2-prompt.txt](artwork-landscape-v2-prompt.txt) |
+| Tablet / compact or short landscape | [north-shore-medium-v2.png](north-shore-medium-v2.png) | 1448 × 1086 | [artwork-medium-v2-prompt.txt](artwork-medium-v2-prompt.txt) |
+| Phone | [north-shore-portrait-v2.png](north-shore-portrait-v2.png) | 887 × 1774 | [artwork-portrait-v2-prompt.txt](artwork-portrait-v2-prompt.txt) |
+| Very tall, narrow preview | [north-shore-tall-v2.png](north-shore-tall-v2.png) | 724 × 2172 | [artwork-tall-v2-prompt.txt](artwork-tall-v2-prompt.txt) |
+
+The image remains one full-screen background. Source-image landmark coordinates in `src/data/homeArtwork.ts` align the mountain labels, a soft lighting mask and snow fields. The overlay darkens surrounding terrain while preserving brighter mountains; it does not alter the source PNG. Snowfall is more visible through brighter, slightly larger particles and denser fields. Intensity and motion still derive from current snowfall and wind. Missing/stale data and reduced-motion preferences stop animation. The artwork remains a decorative geographic interpretation, separate from live weather and mapped run geometry.
