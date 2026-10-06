@@ -28,8 +28,10 @@ export function buildRiderModel(
       a.consistency * 0.75 + (1 - a.stopSeconds / Math.max(a.duration, 1)) * 25,
     );
     const evidence =
-      objective * 0.8 +
-      { easy: 95, right: 75, hard: 35 }[activity.feeling] * 0.2;
+      activity.feeling === "unreported"
+        ? objective
+        : objective * 0.8 +
+          { easy: 95, right: 75, hard: 35 }[activity.feeling] * 0.2;
     buckets.difficulty.push(evidence);
     buckets.consistency.push(a.consistency);
     if (trail.grooming === "groomed") buckets.groomed.push(evidence);
@@ -37,6 +39,7 @@ export function buildRiderModel(
     if (a.distance >= 1000) buckets.long.push(evidence);
     // Demo pitch supports only a demo model; all activity and model UI is labelled synthetic.
     if (
+      activity.simulated &&
       activity.telemetry.filter((p) => p.gradient >= 20 && p.speed > 1)
         .length >= 10
     ) {

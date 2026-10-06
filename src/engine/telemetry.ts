@@ -95,7 +95,13 @@ export function analyze(samples: Sample[]): Analysis {
     };
   const first = samples[0],
     last = samples.at(-1)!;
-  const duration = last.time - first.time,
+  const duration = samples
+      .slice(1)
+      .reduce(
+        (sum, p, i) =>
+          sum + (p.breakBefore ? 0 : Math.max(0, p.time - samples[i].time)),
+        0,
+      ),
     distance = last.distance - first.distance;
   let stops = 0,
     stopSeconds = 0,
@@ -118,7 +124,7 @@ export function analyze(samples: Sample[]): Analysis {
         time: stopStart + 3,
         type: "stop",
         title: "Stop detected",
-        detail: `${Math.round(seconds)} seconds stationary in this replay`,
+        detail: `${Math.round(seconds)} seconds stationary`,
       });
     }
     stopStart = null;
@@ -128,7 +134,12 @@ export function analyze(samples: Sample[]): Analysis {
       prev = samples[i - 1],
       dt = p.time - prev.time;
     if (dt <= 0) continue;
-    vertical += Math.max(0, prev.elevation - p.elevation);
+    if (p.breakBefore) {
+      commitStop(prev.time);
+      continue;
+    }
+    if (p.elevationKnown !== false && prev.elevationKnown !== false)
+      vertical += Math.max(0, prev.elevation - p.elevation);
     if (p.speed < 1) {
       if (stopStart === null) stopStart = prev.time;
     } else {
@@ -192,9 +203,13 @@ export function analyze(samples: Sample[]): Analysis {
     observations.push(
       "Average speed decreased in the simulated steeper middle section.",
     );
-  if (sections[2].averageSpeed > sections[1].averageSpeed * 1.1)
+  if (
+    sections[1].averageSpeed > 0 &&
+    sections[2].averageSpeed > sections[1].averageSpeed * 1.1
+  )
     observations.push("Average speed increased through the rolling finish.");
   return {
+    elevationAvailable: samples.some((s) => s.elevationKnown !== false),
     duration,
     distance,
     vertical,
@@ -218,7 +233,9 @@ export function sampleAt(samples: Sample[], time: number): Sample {
   const a = samples[index - 1],
     b = samples[index],
     t = (time - a.time) / (b.time - a.time);
+  if (b.breakBefore) return time < b.time ? a : b;
   return {
+    ...b,
     time,
     lat: a.lat + (b.lat - a.lat) * t,
     lng: a.lng + (b.lng - a.lng) * t,

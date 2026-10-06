@@ -7,3 +7,9 @@ dist
 .vite
 playwright-report
 test-results
+.env
+.env.*
+!.env.example
+.data/
+coverage/
+*.log

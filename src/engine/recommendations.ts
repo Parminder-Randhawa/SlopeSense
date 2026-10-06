@@ -115,22 +115,35 @@ export function rankTrails(
       const terrain = matches.length
         ? matches.reduce((s, n) => s + n, 0) / matches.length
         : 65;
-      let conditionScore =
-        78 + Math.min(c.snowfall, 20) * 0.65 - Math.max(0, c.wind - 15) * 0.5;
-      conditionScore -=
-        c.visibility === "low" ? 17 : c.visibility === "mixed" ? 6 : 0;
-      if (firmRisk(c))
-        conditionScore -= profile.preferences.includes("avoid-firm") ? 19 : 7;
-      if (
-        profile.preferences.includes("avoid-visibility") &&
-        c.visibility !== "good"
-      )
-        conditionScore -= 10;
-      if (!firmRisk(c))
-        reasons.push("No freeze–thaw flag in the simulated weather scenario.");
-      else
+      const hasWeather = c.simulated && c.snowfall !== null && c.wind !== null;
+      // A forecast is not evidence of snow quality or a trail being open. Live
+      // preferences are ranked on mapped terrain and rider history only.
+      let conditionScore = 0;
+      if (hasWeather) {
+        conditionScore =
+          78 +
+          Math.min(c.snowfall!, 20) * 0.65 -
+          Math.max(0, c.wind! - 15) * 0.5;
+        conditionScore -=
+          c.visibility === "low" ? 17 : c.visibility === "mixed" ? 6 : 0;
+        if (firmRisk(c))
+          conditionScore -= profile.preferences.includes("avoid-firm") ? 19 : 7;
+        if (
+          profile.preferences.includes("avoid-visibility") &&
+          c.visibility !== "good"
+        )
+          conditionScore -= 10;
+        if (!firmRisk(c))
+          reasons.push(
+            "No freeze–thaw flag in the simulated weather scenario.",
+          );
+        else
+          uncertainty.push(
+            "Simulated freeze–thaw risk; actual trail surface unknown.",
+          );
+      } else
         uncertainty.push(
-          "Estimated firm-surface risk from simulated thaw/freeze; actual surface unknown.",
+          "Weather is shown for planning. Run surface and operating status are unverified, so weather is excluded from this score.",
         );
       const progression = clamp(
         100 -
@@ -172,7 +185,9 @@ export function rankTrails(
         clamp(
           Object.entries(parts).reduce(
             (s, [key, val]) =>
-              s + (val * weights[key as keyof typeof weights]) / 100,
+              s +
+              (val * weights[key as keyof typeof weights]) /
+                (hasWeather ? 100 : 80),
             0,
           ) - recencyPenalty,
         ),
@@ -202,7 +217,7 @@ export function rankMountains(fits: Fit[]) {
         suitable: options.length,
         top: options[0],
         reason: options.length
-          ? `${options.length} mapped runs fit your ceiling. ${options[0].trail.name} leads on terrain, winter-scenario conditions and your recent activity.`
+          ? `${options.length} mapped runs fit your ceiling. ${options[0].trail.name} leads on mapped terrain and your recent activity.`
           : "No mapped runs meet your selected terrain ceiling.",
       };
     })

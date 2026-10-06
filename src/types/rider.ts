@@ -23,7 +23,7 @@ export type Profile = {
   goal: Goal;
 };
 export type Persona = "smooth" | "developing" | "cautious";
-export type Feeling = "easy" | "right" | "hard";
+export type Feeling = "easy" | "right" | "hard" | "unreported";
 export type Surface = "soft" | "normal" | "firm" | "variable" | "unknown";
 export type Sample = {
   time: number;
@@ -35,6 +35,10 @@ export type Sample = {
   gradient: number;
   acceleration: number;
   section: number;
+  elevationKnown?: boolean;
+  accuracy?: number;
+  timestamp?: string;
+  breakBefore?: boolean;
 };
 export type TelemetryEvent = {
   time: number;
@@ -43,6 +47,7 @@ export type TelemetryEvent = {
   detail: string;
 };
 export type Analysis = {
+  elevationAvailable?: boolean;
   duration: number;
   distance: number;
   vertical: number;
@@ -66,13 +71,16 @@ export type Analysis = {
 export type Activity = {
   id: string;
   trailId: string;
-  resortId: ResortId;
+  resortId: ResortId | null;
   date: string;
-  persona: Persona;
+  persona: Persona | "recorded";
   feeling: Feeling;
   surface: Surface;
   telemetry: Sample[];
-  simulated: true;
+  simulated: boolean;
+  sport?: Profile["sport"];
+  selectionMode?: "auto" | "manual";
+  matchingConfidence?: number;
 };
 export type Dimension =
   | "difficulty"
@@ -85,14 +93,14 @@ export type Dimension =
 export type Evidence = { count: number; value: number; label: string };
 export type RiderModel = Record<Dimension, Evidence>;
 export type Conditions = {
-  temperature: number;
-  snowfall: number;
-  wind: number;
-  visibility: "good" | "mixed" | "low";
-  daytimeHigh: number;
-  overnightLow: number;
+  temperature: number | null;
+  snowfall: number | null;
+  wind: number | null;
+  visibility: "good" | "mixed" | "low" | "unknown";
+  daytimeHigh: number | null;
+  overnightLow: number | null;
   description: string;
-  simulated: true;
+  simulated: boolean;
 };
 export type AppState = {
   version: 2;

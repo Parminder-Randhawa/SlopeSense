@@ -52,6 +52,7 @@ export function routeFor(trail: SkiRun) {
     .forEach((p, i) => cumulative.push(cumulative[i] + meters(points[i], p)));
   return {
     points,
+    chains,
     cumulative,
     length: cumulative.at(-1)!,
     partial: chains.length > 1,

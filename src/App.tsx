@@ -1,66 +1,86 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Icon } from "./components/Icon";
-import { Onboarding } from "./components/ProfileForm";
 import { Home } from "./pages/Home";
 import { Mountain } from "./pages/Mountain";
-import { Replay } from "./pages/Replay";
+import { RecordPage } from "./pages/Record";
 import { ActivityPage } from "./pages/Activity";
 import { Progress } from "./pages/Progress";
 import { Profile } from "./pages/Profile";
-import {
-  allTrails,
-  demoProfile,
-  initialState,
-  seedActivities,
-} from "./data/demo";
-import { conditions } from "./data/conditions";
+import { allTrails } from "./data/demo";
 import { rankTrails, type Fit } from "./engine/recommendations";
-import { readState, saveState } from "./engine/storage";
+import {
+  loadPreferences,
+  ensureDemoActivities,
+  savePreferences,
+  loadActivities,
+  download,
+} from "./services/local";
+import { useWeather } from "./hooks/useWeather";
+import { useRecorder } from "./hooks/useRecorder";
 import type { Activity, Profile as RiderProfile } from "./types/rider";
 import type { ResortId } from "./types/resort";
 import type { SkiRun } from "./types/trail";
 import "./styles.css";
+import "./live.css";
+import "./personal.css";
 const nav = [
   { id: "home", label: "Home", icon: "home" },
   { id: "explore", label: "Explore", icon: "compass" },
-  { id: "activity", label: "Activity", icon: "activity" },
+  { id: "record", label: "Record", icon: "record" },
   { id: "progress", label: "Progress", icon: "progress" },
   { id: "profile", label: "Profile", icon: "user" },
 ];
-function App() {
-  const [loaded] = useState(readState);
-  const [state, setState] = useState(loaded.state);
-  const [warning, setWarning] = useState(loaded.warning);
-  const [page, setPage] = useState("home");
-  const [resortId, setResortId] = useState<ResortId>("cypress");
-  const [selected, setSelected] = useState<SkiRun | null>(null);
-  const [activity, setActivity] = useState<Activity | null>(null);
-  const [replay, setReplay] = useState<{
-    trail: SkiRun;
-    auto: boolean;
-    key: number;
-  } | null>(null);
-  const [online, setOnline] = useState(navigator.onLine);
-  const fits = useMemo(
-    () => rankTrails(allTrails, state.profile, state.activities, conditions),
-    [state.profile, state.activities],
-  );
+export default function App() {
+  const [prefs, setPrefs] = useState(loadPreferences),
+    [allActivities, setActivities] = useState<Activity[]>([]),
+    [page, setPage] = useState("home"),
+    [resortId, setResortId] = useState<ResortId>("cypress"),
+    [selected, setSelected] = useState<SkiRun | null>(null),
+    [activity, setActivity] = useState<Activity | null>(null),
+    [warning, setWarning] = useState(""),
+    [online, setOnline] = useState(navigator.onLine),
+    [intro, setIntro] = useState(
+      !matchMedia("(prefers-reduced-motion: reduce)").matches,
+    );
+  const { weather, loading, error, refresh } = useWeather(prefs.demo),
+    activities = allActivities.filter((a) => a.simulated === prefs.demo);
+  const onSaved = useCallback((a: Activity) => {
+    setActivities((list) => [...list.filter((x) => x.id !== a.id), a]);
+    setActivity(a);
+    setPage("activity");
+    window.scrollTo(0, 0);
+  }, []);
+  const recorder = useRecorder(onSaved);
   useEffect(() => {
-    const error = saveState(state);
-    if (error) setWarning(error);
-  }, [state]);
-  useEffect(() => {
+    const timer = setTimeout(() => setIntro(false), 1100);
     const sync = () => setOnline(navigator.onLine);
     window.addEventListener("online", sync);
     window.addEventListener("offline", sync);
     return () => {
+      clearTimeout(timer);
       window.removeEventListener("online", sync);
       window.removeEventListener("offline", sync);
     };
   }, []);
+  useEffect(() => {
+    let alive = true;
+    (prefs.demo ? ensureDemoActivities() : loadActivities())
+      .then((list) => {
+        if (alive) setActivities(list);
+      })
+      .catch(() =>
+        setWarning("Could not read saved rides. Check browser storage."),
+      );
+    return () => {
+      alive = false;
+    };
+  }, [prefs.demo]);
+  const fits = useMemo(
+    () => rankTrails(allTrails, prefs.profile, activities, weather),
+    [prefs, allActivities, weather],
+  );
   const navigate = (target: string) => {
     setPage(target);
-    setReplay(null);
     if (target === "activity") setActivity(null);
     window.scrollTo({ top: 0, behavior: "instant" });
   };
@@ -74,84 +94,51 @@ function App() {
     setSelected(fit.trail);
     navigate("explore");
   };
-  const openActivity = (a: Activity) => {
-    setPage("activity");
-    setReplay(null);
-    setActivity(a);
-    window.scrollTo({ top: 0, behavior: "instant" });
-  };
-  const saveProfile = (profile: RiderProfile) =>
-    setState((s) => ({ ...s, profile }));
-  const ask = (text: string) => {
-    const input = text.trim().toLowerCase();
-    if (!input)
-      return "Try “something easier”, “a longer run”, “avoid firm snow”, or “where should I go?”.";
-    let profile = {
-        ...state.profile,
-        preferences: [...state.profile.preferences],
-      },
-      recognized = false;
-    const add = (
-      p: RiderProfile["preferences"][number],
-      opposite?: RiderProfile["preferences"][number],
-    ) => {
-      profile.preferences = [
-        ...new Set([...profile.preferences.filter((x) => x !== opposite), p]),
-      ];
-      recognized = true;
+  const updatePrefs = (profile: RiderProfile, demo = prefs.demo) => {
+    const next = {
+      ...prefs,
+      demo,
+      profile:
+        demo === prefs.demo
+          ? profile
+          : demo
+            ? prefs.demoProfile
+            : prefs.liveProfile,
     };
-    if (/easy|easier|relax|gentle/.test(input)) {
-      profile.goal = "relax";
-      add("gentle", "steep");
+    if (demo === prefs.demo) {
+      if (demo) next.demoProfile = profile;
+      else next.liveProfile = profile;
     }
-    if (/harder|challenge|improve/.test(input)) {
-      profile.goal = "improve";
-      recognized = true;
+    setPrefs(next);
+    try {
+      savePreferences(next);
+    } catch {
+      setWarning("Preferences could not be saved. Check browser storage.");
     }
-    if (/long/.test(input)) add("long", "short");
-    if (/short/.test(input)) add("short", "long");
-    if (/icy|firm/.test(input)) add("avoid-firm");
-    if (/avoid.*steep|not.*steep|don.t.*steep|no steep/.test(input))
-      add("gentle", "steep");
-    if (/groom/.test(input)) add("groomed");
-    if (/visibility|fog/.test(input)) add("avoid-visibility");
-    if (/where|mountain|today|best options/.test(input)) recognized = true;
-    if (!recognized)
-      return "I can apply easy/relaxed, longer/shorter, groomed, progression, and avoid-firm or low-visibility preferences. Try one of those.";
-    // Natural-language requests can never raise the terrain ceiling.
-    saveProfile(profile);
-    let ranked = rankTrails(allTrails, profile, state.activities, conditions);
-    if (/\bblue\b/.test(input))
-      ranked = ranked.filter((f) => f.trail.difficulty === "blue");
-    if (/\bgreen\b/.test(input))
-      ranked = ranked.filter((f) => f.trail.difficulty === "green");
-    const top = ranked[0];
-    return top
-      ? `${top.trail.name} is your best fit for that request (${top.score}% match). Preferences applied; your ${profile.ceiling} ceiling is unchanged. ${top.reasons.find((r) => r.startsWith("A longer")) ?? top.reasons[0]}`
-      : `No matching runs within your ${profile.ceiling} ceiling. Change your terrain limit explicitly in Profile if you want to explore other ratings.`;
   };
-  if (!state.onboarded)
-    return (
-      <Onboarding
-        onDone={(profile, demo) => {
-          setState({
-            version: 2,
-            onboarded: true,
-            profile,
-            activities: demo ? seedActivities() : [],
-          });
-        }}
-      />
-    );
+  const openActivity = (a: Activity) => {
+    setActivity(a);
+    setPage("activity");
+    window.scrollTo(0, 0);
+  };
   return (
-    <div className="app-shell">
+    <div className="app-shell live-shell">
+      {intro && (
+        <div className="launch-animation" aria-hidden="true">
+          <Icon name="mountain" size={75} />
+          <span>
+            SlopeSense<span className="brand-dot">.</span>
+          </span>
+          <i />
+        </div>
+      )}
       <header className="app-header">
         <button
           className="brand"
           onClick={() => navigate("home")}
           aria-label="SlopeSense home"
         >
-          <Icon name="mountain" size={31} />
+          <Icon name="mountain" size={30} />
           <span>
             SlopeSense<span className="brand-dot">.</span>
           </span>
@@ -160,144 +147,175 @@ function App() {
           {nav.map((n) => (
             <button
               key={n.id}
-              className={page === n.id ? "active" : ""}
+              className={`${page === n.id ? "active" : ""} ${n.id === "record" ? "record-nav" : ""}`}
               onClick={() => navigate(n.id)}
             >
-              <Icon name={n.icon} size={17} />
+              <Icon name={n.icon} size={18} />
               {n.label}
             </button>
           ))}
         </nav>
         <div className="header-right">
-          <span className="demo-badge">
+          <span className={`mode-badge ${prefs.demo ? "demo" : ""}`}>
             <span className="status-dot" />
-            WINTER REPLAY
+            {prefs.demo ? "DEMO" : "LOCAL"}
           </span>
           <button
             className="avatar"
-            aria-label="Open profile"
+            aria-label="Open profile and settings"
             onClick={() => navigate("profile")}
           >
-            {state.profile.name.slice(0, 1).toUpperCase()}
+            {prefs.profile.name[0]?.toUpperCase() || "R"}
           </button>
         </div>
       </header>
-      <div className="demo-ribbon">
-        <span>DEMO · JAN 17, 2026</span>
-        <span>Historical winter scenario · simulated weather & activity</span>
-        <span className="offline-indicator">
-          <span className="status-dot" />
-          {online ? "Offline-ready data" : "Offline mode"}
-        </span>
-      </div>
+      {prefs.demo && (
+        <div className="mode-ribbon">
+          DEMO MODE{" "}
+          <span>Sample profile, rides & weather · exit in Settings</span>
+        </div>
+      )}
+      {!online && (
+        <div className="storage-warning">
+          Offline · GPS and saved rides work; fresh weather and uncached map
+          tiles need internet.
+        </div>
+      )}
       {warning && (
         <div className="storage-warning" role="status">
-          <Icon name="info" size={16} />
           {warning}
-          <button
-            className="icon-button"
-            aria-label="Dismiss storage notice"
-            onClick={() => setWarning(null)}
-          >
-            <Icon name="close" size={15} />
+          <button onClick={() => setWarning("")} aria-label="Dismiss notice">
+            ×
           </button>
         </div>
       )}
+      {error && !prefs.demo && (
+        <div className="weather-error" role="status">
+          {error}{" "}
+          {weather.cypress.available
+            ? "Showing cached estimates."
+            : "No estimated conditions available."}
+          <button onClick={refresh}>Retry</button>
+        </div>
+      )}
+      {recorder.draft && page !== "record" && (
+        <button
+          className="active-recording-banner"
+          onClick={() => navigate("record")}
+        >
+          <span className="status-dot" />
+          {recorder.recording ? "Recording your ride" : "Paused ride saved"} ·
+          Return to recording
+          <Icon name="arrow" size={16} />
+        </button>
+      )}
       <main className={`main-content ${page === "home" ? "home-content" : ""}`}>
-        {replay ? (
-          <Replay
-            key={replay.key}
-            trail={replay.trail}
-            auto={replay.auto}
-            profile={state.profile}
-            activities={state.activities}
+        {page === "home" && (
+          <Home
+            profile={prefs.profile}
+            activities={activities}
             fits={fits}
-            onSave={(a) =>
-              setState((s) =>
-                s.activities.some((x) => x.id === a.id)
-                  ? s
-                  : { ...s, activities: [...s.activities, a].slice(-100) },
+            weather={weather}
+            demo={prefs.demo}
+            openMountain={openMountain}
+            openTrail={openTrail}
+            onNavigate={navigate}
+          />
+        )}
+        {page === "explore" && (
+          <Mountain
+            resortId={resortId}
+            selected={selected}
+            fits={fits}
+            profile={prefs.profile}
+            weather={weather[resortId]}
+            onResort={openMountain}
+            onSelect={setSelected}
+            onRecord={(t) => {
+              setSelected(t);
+              navigate("record");
+            }}
+            onRefresh={refresh}
+            loading={loading}
+          />
+        )}
+        {page === "record" && (
+          <RecordPage
+            key={`${prefs.demo}-${selected?.id || "auto"}`}
+            recorder={recorder}
+            profile={prefs.profile}
+            demo={prefs.demo}
+            selected={selected}
+            onHistory={() => navigate("activity")}
+          />
+        )}
+        {page === "activity" && (
+          <ActivityPage
+            activities={activities}
+            selected={activity}
+            onSelect={setActivity}
+            onExplore={() => navigate("record")}
+          />
+        )}
+        {page === "progress" && (
+          <Progress
+            activities={activities}
+            profile={prefs.profile}
+            onActivity={openActivity}
+          />
+        )}
+        {page === "profile" && (
+          <Profile
+            key={String(prefs.demo)}
+            profile={prefs.profile}
+            activities={activities}
+            onActivity={openActivity}
+            onSave={(p) => updatePrefs(p)}
+            demo={prefs.demo}
+            onDemo={(v) => {
+              if (!recorder.draft) {
+                updatePrefs(prefs.profile, v);
+                setSelected(null);
+              }
+            }}
+            locked={Boolean(recorder.draft)}
+            onHistory={() => navigate("activity")}
+            onExport={() =>
+              download(
+                "slopesense-backup.json",
+                JSON.stringify(
+                  {
+                    version: 3,
+                    profile: prefs.profile,
+                    activities: allActivities,
+                  },
+                  null,
+                  2,
+                ),
               )
             }
-            onExit={() => setReplay(null)}
-            onNext={openTrail}
           />
-        ) : (
-          <>
-            {page === "home" && (
-              <Home
-                profile={state.profile}
-                activities={state.activities}
-                fits={fits}
-                openMountain={openMountain}
-                openTrail={openTrail}
-                openActivity={openActivity}
-                onAsk={ask}
-                onNavigate={navigate}
-              />
-            )}
-            {page === "explore" && (
-              <Mountain
-                resortId={resortId}
-                selected={selected}
-                fits={fits}
-                profile={state.profile}
-                onResort={openMountain}
-                onSelect={setSelected}
-                onReplay={(trail, auto) => {
-                  setReplay({ trail, auto, key: Date.now() });
-                  window.scrollTo({ top: 0, behavior: "instant" });
-                }}
-              />
-            )}
-            {page === "activity" && (
-              <ActivityPage
-                activities={state.activities}
-                selected={activity}
-                onSelect={setActivity}
-                onExplore={() => navigate("explore")}
-              />
-            )}
-            {page === "progress" && (
-              <Progress
-                activities={state.activities}
-                profile={state.profile}
-                onActivity={openActivity}
-              />
-            )}
-            {page === "profile" && (
-              <Profile
-                profile={state.profile}
-                count={state.activities.length}
-                onSave={saveProfile}
-                onReset={() => {
-                  setState({
-                    ...initialState(),
-                    onboarded: true,
-                    profile: demoProfile,
-                  });
-                  navigate("home");
-                }}
-              />
-            )}
-          </>
         )}
         <footer className="app-footer">
-          <span className="footer-brand">
-            <Icon name="mountain" size={18} />
-            Made for your next mountain moment.
+          <span>
+            <Icon name="mountain" size={16} /> North Shore, British Columbia
           </span>
-          <span>North Shore, British Columbia · OSM data · Local demo</span>
+          <button onClick={() => navigate("profile")}>
+            Data sources & settings ↗
+          </button>
         </footer>
       </main>
       <nav className="bottom-nav" aria-label="Mobile navigation">
         {nav.map((n) => (
           <button
             key={n.id}
-            className={page === n.id ? "active" : ""}
-            onClick={() => navigate(n.id)}
+            className={`${page === n.id ? "active" : ""} ${n.id === "record" ? "record-nav" : ""}`}
+            onClick={() => {
+              if (n.id === "record" && page !== "explore") setSelected(null);
+              navigate(n.id);
+            }}
           >
-            <Icon name={n.icon} size={21} />
+            <Icon name={n.icon} size={22} />
             <span>{n.label}</span>
           </button>
         ))}
@@ -305,4 +323,3 @@ function App() {
     </div>
   );
 }
-export default App;

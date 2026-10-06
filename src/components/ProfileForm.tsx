@@ -213,7 +213,7 @@ export function Onboarding({
             <p className="demo-profile-note">
               Intermediate snowboarder · maximum Blue terrain
               <br />
-              Includes six simulated activities
+              Includes a full season of sample rides
             </p>
             <button className="text-button" onClick={() => setStep(1)}>
               Set up my own rider <Icon name="chevron" size={16} />

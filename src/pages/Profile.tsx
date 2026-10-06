@@ -1,43 +1,58 @@
 import { useState } from "react";
-import type { Profile as RiderProfile } from "../types/rider";
+import type { Activity, Profile as RiderProfile } from "../types/rider";
 import { ProfileFields } from "../components/ProfileForm";
-import { PageHeading, Notice } from "../components/Shared";
+import { PageHeading } from "../components/Shared";
 import { Icon } from "../components/Icon";
+import { ProfileSnapshot } from "../components/ProfileSnapshot";
 export function Profile({
   profile,
-  count,
+  activities,
+  onActivity,
   onSave,
-  onReset,
+  demo,
+  onDemo,
+  locked,
+  onHistory,
+  onExport,
 }: {
   profile: RiderProfile;
-  count: number;
+  activities: Activity[];
+  onActivity: (a: Activity) => void;
   onSave: (p: RiderProfile) => void;
-  onReset: () => void;
+  demo: boolean;
+  onDemo: (v: boolean) => void;
+  locked: boolean;
+  onHistory: () => void;
+  onExport: () => void;
 }) {
   const [draft, setDraft] = useState(profile),
-    [saved, setSaved] = useState(false),
-    [confirm, setConfirm] = useState(false);
+    [saved, setSaved] = useState(false);
   return (
     <div className="profile-page page-enter">
-      <PageHeading
-        eyebrow="MAKE THE MOUNTAIN YOURS"
-        title="Your ride. Your rules."
-        subtitle="A few preferences. A more personal day on the snow."
-      />
+      <PageHeading eyebrow="YOUR LOCAL PROFILE" title="Make it your ride." />
       <div className="profile-layout">
         <section className="panel">
           <div className="profile-identity">
             <span className="avatar large">
-              {draft.name.slice(0, 1).toUpperCase() || "R"}
+              {draft.name[0]?.toUpperCase() || "R"}
             </span>
             <div>
               <h2>{draft.name || "Rider"}</h2>
               <p>
-                {draft.experience}{" "}
-                {draft.sport === "ski" ? "skier" : "snowboarder"} · {count} demo
-                runs
+                {activities.length} {demo ? "demo" : "saved"} activities · this
+                device
               </p>
             </div>
+          </div>
+          <div className="profile-links">
+            <button className="secondary" onClick={onHistory}>
+              Activities
+              <Icon name="activity" size={17} />
+            </button>
+            <button className="secondary" onClick={onExport}>
+              Export my data
+              <Icon name="arrow" size={17} />
+            </button>
           </div>
           <ProfileFields
             profile={draft}
@@ -53,118 +68,93 @@ export function Profile({
               setSaved(true);
             }}
           >
-            {saved ? (
-              <>
-                <Icon name="check" />
-                Preferences saved
-              </>
-            ) : (
-              <>
-                Save my preferences
-                <Icon name="arrow" />
-              </>
-            )}
+            {saved ? "Preferences saved" : "Save preferences"}
+            <Icon name={saved ? "check" : "arrow"} />
           </button>
-          {saved && (
-            <p className="saved-note" role="status">
-              Your mountain and trail matches have been recalculated.
-            </p>
-          )}
         </section>
         <aside>
-          <div className="panel data-transparency">
-            <p className="eyebrow">AN HONEST LOOK AT YOUR DATA</p>
-            <h2>
-              Real trails.
-              <br />
-              Transparent insights.
-            </h2>
-            <dl>
-              <dt>
-                <span className="source-dot real" />
-                Mapped data
-              </dt>
-              <dd>
-                37 real named trails and geographic coordinates from
-                OpenStreetMap. Community-mapped difficulty; official ratings are
-                not independently verified.
-              </dd>
-              <dt>
-                <span className="source-dot simulated" />
-                Simulated data
-              </dt>
-              <dd>
-                Jan 17, 2026 winter weather, every replay's movement, elevation
-                and pitch, and Alex's seeded activity history.
-              </dd>
-              <dt>
-                <span className="source-dot calculated" />
-                Calculated analytics
-              </dt>
-              <dd>
-                Distance, duration, vertical, stops, pace variation, dimension
-                evidence and deterministic match scores.
-              </dd>
-              <dt>
-                <span className="source-dot reported" />
-                Rider reports
-              </dt>
-              <dd>
-                Your terrain ceiling, preferences, run feedback and optional
-                surface report.
-              </dd>
-              <dt>Unknown</dt>
-              <dd>
-                Daily openings, surveyed elevation, exact terrain
-                characteristics and most grooming information. Weather is not
-                proof of a trail's surface.
-              </dd>
-            </dl>
+          <ProfileSnapshot
+            activities={activities}
+            demo={demo}
+            onActivity={onActivity}
+          />
+          <section className="panel data-transparency">
+            <h2>On this device</h2>
+            <p>
+              Your profile, GPS drafts and saved rides are stored in this
+              browser. Export a backup before clearing browser data. No account
+              is required.
+            </p>
+            <h3>What is live</h3>
+            <p>
+              Device location while recording, and Open-Meteo weather estimates
+              refreshed every 10 minutes. The illustrated home scene is
+              decorative; use the run map for geographic context.
+            </p>
+            <h3>What is mapped</h3>
+            <p>
+              37 OSM runs across Cypress, Grouse and Seymour. This selection is
+              not a complete resort trail map. Resort operating status and daily
+              grooming remain unverified.
+            </p>
+            <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">
+              Weather: Open-Meteo ↗
+            </a>
+            <br />
             <a
               href="https://www.openstreetmap.org/copyright"
               target="_blank"
               rel="noreferrer"
             >
-              OpenStreetMap contributors · ODbL 1.0 ↗
+              Trails: OpenStreetMap · ODbL ↗
             </a>
-          </div>
-          <div className="panel reset-panel">
-            <h3>A fresh day on the mountain</h3>
+          </section>
+          <details className="panel photo-credits">
+            <summary>
+              Illustration & map sources <Icon name="plus" size={16} />
+            </summary>
             <p>
-              Restore Alex, the Blue terrain ceiling, and the six original
-              replay activities on this device.
+              The home illustration is inspired by actual resort terrain
+              references. It is decorative, not a navigation map.
             </p>
-            {confirm ? (
+            <p>
+              Run maps use OpenStreetMap coordinates and cartographic context.
+            </p>
+            <a
+              href="https://www.openstreetmap.org/fixthemap"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Report a map issue ↗
+            </a>
+          </details>
+          <section className="demo-setting" aria-label="Demo settings">
+            <div className="setting-row">
               <div>
-                <p>
-                  This replaces your saved local profile and replay history.
-                </p>
-                <div className="choice-row">
-                  <button
-                    className="secondary"
-                    onClick={() => setConfirm(false)}
-                  >
-                    Keep my data
-                  </button>
-                  <button className="danger-button" onClick={onReset}>
-                    Reset demo
-                  </button>
-                </div>
+                <strong>Try a sample profile</strong>
+                <p>Explore rides, replays and progress.</p>
               </div>
-            ) : (
-              <button className="secondary" onClick={() => setConfirm(true)}>
-                <Icon name="reset" size={17} />
-                Reset demo account
+              <button
+                role="switch"
+                aria-checked={demo}
+                aria-label="Demo mode"
+                disabled={locked}
+                className={`toggle-switch ${demo ? "on" : ""}`}
+                onClick={() => onDemo(!demo)}
+              >
+                <i />
               </button>
-            )}
-          </div>
+            </div>
+            <p className="fine-print">
+              {locked
+                ? "Finish or discard your draft to switch modes."
+                : demo
+                  ? "Demo is active. Your real rides stay separate."
+                  : "Sample data stays separate from your own rides."}
+            </p>
+          </section>
         </aside>
       </div>
-      <Notice>
-        Your data stays in this browser. SlopeSense is a demo recommendation
-        tool, not a live resort operations, navigation or avalanche-safety
-        service.
-      </Notice>
     </div>
   );
 }

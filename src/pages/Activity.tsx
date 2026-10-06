@@ -1,65 +1,53 @@
-import { useMemo, useState } from "react";
-import type { Activity as RunActivity } from "../types/rider";
+import { useState } from "react";
+import type { Activity } from "../types/rider";
 import { allTrails } from "../data/demo";
-import { resortById } from "../data/resorts";
+import { resorts, resortById } from "../data/resorts";
 import { analyze, durationLabel } from "../engine/telemetry";
-import { TelemetryChart } from "../components/TelemetryChart";
 import {
-  DifficultyPill,
-  Empty,
   Metric,
   PageHeading,
+  Empty,
+  DifficultyPill,
   dateLabel,
-  Notice,
 } from "../components/Shared";
+import { ReplayPlayer } from "../components/ReplayPlayer";
 import { Icon } from "../components/Icon";
+import { exportGpx } from "../services/local";
 export function ActivityPage({
   activities,
   selected,
   onSelect,
   onExplore,
 }: {
-  activities: RunActivity[];
-  selected: RunActivity | null;
-  onSelect: (a: RunActivity | null) => void;
+  activities: Activity[];
+  selected: Activity | null;
+  onSelect: (a: Activity | null) => void;
   onExplore: () => void;
 }) {
-  const ordered = useMemo(
-    () => [...activities].sort((a, b) => b.date.localeCompare(a.date)),
-    [activities],
-  );
-  const [filter, setFilter] = useState("all");
   const [compareId, setCompareId] = useState("");
-  const totals = useMemo(
-    () => activities.map((a) => analyze(a.telemetry)),
-    [activities],
-  );
   if (selected) {
-    const trail = allTrails.find((t) => t.id === selected.trailId);
-    if (!trail)
-      return (
-        <Empty title="Trail not found">
-          This saved trail is no longer in the local dataset.
-        </Empty>
-      );
-    const summary = analyze(selected.telemetry);
-    const repeats = ordered.filter(
-      (a) => a.trailId === selected.trailId && a.id !== selected.id,
-    );
-    const compared = repeats.find((a) => a.id === compareId) ?? repeats[0];
-    const other = compared ? analyze(compared.telemetry) : null;
+    const trail = allTrails.find((t) => t.id === selected.trailId),
+      resort = selected.resortId ? resortById[selected.resortId] : resorts[0],
+      summary = analyze(selected.telemetry),
+      repeats = activities.filter(
+        (a) =>
+          a.trailId && a.trailId === selected.trailId && a.id !== selected.id,
+      ),
+      compare = repeats.find((a) => a.id === compareId);
     return (
       <div className="page-enter">
-        <button className="text-button" onClick={() => onSelect(null)}>
-          <Icon name="back" size={16} />
-          All activity
+        <button className="back-link" onClick={() => onSelect(null)}>
+          <Icon name="back" size={17} />
+          All activities
         </button>
         <PageHeading
-          eyebrow={`${resortById[trail.resortId].name} · ${dateLabel(selected.date)} · SIMULATED`}
-          title={trail.name}
-          action={<DifficultyPill difficulty={trail.difficulty} />}
+          eyebrow={`${dateLabel(selected.date)} · ${selected.simulated ? "SIMULATED" : "GPS RECORDING"}`}
+          title={trail?.name || "Mountain activity"}
+          subtitle={
+            selected.resortId ? resort.name : "No confident mapped run match"
+          }
         />
-        <section className="panel activity-detail">
+        <div className="activity-detail panel">
           <div className="summary-metrics">
             <Metric
               value={(summary.distance / 1000).toFixed(2)}
@@ -67,222 +55,152 @@ export function ActivityPage({
               label="Distance"
             />
             <Metric
-              value={Math.round(summary.vertical)}
-              unit="m"
-              label="Demo vertical"
+              value={durationLabel(summary.duration)}
+              label="Tracked time"
             />
-            <Metric value={durationLabel(summary.duration)} label="Time" />
-            <Metric value={summary.stops} label="Stops" />
             <Metric
-              value={Math.round(summary.longestStop)}
-              unit="s"
-              label="Longest stop"
+              value={
+                summary.elevationAvailable ? Math.round(summary.vertical) : "—"
+              }
+              unit={summary.elevationAvailable ? "m" : undefined}
+              label={
+                selected.simulated
+                  ? "Simulated descent"
+                  : "GPS descent estimate"
+              }
             />
             <Metric
               value={summary.averageSpeed.toFixed(1)}
               unit="km/h"
               label="Average speed"
             />
+            <Metric value={summary.stops} label="Detected stops" />
           </div>
-          <TelemetryChart
-            samples={selected.telemetry}
-            comparison={compared?.telemetry}
-          />
-          <div className="chart-key">
-            <span>— Selected replay</span>
-            {compared && <span>┄ {dateLabel(compared.date)} comparison</span>}
-          </div>
-          <div className="summary-columns">
-            <div>
-              <h3>What happened on this run</h3>
-              <ul className="reasons">
-                {summary.observations.map((o) => (
-                  <li key={o}>
-                    <Icon name="activity" size={15} />
-                    {o}
-                  </li>
-                ))}
-              </ul>
-              <div className="feedback-record">
-                <span>
-                  Felt:{" "}
-                  <strong>
-                    {selected.feeling === "right"
-                      ? "Just right"
-                      : selected.feeling}
-                  </strong>
-                </span>
-                <span>
-                  Surface report: <strong>{selected.surface}</strong>
-                </span>
-              </div>
-            </div>
-            <div>
-              <h3>Section by section</h3>
-              {summary.sections.map((s) => (
-                <div className="section-analysis" key={s.label}>
-                  <span>
-                    {s.label}
-                    <small>
-                      {Math.round(s.gradient)}% simulated average pitch
-                    </small>
-                  </span>
-                  <strong>
-                    {s.averageSpeed.toFixed(1)} <small>km/h</small>
-                  </strong>
-                  <span>{s.stops} stops</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-        {compared && other && (
-          <section className="comparison-section panel">
-            <div className="section-title">
-              <div>
-                <p className="eyebrow">THE SAME LINE. A DIFFERENT RIDE.</p>
-                <h2>Compare your tracks.</h2>
-              </div>
+          {selected.telemetry.length > 1 && (
+            <ReplayPlayer
+              key={selected.id}
+              activity={selected}
+              comparison={compare}
+            />
+          )}
+          <p className="fine-print">
+            {selected.simulated
+              ? "This ride uses simulated GPS fixes and elevation."
+              : "Speed and distance are estimated from accepted GPS fixes. Gaps and paused intervals are excluded. Elevation is shown only when altitude accuracy is available."}
+          </p>
+          {repeats.length > 0 && (
+            <label className="compare-picker">
+              Compare this run
               <select
                 aria-label="Compare with activity"
-                value={compared.id}
+                value={compareId}
                 onChange={(e) => setCompareId(e.target.value)}
               >
+                <option value="">No comparison</option>
                 {repeats.map((a) => (
-                  <option value={a.id} key={a.id}>
-                    {dateLabel(a.date)} · {a.persona}
+                  <option key={a.id} value={a.id}>
+                    {new Date(a.date).toLocaleString()}
                   </option>
                 ))}
               </select>
-            </div>
-            <div className="comparison-table">
-              <div>
-                <span>Observation</span>
-                <strong>{dateLabel(compared.date)}</strong>
-                <strong>{dateLabel(selected.date)}</strong>
-              </div>
-              <div>
-                <span>Completion time</span>
-                <strong>{durationLabel(other.duration)}</strong>
-                <strong>{durationLabel(summary.duration)}</strong>
-              </div>
-              <div>
-                <span>Stops</span>
-                <strong>{other.stops}</strong>
-                <strong>{summary.stops}</strong>
-              </div>
-              <div>
-                <span>Moving-speed variation</span>
-                <strong>{Math.round(other.speedCV * 100)}%</strong>
-                <strong>{Math.round(summary.speedCV * 100)}%</strong>
-              </div>
-              <div>
-                <span>Longest stop</span>
-                <strong>{Math.round(other.longestStop)} s</strong>
-                <strong>{Math.round(summary.longestStop)} s</strong>
-              </div>
-            </div>
-            <Notice>
-              {summary.stops === other.stops
-                ? "The stop count was unchanged."
-                : `The selected replay has ${Math.abs(summary.stops - other.stops)} ${summary.stops < other.stops ? "fewer" : "more"} stops.`}{" "}
-              {Math.round(summary.speedCV * 100) ===
-              Math.round(other.speedCV * 100)
-                ? "Moving-speed variation is similar."
-                : `Moving-speed variation is ${summary.speedCV < other.speedCV ? "lower" : "higher"}.`}{" "}
-              Different synthetic profiles explain these changes; completion
-              speed alone is not a skill measure.
-            </Notice>
-          </section>
-        )}
+            </label>
+          )}
+          <div className="feedback-record">
+            <span>
+              Feeling:{" "}
+              <strong>
+                {selected.feeling === "unreported"
+                  ? "Not reported"
+                  : selected.feeling === "right"
+                    ? "Just right"
+                    : selected.feeling}
+              </strong>
+            </span>
+            <span>
+              Surface:{" "}
+              <strong>
+                {selected.surface === "unknown"
+                  ? "Not reported"
+                  : selected.surface}
+              </strong>
+            </span>
+          </div>
+          <ul className="reasons">
+            {summary.observations.map((o) => (
+              <li key={o}>
+                <Icon name="activity" size={15} />
+                {o}
+              </li>
+            ))}
+          </ul>
+          <button className="secondary" onClick={() => exportGpx(selected)}>
+            Export GPX
+            <Icon name="arrow" size={16} />
+          </button>
+        </div>
       </div>
     );
   }
   return (
     <div className="page-enter">
       <PageHeading
-        eyebrow="YOUR DAYS ON THE MOUNTAIN"
-        title="Every run leaves a trace."
-        subtitle="The moments, patterns and small steps that add up."
+        eyebrow="SAVED ON THIS DEVICE"
+        title="Rides & replays."
+        subtitle="Tap a ride for its replay, route, and stats."
       />
-      <div className="activity-overview">
-        <Metric value={activities.length} label="Recorded replays" />
-        <Metric
-          value={(totals.reduce((s, a) => s + a.vertical, 0) / 1000).toFixed(2)}
-          unit="km"
-          label="Simulated vertical"
-        />
-        <Metric
-          value={new Set(activities.map((a) => a.resortId)).size}
-          label="Mountains explored"
-        />
-      </div>
-      <div className="section-title">
-        <h2>Recent activity</h2>
-        <select
-          aria-label="Filter activity mountain"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-        >
-          <option value="all">All mountains</option>
-          {Object.values(resortById).map((r) => (
-            <option value={r.id} key={r.id}>
-              {r.shortName}
-            </option>
-          ))}
-        </select>
-      </div>
       <div className="activity-list">
-        {ordered
-          .filter((a) => filter === "all" || a.resortId === filter)
+        {[...activities]
+          .sort((a, b) => b.date.localeCompare(a.date))
           .map((a) => {
-            const t = allTrails.find((t) => t.id === a.trailId);
-            if (!t) return null;
-            const s = analyze(a.telemetry);
+            const trail = allTrails.find((t) => t.id === a.trailId),
+              s = analyze(a.telemetry);
             return (
               <button
                 className="activity-row"
                 key={a.id}
                 onClick={() => onSelect(a)}
               >
-                <div className={`activity-art ${a.resortId}`}>
-                  <Icon name="mountain" size={40} />
+                <div className="activity-art">
+                  <Icon name="mountain" size={35} />
                 </div>
                 <div className="activity-row-main">
                   <span className="eyebrow">
-                    {dateLabel(a.date)} · {resortById[a.resortId].shortName}
+                    {dateLabel(a.date)} · {a.simulated ? "DEMO" : "GPS"}
                   </span>
-                  <h3>{t.name}</h3>
-                  <DifficultyPill difficulty={t.difficulty} />
-                  <span className="simulated-label">Simulated</span>
+                  <h3>{trail?.name || "Mountain activity"}</h3>
+                  {trail ? (
+                    <DifficultyPill difficulty={trail.difficulty} />
+                  ) : (
+                    <span className="muted">Unmatched run</span>
+                  )}
                 </div>
                 <div className="activity-row-stats">
-                  <Metric value={durationLabel(s.duration)} label="Duration" />
                   <Metric
-                    value={Math.round(s.vertical)}
-                    unit="m"
-                    label="Vertical"
+                    value={(s.distance / 1000).toFixed(2)}
+                    unit="km"
+                    label="Distance"
                   />
-                  <Metric value={s.stops} label="Stops" />
+                  <Metric
+                    value={durationLabel(s.duration)}
+                    label="Tracked time"
+                  />
                 </div>
-                <Icon name="chevron" />
+                <span className="ride-replay-action">
+                  <Icon name="play" size={17} />
+                  Replay
+                </span>
               </button>
             );
           })}
       </div>
-      {!ordered.filter((a) => filter === "all" || a.resortId === filter)
-        .length && (
-        <Empty title="Your first tracks are waiting.">
+      {!activities.length && (
+        <Empty title="Your first ride starts here.">
           <button className="primary" onClick={onExplore}>
-            Explore a mountain
-            <Icon name="arrow" />
+            Start recording
+            <Icon name="play" />
           </button>
         </Empty>
       )}
-      <p className="data-note">
-        Every activity here is simulated. Replays and rider-reported feedback
-        are stored on this device.
-      </p>
     </div>
   );
 }

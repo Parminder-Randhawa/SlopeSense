@@ -243,7 +243,7 @@ try {
     storage.set(STORAGE_KEY, "{bad");
     const recovered = readState();
     assert.ok(recovered.warning);
-    assert.equal(recovered.state.activities.length, 6);
+    assert.equal(recovered.state.activities.length, history.length);
   });
   test("Malformed telemetry cannot crash saved-state loading", () => {
     storage.set(
