@@ -97,8 +97,8 @@ export function ProfileSnapshot({
       )}
       {demo && (
         <p className="fine-print">
-          Sample rides span eight weeks, with repeated runs for replay
-          comparisons. All metrics here come from simulated routes.
+          Sample rides include repeated runs for replay comparisons. All metrics
+          here come from simulated routes.
         </p>
       )}
     </section>

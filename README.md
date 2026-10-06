@@ -35,7 +35,7 @@ Google login and Tiger Cloud are deferred. The local app has no dependency on ei
 - **Progress:** distance by week, saved ride totals, mapped terrain experience, and experimental movement-pattern summaries.
 - **Profile / Settings:** edit preferences, export a JSON backup, and try the sample profile using the small **Demo mode** control at the bottom of Settings. Live mode is the default. A mode change is disabled while a draft exists.
 
-Demo mode feeds synthetic positions along real OSM geometry through the same GPS filtering, run matching, recording, persistence, and analytics code as live rides. It advances simulated time at 10×. Synthetic weather is clearly labelled. Demo and real histories are stored separately by provenance and never combined in recommendations or progress. Demo starts with Alex’s complete profile, eighteen completed rides over eight weeks across the three mountains, feedback, progress statistics and playable replays. These sample rides never appear in the live profile.
+Demo mode feeds synthetic positions along real OSM geometry through the same GPS filtering, run matching, recording, persistence, and analytics code as live rides. It advances simulated time at 10×. Synthetic weather is clearly labelled. Demo and real histories are stored separately by provenance and never combined in recommendations or progress. Demo starts with Alex’s complete profile, eighteen completed rides with an extended sample history across the three mountains, feedback, progress statistics and playable replays. These sample rides never appear in the live profile.
 
 ## What is real, modelled, and unknown
 

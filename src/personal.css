@@ -396,8 +396,8 @@
 }
 @media (max-width: 600px) {
   .home-page .range-scene {
-    height: calc(100svh - 130px);
-    min-height: 740px;
+    height: calc(100svh - 164px);
+    min-height: 650px;
     max-height: none;
   }
   .home-page .range-intro {

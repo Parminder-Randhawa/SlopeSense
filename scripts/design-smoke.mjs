@@ -27,7 +27,7 @@ try {
     await main.getByRole("button", { name, exact: true }).click();
   };
   for (const width of [320, 390, 768, 1024, 1440]) {
-    await page.setViewportSize({ width, height: 900 });
+    await page.setViewportSize({ width, height: width <= 600 ? 844 : 900 });
     await nav("Home");
     await page.getByRole("heading", { name: "Find your next line." }).waitFor();
     check(
@@ -45,6 +45,17 @@ try {
       Math.abs(art.width - art.height) < 2 && art.width <= 950,
       `${width}px immersive artwork keeps native aspect`,
     );
+    if (width <= 600) {
+      check(
+        await page.evaluate(
+          () =>
+            document.querySelector(".home-shortcuts").getBoundingClientRect()
+              .bottom <=
+            document.querySelector(".bottom-nav").getBoundingClientRect().top,
+        ),
+        `${width}px home replay links remain above fixed navigation`,
+      );
+    }
     await nav("Record");
     await page
       .getByRole("button", { name: "Choose a run", exact: true })
