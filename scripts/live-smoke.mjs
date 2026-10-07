@@ -42,11 +42,23 @@ try {
   await page.route("https://**/*", (r) => r.abort());
   await page.addInitScript(disableWebGL);
   await page.goto(base);
-  const nav = async (name) =>
-    page
+  const nav = async (name) => {
+    await page
       .getByRole("navigation", { name: "Mobile navigation" })
       .getByRole("button", { name, exact: true })
       .click();
+    await page
+      .locator(
+        {
+          Home: ".home-page",
+          Explore: ".mountain-page",
+          Record: ".record-page",
+          Progress: ".progress-page",
+          Profile: ".profile-page",
+        }[name],
+      )
+      .waitFor();
+  };
   await page.getByRole("heading", { name: "Find your next line." }).waitFor();
   ok(!(await page.locator(".mode-ribbon").count()), "Live mode is the default");
   ok(
@@ -60,6 +72,9 @@ try {
   await page
     .getByRole("button", { name: "Explore Grouse Mountain", exact: true })
     .click();
+  await page
+    .getByRole("heading", { name: "Grouse Mountain", exact: true })
+    .waitFor();
   ok(
     await page
       .getByRole("heading", { name: "Grouse Mountain", exact: true })
@@ -89,6 +104,9 @@ try {
   await page
     .getByRole("button", { name: "Record this run", exact: true })
     .click();
+  await page
+    .getByRole("button", { name: "Choose a run", exact: true })
+    .waitFor();
   ok(
     (await page
       .getByRole("button", { name: "Choose a run", exact: true })
@@ -147,6 +165,7 @@ try {
   page.once("dialog", (d) => d.accept());
   await page.reload();
   await nav("Record");
+  await page.getByText(/Recovered your draft/).waitFor();
   ok(
     await page.getByText(/Recovered your draft/).isVisible(),
     "Draft survives a reload",

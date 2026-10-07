@@ -41,6 +41,10 @@ export function Mountain({
     info = mountainInfo[resortId];
   const ranked = fits.filter((f) => f.trail.resortId === resortId),
     fit = ranked.find((f) => f.trail.id === selected?.id);
+  const selectRun = (trail: SkiRun | null) => {
+    onSelect(trail);
+    if (trail) window.scrollTo({ top: 0, behavior: "instant" });
+  };
   const shown = trails.filter(
     (t) =>
       filter === "all" ||
@@ -118,7 +122,7 @@ export function Mountain({
             resort={resort}
             trails={shown}
             selectedTrail={selected}
-            onSelectTrail={onSelect}
+            onSelectTrail={selectRun}
             onClearSelection={() => onSelect(null)}
             lockCamera
           />
@@ -155,14 +159,8 @@ export function Mountain({
                   <span>Mapped length</span>
                 </div>
                 <div>
-                  <strong>
-                    {selected.grooming === "groomed" ? "Groomed" : "Unverified"}
-                  </strong>
-                  <span>
-                    {selected.grooming === "groomed"
-                      ? "OSM tag · daily unknown"
-                      : "Daily grooming"}
-                  </span>
+                  <strong>{routeFor(selected).chains.length}</strong>
+                  <span>Mapped route segments</span>
                 </div>
               </div>
               {fit ? (
@@ -172,7 +170,7 @@ export function Mountain({
                     {fit.reasons.slice(0, 3).map((r) => (
                       <li key={r}>
                         <Icon name="check" size={15} />
-                        {r}
+                        <span>{r}</span>
                       </li>
                     ))}
                   </ul>
@@ -192,7 +190,7 @@ export function Mountain({
               )}
               <a
                 className="official-link"
-                href={info.official}
+                href={info.conditions}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -201,10 +199,9 @@ export function Mountain({
               <details className="source-details">
                 <summary>Map accuracy & sources</summary>
                 <p>
-                  Community-mapped OSM trails, snapshot October 3, 2026. This is
-                  a selection of mapped runs, not a complete resort map.
-                  Ratings, daily openings and grooming need confirmation from
-                  the resort.
+                  Community-mapped OSM trails, snapshot October 6, 2026. This is
+                  community-mapped coverage, not a complete resort map. Ratings,
+                  daily openings and grooming need confirmation from the resort.
                 </p>
                 <p>
                   {routeFor(selected).partial
@@ -240,7 +237,7 @@ export function Mountain({
               {ranked[0] && (
                 <button
                   className="primary"
-                  onClick={() => onSelect(ranked[0].trail)}
+                  onClick={() => selectRun(ranked[0].trail)}
                 >
                   Explore {ranked[0].trail.name}
                   <Icon name="arrow" />
@@ -248,7 +245,7 @@ export function Mountain({
               )}
               <a
                 className="official-link"
-                href={info.official}
+                href={info.conditions}
                 target="_blank"
                 rel="noreferrer"
               >
@@ -290,10 +287,7 @@ export function Mountain({
               key={t.id}
               className={`trail-row ${selected?.id === t.id ? "selected" : ""}`}
               onClick={() => {
-                onSelect(t);
-                document
-                  .querySelector(".live-explore")
-                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
+                selectRun(t);
               }}
             >
               <DifficultyPill difficulty={t.difficulty} />

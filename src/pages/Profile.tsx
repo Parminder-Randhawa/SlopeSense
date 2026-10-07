@@ -3,6 +3,7 @@ import type { Activity, Profile as RiderProfile } from "../types/rider";
 import { ProfileFields } from "../components/ProfileForm";
 import { PageHeading } from "../components/Shared";
 import { Icon } from "../components/Icon";
+import { allTrails } from "../data/demo";
 import { ProfileSnapshot } from "../components/ProfileSnapshot";
 export function Profile({
   profile,
@@ -93,9 +94,9 @@ export function Profile({
             </p>
             <h3>What is mapped</h3>
             <p>
-              37 OSM runs across Cypress, Grouse and Seymour. This selection is
-              not a complete resort trail map. Resort operating status and daily
-              grooming remain unverified.
+              {allTrails.length} OSM runs across Cypress, Grouse and Seymour.
+              This selection is not a complete resort trail map. Resort
+              operating status and daily grooming remain unverified.
             </p>
             <a href="https://open-meteo.com/" target="_blank" rel="noreferrer">
               Weather: Open-Meteo ↗

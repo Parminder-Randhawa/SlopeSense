@@ -39,7 +39,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -307,7 +307,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -446,7 +446,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -809,7 +809,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -919,7 +919,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -1128,7 +1128,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -1333,7 +1333,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -1456,7 +1456,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -1555,7 +1555,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -1638,7 +1638,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -1730,7 +1730,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -1956,7 +1956,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -2077,6 +2077,4227 @@
           [
             -123.1955854,
             49.4050478
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-3-bears",
+      "properties": {
+        "id": "cypress-3-bears",
+        "name": "3 Bears",
+        "resortId": "cypress",
+        "difficulty": "unknown",
+        "lengthMeters": 1182,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "118406754",
+            "1193655003",
+            "1421942276",
+            "1421948411"
+          ],
+          "osmDifficultyValues": [
+            "easy",
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "3 Bears",
+              "piste:difficulty": "easy",
+              "piste:type": "downhill"
+            },
+            {
+              "name": "3 Bears",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            },
+            {
+              "name": "3 Bears",
+              "piste:difficulty": "easy",
+              "piste:type": "downhill"
+            },
+            {
+              "name": "3 Bears",
+              "piste:difficulty": "easy",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -123.2005612,
+              49.3922095
+            ],
+            [
+              -123.2004769,
+              49.3919712
+            ],
+            [
+              -123.2003499,
+              49.3916541
+            ],
+            [
+              -123.2003115,
+              49.3915344
+            ],
+            [
+              -123.2002901,
+              49.3914448
+            ],
+            [
+              -123.2002544,
+              49.3912925
+            ],
+            [
+              -123.2002232,
+              49.3912542
+            ],
+            [
+              -123.2001807,
+              49.3912226
+            ],
+            [
+              -123.2001203,
+              49.3911986
+            ],
+            [
+              -123.2000721,
+              49.3911932
+            ],
+            [
+              -123.2000289,
+              49.3911972
+            ],
+            [
+              -123.199998,
+              49.3912127
+            ],
+            [
+              -123.1999682,
+              49.3912444
+            ],
+            [
+              -123.1999387,
+              49.3913133
+            ],
+            [
+              -123.1999192,
+              49.391403
+            ],
+            [
+              -123.1998727,
+              49.3915521
+            ],
+            [
+              -123.1998601,
+              49.3916057
+            ],
+            [
+              -123.1998397,
+              49.3916907
+            ],
+            [
+              -123.1998019,
+              49.391924
+            ],
+            [
+              -123.199783,
+              49.3919817
+            ],
+            [
+              -123.1997599,
+              49.3920082
+            ],
+            [
+              -123.1997233,
+              49.3920267
+            ],
+            [
+              -123.1996778,
+              49.392036
+            ],
+            [
+              -123.1996354,
+              49.3920343
+            ],
+            [
+              -123.1995915,
+              49.3920209
+            ],
+            [
+              -123.1995503,
+              49.3919951
+            ],
+            [
+              -123.1994897,
+              49.3919323
+            ],
+            [
+              -123.1994539,
+              49.3918495
+            ],
+            [
+              -123.1994129,
+              49.3917715
+            ],
+            [
+              -123.1992885,
+              49.3915618
+            ],
+            [
+              -123.1991816,
+              49.3913927
+            ],
+            [
+              -123.1991331,
+              49.3913228
+            ],
+            [
+              -123.1989696,
+              49.3910822
+            ],
+            [
+              -123.1989222,
+              49.3910018
+            ],
+            [
+              -123.1988833,
+              49.3909095
+            ],
+            [
+              -123.1987584,
+              49.3907025
+            ],
+            [
+              -123.1987344,
+              49.3906475
+            ],
+            [
+              -123.1987115,
+              49.3905832
+            ],
+            [
+              -123.1986609,
+              49.3903491
+            ],
+            [
+              -123.1986155,
+              49.3902557
+            ],
+            [
+              -123.1985319,
+              49.3901574
+            ],
+            [
+              -123.1984206,
+              49.3900459
+            ],
+            [
+              -123.1983411,
+              49.3899454
+            ],
+            [
+              -123.1982055,
+              49.3897179
+            ],
+            [
+              -123.1979951,
+              49.3894141
+            ],
+            [
+              -123.1979581,
+              49.3893108
+            ],
+            [
+              -123.1979376,
+              49.3892307
+            ]
+          ],
+          [
+            [
+              -123.2060268,
+              49.3932615
+            ],
+            [
+              -123.205717,
+              49.3933782
+            ],
+            [
+              -123.2054415,
+              49.3935804
+            ],
+            [
+              -123.2051926,
+              49.3937466
+            ],
+            [
+              -123.2050081,
+              49.3938514
+            ],
+            [
+              -123.204787,
+              49.3939841
+            ],
+            [
+              -123.204624,
+              49.3940469
+            ],
+            [
+              -123.2045489,
+              49.3940525
+            ],
+            [
+              -123.2044287,
+              49.3940357
+            ],
+            [
+              -123.2041455,
+              49.3939645
+            ],
+            [
+              -123.2037367,
+              49.3938648
+            ],
+            [
+              -123.2035707,
+              49.3938108
+            ],
+            [
+              -123.2033921,
+              49.3937485
+            ],
+            [
+              -123.2030601,
+              49.3937121
+            ],
+            [
+              -123.2029194,
+              49.3936581
+            ],
+            [
+              -123.2026939,
+              49.3935256
+            ],
+            [
+              -123.2025688,
+              49.3934119
+            ],
+            [
+              -123.2023875,
+              49.3932471
+            ],
+            [
+              -123.2021948,
+              49.3931181
+            ],
+            [
+              -123.201993,
+              49.3929982
+            ],
+            [
+              -123.2018809,
+              49.3929217
+            ],
+            [
+              -123.2016955,
+              49.3928359
+            ],
+            [
+              -123.2014484,
+              49.3927497
+            ]
+          ],
+          [
+            [
+              -123.2017672,
+              49.3931696
+            ],
+            [
+              -123.2016252,
+              49.3930244
+            ],
+            [
+              -123.2015195,
+              49.3928882
+            ],
+            [
+              -123.2014484,
+              49.3927497
+            ],
+            [
+              -123.2012309,
+              49.3925998
+            ],
+            [
+              -123.2007854,
+              49.3923792
+            ],
+            [
+              -123.2005612,
+              49.3922095
+            ]
+          ],
+          [
+            [
+              -123.1979376,
+              49.3892307
+            ],
+            [
+              -123.1977698,
+              49.3889696
+            ],
+            [
+              -123.1976896,
+              49.3888286
+            ],
+            [
+              -123.1976878,
+              49.3887398
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-access-to-raven-ridge",
+      "properties": {
+        "id": "cypress-access-to-raven-ridge",
+        "name": "Access to Raven Ridge",
+        "resortId": "cypress",
+        "difficulty": "green",
+        "lengthMeters": 220,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "85877878"
+          ],
+          "osmDifficultyValues": [
+            "easy"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Access to Raven Ridge",
+              "piste:difficulty": "easy",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.203371,
+            49.3948305
+          ],
+          [
+            -123.2032837,
+            49.3947672
+          ],
+          [
+            -123.2031867,
+            49.3946713
+          ],
+          [
+            -123.2031208,
+            49.3945387
+          ],
+          [
+            -123.2030642,
+            49.3944099
+          ],
+          [
+            -123.2030138,
+            49.3943357
+          ],
+          [
+            -123.202803,
+            49.3941101
+          ],
+          [
+            -123.2019081,
+            49.3932959
+          ],
+          [
+            -123.2017672,
+            49.3931696
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-alexandre-bilodeau-s-moguls-run",
+      "properties": {
+        "id": "cypress-alexandre-bilodeau-s-moguls-run",
+        "name": "Alexandre Bilodeau's (Moguls Run)",
+        "resortId": "cypress",
+        "difficulty": "black",
+        "lengthMeters": 321,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "85877875"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Alexandre Bilodeau's (Moguls Run)",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2056581,
+            49.3916989
+          ],
+          [
+            -123.2048671,
+            49.3920665
+          ],
+          [
+            -123.2045293,
+            49.3919218
+          ],
+          [
+            -123.2031485,
+            49.3924526
+          ],
+          [
+            -123.2022594,
+            49.3927927
+          ],
+          [
+            -123.20201,
+            49.3928868
+          ],
+          [
+            -123.2018809,
+            49.3929217
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-area-51-glades",
+      "properties": {
+        "id": "cypress-area-51-glades",
+        "name": "Area 51 Glades",
+        "resortId": "cypress",
+        "difficulty": "double-black",
+        "lengthMeters": 214,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "899502454"
+          ],
+          "osmDifficultyValues": [
+            "expert"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Area 51 Glades",
+              "piste:difficulty": "expert",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2033392,
+            49.4055169
+          ],
+          [
+            -123.2034509,
+            49.404648
+          ],
+          [
+            -123.2038585,
+            49.4042268
+          ],
+          [
+            -123.2046257,
+            49.4041384
+          ],
+          [
+            -123.2046937,
+            49.4041456
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-ashley-mcivor-s",
+      "properties": {
+        "id": "cypress-ashley-mcivor-s",
+        "name": "Ashley McIvor's",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 358,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040618"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Ashley McIvor's",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2102206,
+            49.3954986
+          ],
+          [
+            -123.2094219,
+            49.3957294
+          ],
+          [
+            -123.2088977,
+            49.3958611
+          ],
+          [
+            -123.2083399,
+            49.3959625
+          ],
+          [
+            -123.2078793,
+            49.3960914
+          ],
+          [
+            -123.207689,
+            49.3961704
+          ],
+          [
+            -123.2070084,
+            49.396548
+          ],
+          [
+            -123.2069342,
+            49.3966165
+          ],
+          [
+            -123.2066329,
+            49.3968944
+          ],
+          [
+            -123.2062542,
+            49.3972437
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-benny-s",
+      "properties": {
+        "id": "cypress-benny-s",
+        "name": "Benny's",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 1244,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040382",
+            "118406739",
+            "118406943"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Benny's",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            },
+            {
+              "name": "Benny's",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            },
+            {
+              "name": "Benny's",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -123.2068227,
+              49.3889368
+            ],
+            [
+              -123.2062483,
+              49.3884621
+            ],
+            [
+              -123.2058028,
+              49.3878787
+            ],
+            [
+              -123.2057275,
+              49.3876238
+            ],
+            [
+              -123.2056038,
+              49.3874451
+            ]
+          ],
+          [
+            [
+              -123.2056038,
+              49.3874451
+            ],
+            [
+              -123.2055239,
+              49.3872273
+            ],
+            [
+              -123.205494,
+              49.3870268
+            ],
+            [
+              -123.2056342,
+              49.3868445
+            ],
+            [
+              -123.2061495,
+              49.386237
+            ]
+          ],
+          [
+            [
+              -123.2061495,
+              49.386237
+            ],
+            [
+              -123.2063909,
+              49.3858868
+            ],
+            [
+              -123.2061824,
+              49.3854872
+            ],
+            [
+              -123.2056245,
+              49.3849669
+            ],
+            [
+              -123.2055118,
+              49.384918
+            ],
+            [
+              -123.2050612,
+              49.3849067
+            ],
+            [
+              -123.204077,
+              49.3850758
+            ],
+            [
+              -123.2033176,
+              49.3852825
+            ],
+            [
+              -123.202549,
+              49.3855627
+            ],
+            [
+              -123.2022924,
+              49.3858372
+            ],
+            [
+              -123.201884,
+              49.3861883
+            ],
+            [
+              -123.201195,
+              49.3865406
+            ],
+            [
+              -123.2008042,
+              49.38688
+            ],
+            [
+              -123.2001724,
+              49.3873172
+            ],
+            [
+              -123.1991303,
+              49.3880939
+            ],
+            [
+              -123.1985863,
+              49.3883759
+            ],
+            [
+              -123.1981575,
+              49.3885077
+            ],
+            [
+              -123.1978505,
+              49.388593
+            ],
+            [
+              -123.1977397,
+              49.3886446
+            ],
+            [
+              -123.1976878,
+              49.3887398
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-black-fly",
+      "properties": {
+        "id": "cypress-black-fly",
+        "name": "Black Fly",
+        "resortId": "cypress",
+        "difficulty": "double-black",
+        "lengthMeters": 295,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040385"
+          ],
+          "osmDifficultyValues": [
+            "expert"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Black Fly",
+              "piste:difficulty": "expert",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2056342,
+            49.3868445
+          ],
+          [
+            -123.2051788,
+            49.3864426
+          ],
+          [
+            -123.204691,
+            49.3860069
+          ],
+          [
+            -123.2035223,
+            49.3857462
+          ],
+          [
+            -123.202556,
+            49.3857686
+          ],
+          [
+            -123.2022924,
+            49.3858372
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-blaster",
+      "properties": {
+        "id": "cypress-blaster",
+        "name": "Blaster",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 221,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "91317043"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Blaster",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1977306,
+            49.3991619
+          ],
+          [
+            -123.1978153,
+            49.398701
+          ],
+          [
+            -123.1979005,
+            49.3983912
+          ],
+          [
+            -123.1980204,
+            49.3982401
+          ],
+          [
+            -123.1981095,
+            49.3977843
+          ],
+          [
+            -123.1981946,
+            49.3974594
+          ],
+          [
+            -123.1983059,
+            49.3972184
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-bowen-face",
+      "properties": {
+        "id": "cypress-bowen-face",
+        "name": "Bowen Face",
+        "resortId": "cypress",
+        "difficulty": "black",
+        "lengthMeters": 306,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "91317029"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Bowen Face",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1978212,
+            49.4014124
+          ],
+          [
+            -123.1985946,
+            49.4006344
+          ],
+          [
+            -123.1997896,
+            49.3995779
+          ],
+          [
+            -123.2002568,
+            49.3991657
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-bowen-west-glades",
+      "properties": {
+        "id": "cypress-bowen-west-glades",
+        "name": "Bowen West Glades",
+        "resortId": "cypress",
+        "difficulty": "double-black",
+        "lengthMeters": 362,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "899502459"
+          ],
+          "osmDifficultyValues": [
+            "expert"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Bowen West Glades",
+              "piste:difficulty": "expert",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1972575,
+            49.4019022
+          ],
+          [
+            -123.1985039,
+            49.4017669
+          ],
+          [
+            -123.199463,
+            49.4009868
+          ],
+          [
+            -123.1998386,
+            49.3997489
+          ],
+          [
+            -123.1997896,
+            49.3995779
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-cat-track",
+      "properties": {
+        "id": "cypress-cat-track",
+        "name": "Cat Track",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 395,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040703"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Cat Track",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1945033,
+            49.4037473
+          ],
+          [
+            -123.1932901,
+            49.4033065
+          ],
+          [
+            -123.1927656,
+            49.4032275
+          ],
+          [
+            -123.1924018,
+            49.4031657
+          ],
+          [
+            -123.1922799,
+            49.403145
+          ],
+          [
+            -123.1917572,
+            49.4030563
+          ],
+          [
+            -123.1902041,
+            49.4028853
+          ],
+          [
+            -123.1893542,
+            49.4026747
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-crater-glades",
+      "properties": {
+        "id": "cypress-crater-glades",
+        "name": "Crater Glades",
+        "resortId": "cypress",
+        "difficulty": "double-black",
+        "lengthMeters": 432,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "1120473836"
+          ],
+          "osmDifficultyValues": [
+            "expert"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Crater Glades",
+              "piste:difficulty": "expert",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1924452,
+            49.4021279
+          ],
+          [
+            -123.1929523,
+            49.4017865
+          ],
+          [
+            -123.1930905,
+            49.4016066
+          ],
+          [
+            -123.1931973,
+            49.4014308
+          ],
+          [
+            -123.1932476,
+            49.4012836
+          ],
+          [
+            -123.1933732,
+            49.4003636
+          ],
+          [
+            -123.1934298,
+            49.4001306
+          ],
+          [
+            -123.1934926,
+            49.3997544
+          ],
+          [
+            -123.1936622,
+            49.3992719
+          ],
+          [
+            -123.1936622,
+            49.3991002
+          ],
+          [
+            -123.1937315,
+            49.398437
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-darkside",
+      "properties": {
+        "id": "cypress-darkside",
+        "name": "Darkside",
+        "resortId": "cypress",
+        "difficulty": "double-black",
+        "lengthMeters": 553,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "899502445",
+            "1120473837"
+          ],
+          "osmDifficultyValues": [
+            "expert"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Darkside",
+              "oneway": "no",
+              "piste:difficulty": "expert",
+              "piste:type": "downhill"
+            },
+            {
+              "lit": "no",
+              "name": "Darkside",
+              "piste:difficulty": "expert",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -123.191836,
+              49.4010119
+            ],
+            [
+              -123.1916031,
+              49.3997559
+            ],
+            [
+              -123.1909509,
+              49.4001414
+            ],
+            [
+              -123.1903499,
+              49.4005543
+            ],
+            [
+              -123.1911093,
+              49.4007122
+            ],
+            [
+              -123.1911676,
+              49.4008616
+            ],
+            [
+              -123.1915325,
+              49.401052
+            ],
+            [
+              -123.191836,
+              49.4010119
+            ]
+          ],
+          [
+            [
+              -123.1920666,
+              49.4010327
+            ],
+            [
+              -123.1914821,
+              49.4006376
+            ],
+            [
+              -123.1911365,
+              49.4003963
+            ],
+            [
+              -123.1906932,
+              49.3999762
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-elevator",
+      "properties": {
+        "id": "cypress-elevator",
+        "name": "Elevator",
+        "resortId": "cypress",
+        "difficulty": "double-black",
+        "lengthMeters": 227,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "899502447"
+          ],
+          "osmDifficultyValues": [
+            "expert"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Elevator",
+              "piste:difficulty": "expert",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1925437,
+            49.4023456
+          ],
+          [
+            -123.1908777,
+            49.4019648
+          ],
+          [
+            -123.1895121,
+            49.4018547
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-first-sun",
+      "properties": {
+        "id": "cypress-first-sun",
+        "name": "First Sun",
+        "resortId": "cypress",
+        "difficulty": "black",
+        "lengthMeters": 610,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "85877879"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "First Sun",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2068227,
+            49.3889368
+          ],
+          [
+            -123.2061021,
+            49.3890333
+          ],
+          [
+            -123.2055331,
+            49.3890642
+          ],
+          [
+            -123.2054382,
+            49.3890694
+          ],
+          [
+            -123.2039346,
+            49.3891512
+          ],
+          [
+            -123.2031162,
+            49.389068
+          ],
+          [
+            -123.2000663,
+            49.3887582
+          ],
+          [
+            -123.1991749,
+            49.3884832
+          ],
+          [
+            -123.1985863,
+            49.3883759
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-gibsons",
+      "properties": {
+        "id": "cypress-gibsons",
+        "name": "Gibsons",
+        "resortId": "cypress",
+        "difficulty": "black",
+        "lengthMeters": 377,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "375889413"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Gibsons",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1947064,
+            49.4043804
+          ],
+          [
+            -123.1947968,
+            49.4044673
+          ],
+          [
+            -123.1949041,
+            49.4045301
+          ],
+          [
+            -123.1949551,
+            49.4045389
+          ],
+          [
+            -123.1950543,
+            49.4045249
+          ],
+          [
+            -123.1953413,
+            49.40438
+          ],
+          [
+            -123.1959915,
+            49.4039247
+          ],
+          [
+            -123.1965299,
+            49.4035984
+          ],
+          [
+            -123.1977879,
+            49.4026615
+          ],
+          [
+            -123.1983697,
+            49.4023235
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-glades",
+      "properties": {
+        "id": "cypress-glades",
+        "name": "Glades",
+        "resortId": "cypress",
+        "difficulty": "black",
+        "lengthMeters": 360,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040709"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Glades",
+              "piste:difficulty": "advanced",
+              "piste:status": "open",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1968031,
+            49.4101185
+          ],
+          [
+            -123.196918,
+            49.4100879
+          ],
+          [
+            -123.197072,
+            49.4100551
+          ],
+          [
+            -123.1971069,
+            49.4100382
+          ],
+          [
+            -123.1971211,
+            49.4100214
+          ],
+          [
+            -123.1971483,
+            49.4099911
+          ],
+          [
+            -123.1971806,
+            49.4099625
+          ],
+          [
+            -123.1972636,
+            49.4099213
+          ],
+          [
+            -123.1984204,
+            49.4094085
+          ],
+          [
+            -123.1992918,
+            49.4088221
+          ],
+          [
+            -123.1995368,
+            49.408289
+          ],
+          [
+            -123.1993151,
+            49.4077292
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-horizon-bypass",
+      "properties": {
+        "id": "cypress-horizon-bypass",
+        "name": "Horizon Bypass",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 293,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040696"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Horizon Bypass",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2036154,
+            49.4017002
+          ],
+          [
+            -123.2036504,
+            49.4015523
+          ],
+          [
+            -123.2036367,
+            49.4013739
+          ],
+          [
+            -123.2034534,
+            49.4010794
+          ],
+          [
+            -123.2034556,
+            49.4009898
+          ],
+          [
+            -123.2036592,
+            49.4006199
+          ],
+          [
+            -123.203869,
+            49.4003164
+          ],
+          [
+            -123.2045858,
+            49.3996889
+          ],
+          [
+            -123.2047266,
+            49.3995273
+          ],
+          [
+            -123.2048693,
+            49.399346
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-horizon-eagleexpress-connector",
+      "properties": {
+        "id": "cypress-horizon-eagleexpress-connector",
+        "name": "Horizon-EagleExpress connector",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 173,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "65057504"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Horizon-EagleExpress connector",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2045965,
+            49.3983613
+          ],
+          [
+            -123.2046893,
+            49.3982472
+          ],
+          [
+            -123.2054047,
+            49.3975483
+          ],
+          [
+            -123.2056383,
+            49.3973441
+          ],
+          [
+            -123.2060785,
+            49.3971779
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-horsefly",
+      "properties": {
+        "id": "cypress-horsefly",
+        "name": "Horsefly",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 110,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040713"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Horsefly",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1987688,
+            49.4081387
+          ],
+          [
+            -123.198706,
+            49.4078347
+          ],
+          [
+            -123.1985538,
+            49.4074037
+          ],
+          [
+            -123.1985572,
+            49.407159
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-hose-side",
+      "properties": {
+        "id": "cypress-hose-side",
+        "name": "Hose Side",
+        "resortId": "cypress",
+        "difficulty": "black",
+        "lengthMeters": 312,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "85877870"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Hose Side",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2114562,
+            49.3929966
+          ],
+          [
+            -123.2106149,
+            49.3933229
+          ],
+          [
+            -123.2105714,
+            49.3933447
+          ],
+          [
+            -123.2100813,
+            49.3935906
+          ],
+          [
+            -123.2095597,
+            49.3939301
+          ],
+          [
+            -123.2095285,
+            49.3939558
+          ],
+          [
+            -123.2094548,
+            49.3940163
+          ],
+          [
+            -123.2092739,
+            49.3941649
+          ],
+          [
+            -123.2087344,
+            49.3943951
+          ],
+          [
+            -123.2079716,
+            49.3945884
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-howe-sound-crest-trail",
+      "properties": {
+        "id": "cypress-howe-sound-crest-trail",
+        "name": "Howe Sound Crest Trail",
+        "resortId": "cypress",
+        "difficulty": "green",
+        "lengthMeters": 160,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40311929"
+          ],
+          "osmDifficultyValues": [
+            "easy"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Howe Sound Crest Trail",
+              "oneway": "no",
+              "piste:difficulty": "easy",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2024612,
+            49.3958255
+          ],
+          [
+            -123.2024896,
+            49.3959353
+          ],
+          [
+            -123.2025153,
+            49.3960205
+          ],
+          [
+            -123.2025694,
+            49.3960851
+          ],
+          [
+            -123.2026347,
+            49.3961711
+          ],
+          [
+            -123.202797,
+            49.3963077
+          ],
+          [
+            -123.2028791,
+            49.3964038
+          ],
+          [
+            -123.202973,
+            49.3965097
+          ],
+          [
+            -123.2030261,
+            49.3966114
+          ],
+          [
+            -123.2030578,
+            49.3967465
+          ],
+          [
+            -123.203083,
+            49.3968887
+          ],
+          [
+            -123.2032428,
+            49.3971515
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-humpty-dumpty",
+      "properties": {
+        "id": "cypress-humpty-dumpty",
+        "name": "Humpty Dumpty",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 707,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "91327370"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Humpty Dumpty",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1947949,
+            49.4046492
+          ],
+          [
+            -123.1949689,
+            49.4046542
+          ],
+          [
+            -123.1950896,
+            49.4046755
+          ],
+          [
+            -123.1952909,
+            49.4047917
+          ],
+          [
+            -123.1954217,
+            49.4048965
+          ],
+          [
+            -123.1955198,
+            49.4051109
+          ],
+          [
+            -123.1956933,
+            49.4052238
+          ],
+          [
+            -123.1958744,
+            49.4051044
+          ],
+          [
+            -123.1960152,
+            49.4050226
+          ],
+          [
+            -123.1970299,
+            49.4043458
+          ],
+          [
+            -123.1980366,
+            49.4037247
+          ],
+          [
+            -123.1990467,
+            49.4034556
+          ],
+          [
+            -123.2004281,
+            49.4031728
+          ],
+          [
+            -123.2011484,
+            49.4028332
+          ],
+          [
+            -123.202011,
+            49.4021244
+          ],
+          [
+            -123.2023074,
+            49.4020902
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-hut-run",
+      "properties": {
+        "id": "cypress-hut-run",
+        "name": "Hut Run",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 275,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "91317045",
+            "890255928"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Hut Run",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            },
+            {
+              "name": "Hut Run",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -123.1992996,
+              49.3985268
+            ],
+            [
+              -123.1991506,
+              49.3983688
+            ],
+            [
+              -123.1990546,
+              49.3981331
+            ],
+            [
+              -123.1989439,
+              49.3980198
+            ],
+            [
+              -123.1988139,
+              49.3978969
+            ],
+            [
+              -123.1987056,
+              49.3977865
+            ],
+            [
+              -123.1986622,
+              49.3977417
+            ],
+            [
+              -123.1984424,
+              49.3975825
+            ],
+            [
+              -123.1983464,
+              49.3974798
+            ],
+            [
+              -123.1983059,
+              49.3972184
+            ]
+          ],
+          [
+            [
+              -123.1987056,
+              49.3977865
+            ],
+            [
+              -123.1992178,
+              49.3968683
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-hutch",
+      "properties": {
+        "id": "cypress-hutch",
+        "name": "Hutch",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 194,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040693"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Hutch",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1908176,
+            49.4040559
+          ],
+          [
+            -123.1901894,
+            49.4036481
+          ],
+          [
+            -123.1896393,
+            49.4032407
+          ],
+          [
+            -123.1896578,
+            49.4029787
+          ],
+          [
+            -123.1893542,
+            49.4026747
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-jasey-jay-anderson-s",
+      "properties": {
+        "id": "cypress-jasey-jay-anderson-s",
+        "name": "Jasey Jay Anderson's",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 657,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40042418"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Jasey Jay Anderson's",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2142768,
+            49.3929771
+          ],
+          [
+            -123.2137691,
+            49.3930078
+          ],
+          [
+            -123.2133131,
+            49.3931203
+          ],
+          [
+            -123.2127725,
+            49.3933176
+          ],
+          [
+            -123.211837,
+            49.3937804
+          ],
+          [
+            -123.211677,
+            49.3939128
+          ],
+          [
+            -123.2114461,
+            49.3943298
+          ],
+          [
+            -123.2093754,
+            49.3945639
+          ],
+          [
+            -123.2088373,
+            49.3946773
+          ],
+          [
+            -123.2077034,
+            49.3951885
+          ],
+          [
+            -123.207188,
+            49.3954809
+          ],
+          [
+            -123.2066801,
+            49.3957018
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-l-t-d",
+      "properties": {
+        "id": "cypress-l-t-d",
+        "name": "L. T. D",
+        "resortId": "cypress",
+        "difficulty": "double-black",
+        "lengthMeters": 357,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "899502449"
+          ],
+          "osmDifficultyValues": [
+            "expert"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "L. T. D",
+              "piste:difficulty": "expert",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1946516,
+            49.4031164
+          ],
+          [
+            -123.1946183,
+            49.4022978
+          ],
+          [
+            -123.1958629,
+            49.4020813
+          ],
+          [
+            -123.1957231,
+            49.4028955
+          ],
+          [
+            -123.1946516,
+            49.4031164
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-lower-bowen",
+      "properties": {
+        "id": "cypress-lower-bowen",
+        "name": "Lower Bowen",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 786,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040692",
+            "91317067"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Lower Bowen",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            },
+            {
+              "name": "Lower Bowen",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -123.198005,
+              49.3993709
+            ],
+            [
+              -123.1983262,
+              49.3994112
+            ],
+            [
+              -123.1987132,
+              49.3992576
+            ],
+            [
+              -123.1989019,
+              49.3991575
+            ],
+            [
+              -123.1991622,
+              49.3990194
+            ],
+            [
+              -123.1996674,
+              49.3988491
+            ],
+            [
+              -123.2009142,
+              49.3978832
+            ],
+            [
+              -123.2014939,
+              49.3975805
+            ],
+            [
+              -123.2020505,
+              49.3972977
+            ],
+            [
+              -123.2023947,
+              49.3969488
+            ],
+            [
+              -123.2027389,
+              49.3965583
+            ],
+            [
+              -123.2028791,
+              49.3964038
+            ]
+          ],
+          [
+            [
+              -123.2002568,
+              49.3991657
+            ],
+            [
+              -123.2012185,
+              49.398644
+            ],
+            [
+              -123.2018594,
+              49.3981378
+            ],
+            [
+              -123.2028049,
+              49.3972385
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-lower-coyote-7",
+      "properties": {
+        "id": "cypress-lower-coyote-7",
+        "name": "Lower Coyote 7",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 292,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40042417"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Lower Coyote 7",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2019779,
+            49.3897839
+          ],
+          [
+            -123.2014116,
+            49.3896788
+          ],
+          [
+            -123.1998026,
+            49.3896361
+          ],
+          [
+            -123.1988885,
+            49.3895496
+          ],
+          [
+            -123.1979951,
+            49.3894141
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-lower-trumpeter",
+      "properties": {
+        "id": "cypress-lower-trumpeter",
+        "name": "Lower Trumpeter",
+        "resortId": "cypress",
+        "difficulty": "black",
+        "lengthMeters": 160,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "85877880"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Lower Trumpeter",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2077034,
+            49.3951885
+          ],
+          [
+            -123.2075314,
+            49.3957065
+          ],
+          [
+            -123.2074421,
+            49.3958576
+          ],
+          [
+            -123.2073304,
+            49.3960466
+          ],
+          [
+            -123.2070084,
+            49.396548
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-maelle-ricker-s",
+      "properties": {
+        "id": "cypress-maelle-ricker-s",
+        "name": "Maelle Ricker's",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 1075,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040601"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Maelle Ricker's",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2133796,
+            49.3915194
+          ],
+          [
+            -123.2134104,
+            49.3915382
+          ],
+          [
+            -123.2137992,
+            49.3917748
+          ],
+          [
+            -123.2141249,
+            49.3920874
+          ],
+          [
+            -123.2142301,
+            49.3925208
+          ],
+          [
+            -123.2142885,
+            49.3926881
+          ],
+          [
+            -123.2142768,
+            49.3929771
+          ],
+          [
+            -123.2141483,
+            49.3934333
+          ],
+          [
+            -123.213938,
+            49.394034
+          ],
+          [
+            -123.2137713,
+            49.3942837
+          ],
+          [
+            -123.2134126,
+            49.3943391
+          ],
+          [
+            -123.2128398,
+            49.3941253
+          ],
+          [
+            -123.212373,
+            49.3940024
+          ],
+          [
+            -123.2121515,
+            49.3940272
+          ],
+          [
+            -123.2117311,
+            49.3941532
+          ],
+          [
+            -123.2114461,
+            49.3943298
+          ],
+          [
+            -123.2112449,
+            49.3948575
+          ],
+          [
+            -123.2102206,
+            49.3954986
+          ],
+          [
+            -123.2100256,
+            49.3958398
+          ],
+          [
+            -123.2097808,
+            49.3960771
+          ],
+          [
+            -123.2093925,
+            49.39642
+          ],
+          [
+            -123.2091293,
+            49.3966619
+          ],
+          [
+            -123.2088315,
+            49.3968107
+          ],
+          [
+            -123.208291,
+            49.3969882
+          ],
+          [
+            -123.2077953,
+            49.3970941
+          ],
+          [
+            -123.2073318,
+            49.3971345
+          ],
+          [
+            -123.2068048,
+            49.397181
+          ],
+          [
+            -123.2062542,
+            49.3972437
+          ],
+          [
+            -123.2061282,
+            49.3971968
+          ],
+          [
+            -123.2060785,
+            49.3971779
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-meteor",
+      "properties": {
+        "id": "cypress-meteor",
+        "name": "Meteor",
+        "resortId": "cypress",
+        "difficulty": "double-black",
+        "lengthMeters": 336,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040384"
+          ],
+          "osmDifficultyValues": [
+            "expert"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Meteor",
+              "piste:difficulty": "expert",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2056038,
+            49.3874451
+          ],
+          [
+            -123.2043198,
+            49.3870845
+          ],
+          [
+            -123.203405,
+            49.3869576
+          ],
+          [
+            -123.2024956,
+            49.3867402
+          ],
+          [
+            -123.201195,
+            49.3865406
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-moons",
+      "properties": {
+        "id": "cypress-moons",
+        "name": "Moons",
+        "resortId": "cypress",
+        "difficulty": "black",
+        "lengthMeters": 437,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040705"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Moons",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1924018,
+            49.4031657
+          ],
+          [
+            -123.1925437,
+            49.4023456
+          ],
+          [
+            -123.1924452,
+            49.4021279
+          ],
+          [
+            -123.1922009,
+            49.4015821
+          ],
+          [
+            -123.1920666,
+            49.4010327
+          ],
+          [
+            -123.191858,
+            49.4001736
+          ],
+          [
+            -123.1918696,
+            49.3992897
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-primary-power",
+      "properties": {
+        "id": "cypress-primary-power",
+        "name": "Primary Power",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 291,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "91317015"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Primary Power",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2034534,
+            49.4010794
+          ],
+          [
+            -123.2032991,
+            49.40074
+          ],
+          [
+            -123.2031958,
+            49.4006266
+          ],
+          [
+            -123.2031155,
+            49.4004851
+          ],
+          [
+            -123.2031131,
+            49.4003524
+          ],
+          [
+            -123.2031375,
+            49.4001189
+          ],
+          [
+            -123.2031247,
+            49.3999826
+          ],
+          [
+            -123.202832,
+            49.3994385
+          ],
+          [
+            -123.2027769,
+            49.3993384
+          ],
+          [
+            -123.2026271,
+            49.3991042
+          ],
+          [
+            -123.2025219,
+            49.398949
+          ],
+          [
+            -123.2024707,
+            49.398817
+          ],
+          [
+            -123.2024434,
+            49.3985811
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-rainbow",
+      "properties": {
+        "id": "cypress-rainbow",
+        "name": "Rainbow",
+        "resortId": "cypress",
+        "difficulty": "unknown",
+        "lengthMeters": 587,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040716",
+            "91317020"
+          ],
+          "osmDifficultyValues": [
+            "advanced",
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Rainbow",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            },
+            {
+              "lit": "yes",
+              "name": "Rainbow",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -123.200732,
+              49.4020964
+            ],
+            [
+              -123.2004547,
+              49.4015996
+            ],
+            [
+              -123.2004842,
+              49.4015196
+            ],
+            [
+              -123.200665,
+              49.4010875
+            ],
+            [
+              -123.2007708,
+              49.4007595
+            ],
+            [
+              -123.2009924,
+              49.4003618
+            ],
+            [
+              -123.2013898,
+              49.3998493
+            ],
+            [
+              -123.2024434,
+              49.3985811
+            ]
+          ],
+          [
+            [
+              -123.2024434,
+              49.3985811
+            ],
+            [
+              -123.2026449,
+              49.3983564
+            ],
+            [
+              -123.2029384,
+              49.3981294
+            ],
+            [
+              -123.2033733,
+              49.3978584
+            ],
+            [
+              -123.2036464,
+              49.3976605
+            ],
+            [
+              -123.2038557,
+              49.3974708
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-rideout",
+      "properties": {
+        "id": "cypress-rideout",
+        "name": "Rideout",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 108,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040455"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Rideout",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2093854,
+            49.3898735
+          ],
+          [
+            -123.209564,
+            49.3899902
+          ],
+          [
+            -123.2096415,
+            49.3900611
+          ],
+          [
+            -123.2096911,
+            49.3901236
+          ],
+          [
+            -123.2097099,
+            49.3902154
+          ],
+          [
+            -123.209714,
+            49.3902891
+          ],
+          [
+            -123.209702,
+            49.3903476
+          ],
+          [
+            -123.209639,
+            49.3904096
+          ],
+          [
+            -123.2094076,
+            49.3905105
+          ],
+          [
+            -123.209148,
+            49.3905147
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-ripcord",
+      "properties": {
+        "id": "cypress-ripcord",
+        "name": "Ripcord",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 527,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040714"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Ripcord",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1964526,
+            49.4101818
+          ],
+          [
+            -123.1963467,
+            49.4101286
+          ],
+          [
+            -123.196324,
+            49.4100918
+          ],
+          [
+            -123.1963231,
+            49.4100648
+          ],
+          [
+            -123.196326,
+            49.4100155
+          ],
+          [
+            -123.1962581,
+            49.4097024
+          ],
+          [
+            -123.1961621,
+            49.4094867
+          ],
+          [
+            -123.1960734,
+            49.4092101
+          ],
+          [
+            -123.1959194,
+            49.4085773
+          ],
+          [
+            -123.1959046,
+            49.4081935
+          ],
+          [
+            -123.1959234,
+            49.4078383
+          ],
+          [
+            -123.1959797,
+            49.407539
+          ],
+          [
+            -123.1961657,
+            49.4070481
+          ],
+          [
+            -123.1961349,
+            49.4070102
+          ],
+          [
+            -123.1959195,
+            49.4063432
+          ],
+          [
+            -123.1953524,
+            49.4056295
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-runway",
+      "properties": {
+        "id": "cypress-runway",
+        "name": "Runway",
+        "resortId": "cypress",
+        "difficulty": "green",
+        "lengthMeters": 332,
+        "grooming": "groomed",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "1011352662"
+          ],
+          "osmDifficultyValues": [
+            "easy"
+          ],
+          "osmGroomingValues": [
+            "classic"
+          ],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Runway",
+              "piste:difficulty": "easy",
+              "piste:grooming": "classic",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1981283,
+            49.3966589
+          ],
+          [
+            -123.1979932,
+            49.3966554
+          ],
+          [
+            -123.1980914,
+            49.396589
+          ],
+          [
+            -123.1982035,
+            49.3965312
+          ],
+          [
+            -123.1985163,
+            49.3964187
+          ],
+          [
+            -123.1988806,
+            49.396364
+          ],
+          [
+            -123.1993172,
+            49.3963078
+          ],
+          [
+            -123.2000785,
+            49.396282
+          ],
+          [
+            -123.2007439,
+            49.3961969
+          ],
+          [
+            -123.2017807,
+            49.3961057
+          ],
+          [
+            -123.2022822,
+            49.3961272
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-shore-glades",
+      "properties": {
+        "id": "cypress-shore-glades",
+        "name": "Shore Glades",
+        "resortId": "cypress",
+        "difficulty": "black",
+        "lengthMeters": 291,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "85877882"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Shore Glades",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2093854,
+            49.3898735
+          ],
+          [
+            -123.2094921,
+            49.3896659
+          ],
+          [
+            -123.209526,
+            49.3895598
+          ],
+          [
+            -123.2095213,
+            49.38951
+          ],
+          [
+            -123.2094515,
+            49.3893622
+          ],
+          [
+            -123.2089374,
+            49.3890053
+          ],
+          [
+            -123.2087451,
+            49.3888812
+          ],
+          [
+            -123.2086318,
+            49.3886017
+          ],
+          [
+            -123.2085078,
+            49.38844
+          ],
+          [
+            -123.2084073,
+            49.3883634
+          ],
+          [
+            -123.208217,
+            49.3882892
+          ],
+          [
+            -123.2071612,
+            49.3881173
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-shuttle",
+      "properties": {
+        "id": "cypress-shuttle",
+        "name": "Shuttle",
+        "resortId": "cypress",
+        "difficulty": "green",
+        "lengthMeters": 205,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040690"
+          ],
+          "osmDifficultyValues": [
+            "easy"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Shuttle",
+              "piste:difficulty": "easy",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.198005,
+            49.3993709
+          ],
+          [
+            -123.1977306,
+            49.3991619
+          ],
+          [
+            -123.1974344,
+            49.3989159
+          ],
+          [
+            -123.1967644,
+            49.3983578
+          ],
+          [
+            -123.1962608,
+            49.3980556
+          ],
+          [
+            -123.1962271,
+            49.3979559
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-ski-out",
+      "properties": {
+        "id": "cypress-ski-out",
+        "name": "Ski Out",
+        "resortId": "cypress",
+        "difficulty": "green",
+        "lengthMeters": 243,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040504"
+          ],
+          "osmDifficultyValues": [
+            "easy"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Ski Out",
+              "piste:difficulty": "easy",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.206315,
+            49.3954869
+          ],
+          [
+            -123.2058277,
+            49.395511
+          ],
+          [
+            -123.2053959,
+            49.3955087
+          ],
+          [
+            -123.2051571,
+            49.3954822
+          ],
+          [
+            -123.2049226,
+            49.3954336
+          ],
+          [
+            -123.2043656,
+            49.3952351
+          ],
+          [
+            -123.2038477,
+            49.3949491
+          ],
+          [
+            -123.2036283,
+            49.3948491
+          ],
+          [
+            -123.203371,
+            49.3948305
+          ],
+          [
+            -123.2033148,
+            49.3948537
+          ],
+          [
+            -123.2032828,
+            49.3948697
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-slash",
+      "properties": {
+        "id": "cypress-slash",
+        "name": "Slash",
+        "resortId": "cypress",
+        "difficulty": "black",
+        "lengthMeters": 586,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040701"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Slash",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1959944,
+            49.4030004
+          ],
+          [
+            -123.1960532,
+            49.4023982
+          ],
+          [
+            -123.1960331,
+            49.4018717
+          ],
+          [
+            -123.1954078,
+            49.4010819
+          ],
+          [
+            -123.1952062,
+            49.4004501
+          ],
+          [
+            -123.1952667,
+            49.3996867
+          ],
+          [
+            -123.1957445,
+            49.3987637
+          ],
+          [
+            -123.1962271,
+            49.3979559
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-sunshine-face-glades",
+      "properties": {
+        "id": "cypress-sunshine-face-glades",
+        "name": "Sunshine Face Glades",
+        "resortId": "cypress",
+        "difficulty": "double-black",
+        "lengthMeters": 58,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "899502453"
+          ],
+          "osmDifficultyValues": [
+            "expert"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Sunshine Face Glades",
+              "oneway": "yes",
+              "piste:difficulty": "expert",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2052618,
+            49.4044365
+          ],
+          [
+            -123.2056317,
+            49.4039688
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-the-b-hip",
+      "properties": {
+        "id": "cypress-the-b-hip",
+        "name": "The B Hip",
+        "resortId": "cypress",
+        "difficulty": "black",
+        "lengthMeters": 335,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040523"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "The B Hip",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2120473,
+            49.3925648
+          ],
+          [
+            -123.2109014,
+            49.3927857
+          ],
+          [
+            -123.2101352,
+            49.3929934
+          ],
+          [
+            -123.2100884,
+            49.3930063
+          ],
+          [
+            -123.2097719,
+            49.3930936
+          ],
+          [
+            -123.2091388,
+            49.3933392
+          ],
+          [
+            -123.2090429,
+            49.3934653
+          ],
+          [
+            -123.2088951,
+            49.3936597
+          ],
+          [
+            -123.2087793,
+            49.393751
+          ],
+          [
+            -123.2082309,
+            49.3940767
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-tomcat",
+      "properties": {
+        "id": "cypress-tomcat",
+        "name": "Tomcat",
+        "resortId": "cypress",
+        "difficulty": "black",
+        "lengthMeters": 303,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "1120473833"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Tomcat",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1968665,
+            49.4094964
+          ],
+          [
+            -123.1966269,
+            49.4092313
+          ],
+          [
+            -123.1965947,
+            49.4088998
+          ],
+          [
+            -123.1966966,
+            49.4086973
+          ],
+          [
+            -123.1968361,
+            49.4084739
+          ],
+          [
+            -123.1969005,
+            49.4083378
+          ],
+          [
+            -123.1970495,
+            49.4079762
+          ],
+          [
+            -123.1968361,
+            49.40772
+          ],
+          [
+            -123.1965464,
+            49.4075734
+          ],
+          [
+            -123.1963318,
+            49.4073605
+          ],
+          [
+            -123.1961657,
+            49.4070481
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-un-run",
+      "properties": {
+        "id": "cypress-un-run",
+        "name": "Un Run",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 357,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040465"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Un Run",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.213177,
+            49.3914367
+          ],
+          [
+            -123.2131071,
+            49.3912719
+          ],
+          [
+            -123.2130221,
+            49.3911376
+          ],
+          [
+            -123.2129093,
+            49.3910325
+          ],
+          [
+            -123.2128139,
+            49.390981
+          ],
+          [
+            -123.2125477,
+            49.3909369
+          ],
+          [
+            -123.2123468,
+            49.3909394
+          ],
+          [
+            -123.2121557,
+            49.3909715
+          ],
+          [
+            -123.2119296,
+            49.3910423
+          ],
+          [
+            -123.2117825,
+            49.3910576
+          ],
+          [
+            -123.2115837,
+            49.3910504
+          ],
+          [
+            -123.2114371,
+            49.3910299
+          ],
+          [
+            -123.2112775,
+            49.3909702
+          ],
+          [
+            -123.2110994,
+            49.3908512
+          ],
+          [
+            -123.210866,
+            49.3906782
+          ],
+          [
+            -123.2107869,
+            49.3905636
+          ],
+          [
+            -123.2106449,
+            49.3904682
+          ],
+          [
+            -123.2104584,
+            49.3903888
+          ],
+          [
+            -123.2103939,
+            49.3903083
+          ],
+          [
+            -123.2103877,
+            49.3902008
+          ],
+          [
+            -123.2103682,
+            49.3901492
+          ],
+          [
+            -123.210326,
+            49.3901223
+          ],
+          [
+            -123.2102594,
+            49.3901121
+          ],
+          [
+            -123.2101789,
+            49.3901196
+          ],
+          [
+            -123.2101179,
+            49.3901484
+          ],
+          [
+            -123.2099724,
+            49.3902442
+          ],
+          [
+            -123.209639,
+            49.3904096
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-under-the-volcano-glades",
+      "properties": {
+        "id": "cypress-under-the-volcano-glades",
+        "name": "Under The Volcano Glades",
+        "resortId": "cypress",
+        "difficulty": "double-black",
+        "lengthMeters": 381,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "1120473835"
+          ],
+          "osmDifficultyValues": [
+            "expert"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Under The Volcano Glades",
+              "piste:difficulty": "expert",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.196851,
+            49.4022552
+          ],
+          [
+            -123.1967911,
+            49.4018846
+          ],
+          [
+            -123.1966906,
+            49.4016965
+          ],
+          [
+            -123.196634,
+            49.4013408
+          ],
+          [
+            -123.1967346,
+            49.4008625
+          ],
+          [
+            -123.1968985,
+            49.4005623
+          ],
+          [
+            -123.1969482,
+            49.4001674
+          ],
+          [
+            -123.1970299,
+            49.399873
+          ],
+          [
+            -123.1971241,
+            49.3994927
+          ],
+          [
+            -123.1974344,
+            49.3989159
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-upper-bowen",
+      "properties": {
+        "id": "cypress-upper-bowen",
+        "name": "Upper Bowen",
+        "resortId": "cypress",
+        "difficulty": "black",
+        "lengthMeters": 388,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040700"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Upper Bowen",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1947954,
+            49.4041615
+          ],
+          [
+            -123.1947217,
+            49.4041654
+          ],
+          [
+            -123.1946949,
+            49.4041374
+          ],
+          [
+            -123.1946949,
+            49.4041078
+          ],
+          [
+            -123.1959944,
+            49.4030004
+          ],
+          [
+            -123.196851,
+            49.4022552
+          ],
+          [
+            -123.1972575,
+            49.4019022
+          ],
+          [
+            -123.1978212,
+            49.4014124
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-upper-coyote-7",
+      "properties": {
+        "id": "cypress-upper-coyote-7",
+        "name": "Upper Coyote 7",
+        "resortId": "cypress",
+        "difficulty": "black",
+        "lengthMeters": 320,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "40040388"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Upper Coyote 7",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.2061021,
+            49.3890333
+          ],
+          [
+            -123.2054977,
+            49.3892217
+          ],
+          [
+            -123.2050936,
+            49.3893477
+          ],
+          [
+            -123.2040972,
+            49.3897124
+          ],
+          [
+            -123.2031363,
+            49.3898822
+          ],
+          [
+            -123.2019779,
+            49.3897839
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-upper-rainbow",
+      "properties": {
+        "id": "cypress-upper-rainbow",
+        "name": "Upper Rainbow",
+        "resortId": "cypress",
+        "difficulty": "black",
+        "lengthMeters": 141,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "1120473839"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Upper Rainbow",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1991587,
+            49.4024234
+          ],
+          [
+            -123.1992089,
+            49.4022883
+          ],
+          [
+            -123.1992557,
+            49.4021797
+          ],
+          [
+            -123.1993625,
+            49.4021123
+          ],
+          [
+            -123.1994794,
+            49.4020384
+          ],
+          [
+            -123.1995495,
+            49.4019732
+          ],
+          [
+            -123.1997732,
+            49.4017864
+          ],
+          [
+            -123.19985,
+            49.4017342
+          ],
+          [
+            -123.1999936,
+            49.4016625
+          ],
+          [
+            -123.2004547,
+            49.4015996
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cypress-webb-site",
+      "properties": {
+        "id": "cypress-webb-site",
+        "name": "Webb Site",
+        "resortId": "cypress",
+        "difficulty": "blue",
+        "lengthMeters": 279,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "91317055"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Webb Site",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -123.1989019,
+            49.3991575
+          ],
+          [
+            -123.199046,
+            49.3987891
+          ],
+          [
+            -123.1992996,
+            49.3985268
+          ],
+          [
+            -123.1996187,
+            49.398152
+          ],
+          [
+            -123.1999941,
+            49.3976508
+          ],
+          [
+            -123.2003231,
+            49.3973561
+          ],
+          [
+            -123.2005669,
+            49.3972553
+          ],
+          [
+            -123.2009559,
+            49.3971298
           ]
         ]
       }

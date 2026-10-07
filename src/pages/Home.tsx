@@ -127,7 +127,7 @@ export function Home({
             </span>
             <span>
               <strong>Your progress</strong>
-              <small>Distance, terrain & riding patterns</small>
+              <small>Distance, levels & earned experience</small>
             </span>
             <Icon name="chevron" size={17} />
           </button>

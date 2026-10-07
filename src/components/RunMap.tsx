@@ -10,6 +10,7 @@ import type { Sample } from "../types/rider";
 import { trailsToFeatureCollection } from "../lib/trailParser";
 import { OfflineTrailMap } from "./OfflineTrailMap";
 import { Icon } from "./Icon";
+import { useMapContext } from "../hooks/useMapContext";
 import { mapStyle } from "../lib/mapStyle";
 const colors = [
   "match",
@@ -24,6 +25,32 @@ const colors = [
   "#bf9bde",
   "#86958b",
 ] as any;
+function fitPadding(
+  m: MapType,
+  preferred:
+    { top: number; bottom: number; left: number; right: number } | undefined,
+  fallback: number,
+) {
+  const p = preferred || {
+    top: fallback,
+    bottom: fallback,
+    left: fallback,
+    right: fallback,
+  };
+  const height = m.getContainer().clientHeight,
+    width = m.getContainer().clientWidth;
+  const vertical = Math.min(1, (height * 0.65) / Math.max(1, p.top + p.bottom));
+  const horizontal = Math.min(
+    1,
+    (width * 0.65) / Math.max(1, p.left + p.right),
+  );
+  return {
+    top: p.top * vertical,
+    bottom: p.bottom * vertical,
+    left: p.left * horizontal,
+    right: p.right * horizontal,
+  };
+}
 const empty = {
   type: "FeatureCollection",
   features: [],
@@ -35,6 +62,8 @@ export function RunMap({
   onSelectTrail,
   onClearSelection,
   lockCamera = false,
+  showZoomControls = true,
+  cameraPadding,
   track = [],
   rider,
 }: {
@@ -44,23 +73,32 @@ export function RunMap({
   onSelectTrail?: (t: SkiRun) => void;
   onClearSelection?: () => void;
   lockCamera?: boolean;
+  showZoomControls?: boolean;
+  cameraPadding?: { top: number; bottom: number; left: number; right: number };
   track?: Sample[];
   rider?: Sample;
 }) {
+  const context = useMapContext(resort.id);
+  const contextRef = useRef(context);
+  contextRef.current = context;
   const container = useRef<HTMLDivElement>(null),
     mapRef = useRef<MapType | null>(null),
     callbacks = useRef(onSelectTrail),
     clearCallback = useRef(onClearSelection),
     selectedRef = useRef(selectedTrail),
     trailRef = useRef(trails),
-    fitted = useRef(false);
+    fitted = useRef(false),
+    paddingRef = useRef(cameraPadding);
+  paddingRef.current = cameraPadding;
   callbacks.current = onSelectTrail;
   clearCallback.current = onClearSelection;
   selectedRef.current = selectedTrail;
   trailRef.current = trails;
   const [loaded, setLoaded] = useState(false),
     [offline, setOffline] = useState(false),
-    [notice, setNotice] = useState("");
+    [notice, setNotice] = useState(""),
+    [locatedPoint, setLocatedPoint] = useState<Sample | null>(null),
+    [locationTick, setLocationTick] = useState(0);
   useEffect(() => {
     if (!container.current || offline) return;
     setLoaded(false);
@@ -95,7 +133,7 @@ export function RunMap({
       new maplibregl.AttributionControl({ compact: false }),
       "bottom-left",
     );
-    if (!lockCamera)
+    if (!lockCamera && showZoomControls)
       m.addControl(
         new maplibregl.NavigationControl({ showCompass: false }),
         "top-right",
@@ -104,9 +142,79 @@ export function RunMap({
       new maplibregl.ScaleControl({ maxWidth: 75, unit: "metric" }),
       "bottom-right",
     );
-    m.on("load", () => {
+    // Local geometry must not wait for remote basemap tiles to finish.
+    m.once("style.load", () => {
       if (disposed) return;
       setLoaded(true);
+      m.addSource("local-context", {
+        type: "geojson",
+        data: contextRef.current,
+      });
+      m.addLayer({
+        id: "context-areas",
+        type: "fill",
+        source: "local-context",
+        filter: ["==", ["geometry-type"], "Polygon"],
+        paint: {
+          "fill-color": [
+            "match",
+            ["get", "kind"],
+            "water",
+            "#213e52",
+            "building",
+            "#3f5159",
+            "#203833",
+          ],
+          "fill-opacity": 0.65,
+        },
+      });
+      m.addLayer({
+        id: "context-lines",
+        type: "line",
+        source: "local-context",
+        filter: ["==", ["geometry-type"], "LineString"],
+        paint: {
+          "line-color": [
+            "match",
+            ["get", "kind"],
+            "lift",
+            "#a3adb5",
+            "connector",
+            "#6d8d89",
+            "stream",
+            "#345c72",
+            "#45585d",
+          ],
+          "line-width": [
+            "match",
+            ["get", "kind"],
+            "connector",
+            2,
+            "lift",
+            1.5,
+            1,
+          ],
+          "line-opacity": 0.6,
+        },
+      });
+      m.addLayer({
+        id: "context-labels",
+        type: "symbol",
+        source: "local-context",
+        filter: ["==", ["get", "kind"], "lift"],
+        layout: {
+          "symbol-placement": "line",
+          "text-field": ["get", "name"],
+          "text-font": ["Noto Sans Regular"],
+          "text-size": 10,
+          "text-padding": 15,
+        },
+        paint: {
+          "text-color": "#9db2b8",
+          "text-halo-color": "#101c23",
+          "text-halo-width": 2,
+        },
+      });
       m.addSource("trails", {
         type: "geojson",
         data: trailsToFeatureCollection(trailRef.current),
@@ -166,7 +274,7 @@ export function RunMap({
         layout: {
           "symbol-placement": "line",
           "text-field": ["get", "name"],
-          "text-font": ["Open Sans Regular"],
+          "text-font": ["Noto Sans Regular"],
           "text-size": 12,
           "symbol-spacing": 450,
           "text-padding": 10,
@@ -223,7 +331,11 @@ export function RunMap({
             : t.geometry.coordinates.flat()
           ).forEach((p) => bounds.extend([p[0], p[1]])),
         );
-        m.fitBounds(bounds, { padding: 45, maxZoom: 15, duration: 0 });
+        m.fitBounds(bounds, {
+          padding: fitPadding(m, paddingRef.current, 45),
+          maxZoom: 15,
+          duration: 0,
+        });
       }
     });
     m.on("click", "trail-hit", (e) => {
@@ -261,7 +373,7 @@ export function RunMap({
         ).forEach((p) => bounds.extend([p[0], p[1]])),
       );
       m.fitBounds(bounds, {
-        padding: t ? 65 : 45,
+        padding: fitPadding(m, paddingRef.current, t ? 65 : 45),
         maxZoom: t ? 16 : 15,
         duration: 0,
       });
@@ -273,7 +385,7 @@ export function RunMap({
       m.remove();
       mapRef.current = null;
     };
-  }, [resort.id, offline, lockCamera]);
+  }, [resort.id, offline, lockCamera, showZoomControls]);
   useEffect(() => {
     const m = mapRef.current;
     if (loaded && m?.getSource("trails"))
@@ -305,7 +417,7 @@ export function RunMap({
         : selectedTrail.geometry.coordinates.flat()
       ).forEach((p) => bounds.extend([p[0], p[1]]));
       m.fitBounds(bounds, {
-        padding: 65,
+        padding: fitPadding(m, paddingRef.current, 65),
         maxZoom: 16,
         duration: matchMedia("(prefers-reduced-motion: reduce)").matches
           ? 0
@@ -320,7 +432,7 @@ export function RunMap({
         ).forEach((p) => bounds.extend([p[0], p[1]])),
       );
       m.fitBounds(bounds, {
-        padding: 45,
+        padding: fitPadding(m, paddingRef.current, 45),
         maxZoom: 15,
         duration: matchMedia("(prefers-reduced-motion: reduce)").matches
           ? 0
@@ -346,7 +458,7 @@ export function RunMap({
           geometry: { type: "LineString", coordinates },
         })),
     });
-    const p = rider || track.at(-1);
+    const p = rider || track.at(-1) || locatedPoint;
     (m.getSource("rider") as GeoJSONSource).setData(
       p
         ? {
@@ -361,13 +473,23 @@ export function RunMap({
       if (track.length > 1) {
         const bounds = new maplibregl.LngLatBounds();
         track.forEach((p) => bounds.extend([p.lng, p.lat]));
-        m.fitBounds(bounds, { padding: 65, maxZoom: 16, duration: 400 });
+        m.fitBounds(bounds, {
+          padding: fitPadding(m, paddingRef.current, 65),
+          maxZoom: 16,
+          duration: 400,
+        });
       } else m.flyTo({ center: [p.lng, p.lat], zoom: 15 });
     }
-  }, [track, rider, loaded, selectedTrail]);
+  }, [track, rider, loaded, selectedTrail, locatedPoint]);
+  useEffect(() => {
+    const source = mapRef.current?.getSource("local-context") as
+      GeoJSONSource | undefined;
+    if (loaded && source) source.setData(context);
+  }, [context, loaded]);
   const locate = () => {
-    const p = rider || track.at(-1);
+    const p = rider || track.at(-1) || locatedPoint;
     if (p) {
+      setLocationTick((t) => t + 1);
       mapRef.current?.flyTo({ center: [p.lng, p.lat], zoom: 15 });
       return;
     }
@@ -379,6 +501,19 @@ export function RunMap({
     navigator.geolocation.getCurrentPosition(
       (p) => {
         setNotice("");
+        setLocatedPoint({
+          lat: p.coords.latitude,
+          lng: p.coords.longitude,
+          time: 0,
+          speed: 0,
+          distance: 0,
+          elevation: 0,
+          elevationKnown: false,
+          gradient: 0,
+          acceleration: 0,
+          section: 0,
+        });
+        setLocationTick((t) => t + 1);
         const m = mapRef.current;
         m?.flyTo({ center: [p.coords.longitude, p.coords.latitude], zoom: 15 });
         if (m?.getSource("rider"))
@@ -412,20 +547,23 @@ export function RunMap({
   );
   return (
     <div
-      className={`run-map ${offline ? "is-simple" : ""} ${lockCamera ? "is-guided" : ""}`}
+      className={`run-map ${offline ? "is-simple" : !loaded ? "is-loading" : ""} ${lockCamera ? "is-guided" : ""}`}
     >
-      {offline ? (
+      {(offline || !loaded) && (
         <OfflineTrailMap
           resort={resort}
           trails={trails}
           selectedTrail={selectedTrail || null}
           onSelectTrail={onSelectTrail || (() => {})}
-          rider={rider || track.at(-1)}
+          rider={rider || track.at(-1) || locatedPoint || undefined}
+          centerOnRider={locationTick}
           track={track}
           lockCamera={lockCamera}
+          showZoomControls={showZoomControls}
           onClearSelection={onClearSelection}
         />
-      ) : (
+      )}
+      {!offline && (
         <div
           className="run-canvas"
           ref={container}
@@ -433,7 +571,7 @@ export function RunMap({
         />
       )}
       {controls}
-      {!lockCamera && !offline && (
+      {!lockCamera && (
         <div className="run-map-tools">
           <button onClick={locate} aria-label="Locate me">
             <Icon name="target" size={19} />
