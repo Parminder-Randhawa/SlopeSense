@@ -19,9 +19,9 @@ export const homeArtwork: Record<
   }
 > = {
   wide: {
-    src: "/assets/north-shore-wide-v2.png",
-    width: 1672,
-    height: 941,
+    src: "/assets/north-shore-wide-hd.webp",
+    width: 3840,
+    height: 2161,
     mountains: {
       cypress: {
         label: [0.27, 0.53],
@@ -44,12 +44,12 @@ export const homeArtwork: Record<
     },
   },
   medium: {
-    src: "/assets/north-shore-medium-v2.png",
-    width: 1448,
-    height: 1086,
+    src: "/assets/north-shore-medium-hd.webp",
+    width: 2896,
+    height: 2172,
     mountains: {
       cypress: {
-        label: [0.29, 0.37],
+        label: [0.29, 0.49],
         glow: [0.29, 0.555, 0.18, 0.17],
         summit: [0.22, 0.454],
         landmark: [0.287, 0.606],
@@ -69,12 +69,12 @@ export const homeArtwork: Record<
     },
   },
   tall: {
-    src: "/assets/north-shore-tall-v2.png",
-    width: 724,
-    height: 2172,
+    src: "/assets/north-shore-tall-hd.webp",
+    width: 1448,
+    height: 4344,
     mountains: {
       cypress: {
-        label: [0.3, 0.3],
+        label: [0.3, 0.44],
         glow: [0.28, 0.408, 0.23, 0.082],
         summit: [0.2, 0.359],
         landmark: [0.299, 0.425],
@@ -94,12 +94,12 @@ export const homeArtwork: Record<
     },
   },
   portrait: {
-    src: "/assets/north-shore-portrait-v2.png",
-    width: 887,
-    height: 1774,
+    src: "/assets/north-shore-portrait-hd.webp",
+    width: 1774,
+    height: 3548,
     mountains: {
       cypress: {
-        label: [0.2, 0.28],
+        label: [0.2, 0.44],
         glow: [0.28, 0.48, 0.19, 0.1],
         summit: [0.19, 0.417],
         landmark: [0.286, 0.523],

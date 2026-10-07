@@ -31,7 +31,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -111,7 +111,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -210,7 +210,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -570,7 +570,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -734,7 +734,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -926,7 +926,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -1058,7 +1058,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -1160,7 +1160,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -1401,7 +1401,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -1591,7 +1591,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -1700,7 +1700,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -1779,7 +1779,7 @@
               "piste:type": "downhill"
             }
           ],
-          "snapshotDate": "2026-10-03"
+          "snapshotDate": "2026-10-06"
         }
       },
       "geometry": {
@@ -1864,6 +1864,4024 @@
           [
             -122.9469195,
             49.3750167
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-backdoor",
+      "properties": {
+        "id": "seymour-backdoor",
+        "name": "Backdoor",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 246,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "62103834",
+            "1052361702"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Backdoor",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            },
+            {
+              "lit": "no",
+              "name": "Backdoor",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -122.9423279,
+              49.3775017
+            ],
+            [
+              -122.9422355,
+              49.3775784
+            ],
+            [
+              -122.9421734,
+              49.3776211
+            ],
+            [
+              -122.9420961,
+              49.3776569
+            ],
+            [
+              -122.9419767,
+              49.3776866
+            ],
+            [
+              -122.9418619,
+              49.3776843
+            ],
+            [
+              -122.9417226,
+              49.3776706
+            ],
+            [
+              -122.9415735,
+              49.3776087
+            ],
+            [
+              -122.9414656,
+              49.3775497
+            ],
+            [
+              -122.941359,
+              49.3774922
+            ],
+            [
+              -122.9412904,
+              49.3774396
+            ],
+            [
+              -122.9412565,
+              49.3773992
+            ],
+            [
+              -122.9412132,
+              49.3773489
+            ],
+            [
+              -122.9411324,
+              49.3773199
+            ],
+            [
+              -122.9410176,
+              49.3773199
+            ],
+            [
+              -122.9409485,
+              49.3773496
+            ],
+            [
+              -122.9409106,
+              49.3773999
+            ],
+            [
+              -122.9409204,
+              49.3774762
+            ],
+            [
+              -122.940975,
+              49.3775466
+            ],
+            [
+              -122.9410106,
+              49.3776111
+            ],
+            [
+              -122.9410179,
+              49.3776933
+            ],
+            [
+              -122.941034,
+              49.377804
+            ],
+            [
+              -122.9410387,
+              49.377894
+            ],
+            [
+              -122.9410678,
+              49.3779869
+            ],
+            [
+              -122.9411241,
+              49.3780634
+            ],
+            [
+              -122.9411952,
+              49.3781064
+            ]
+          ],
+          [
+            [
+              -122.9410387,
+              49.377894
+            ],
+            [
+              -122.9410348,
+              49.3779629
+            ],
+            [
+              -122.9410199,
+              49.3780023
+            ],
+            [
+              -122.9409702,
+              49.3780245
+            ],
+            [
+              -122.9408959,
+              49.3780238
+            ],
+            [
+              -122.9407784,
+              49.3780047
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-boomerang",
+      "properties": {
+        "id": "seymour-boomerang",
+        "name": "Boomerang",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 197,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "693987121"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Boomerang",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9434968,
+            49.3705436
+          ],
+          [
+            -122.9439597,
+            49.3704569
+          ],
+          [
+            -122.9445126,
+            49.3704198
+          ],
+          [
+            -122.9450655,
+            49.3704834
+          ],
+          [
+            -122.9459945,
+            49.3700819
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-brockton-gully",
+      "properties": {
+        "id": "seymour-brockton-gully",
+        "name": "Brockton Gully",
+        "resortId": "seymour",
+        "difficulty": "green",
+        "lengthMeters": 554,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "62103848"
+          ],
+          "osmDifficultyValues": [
+            "easy"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Brockton Gully",
+              "piste:difficulty": "easy",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9404846,
+            49.380587
+          ],
+          [
+            -122.9404394,
+            49.3806327
+          ],
+          [
+            -122.940408,
+            49.3806853
+          ],
+          [
+            -122.9404179,
+            49.3808022
+          ],
+          [
+            -122.9405252,
+            49.3809
+          ],
+          [
+            -122.9406432,
+            49.3809908
+          ],
+          [
+            -122.9408149,
+            49.3810885
+          ],
+          [
+            -122.9409651,
+            49.3811305
+          ],
+          [
+            -122.9411904,
+            49.3811514
+          ],
+          [
+            -122.9413835,
+            49.3811305
+          ],
+          [
+            -122.9415422,
+            49.3810563
+          ],
+          [
+            -122.941674,
+            49.3809001
+          ],
+          [
+            -122.9418199,
+            49.3807025
+          ],
+          [
+            -122.9419863,
+            49.3805277
+          ],
+          [
+            -122.9420739,
+            49.3804403
+          ],
+          [
+            -122.9421468,
+            49.3803795
+          ],
+          [
+            -122.9421644,
+            49.3803434
+          ],
+          [
+            -122.9421587,
+            49.3803088
+          ],
+          [
+            -122.9420929,
+            49.3801557
+          ],
+          [
+            -122.9420096,
+            49.3799879
+          ],
+          [
+            -122.9420147,
+            49.3798184
+          ],
+          [
+            -122.9419642,
+            49.3796351
+          ],
+          [
+            -122.9418441,
+            49.3794256
+          ],
+          [
+            -122.9417601,
+            49.379174
+          ],
+          [
+            -122.9417385,
+            49.3790999
+          ],
+          [
+            -122.9416556,
+            49.3789748
+          ],
+          [
+            -122.9415382,
+            49.3788766
+          ],
+          [
+            -122.941405,
+            49.3787835
+          ],
+          [
+            -122.9414211,
+            49.3786526
+          ],
+          [
+            -122.9413934,
+            49.3784616
+          ],
+          [
+            -122.9413291,
+            49.3783289
+          ],
+          [
+            -122.9411679,
+            49.3782325
+          ],
+          [
+            -122.940772,
+            49.3781236
+          ],
+          [
+            -122.9406171,
+            49.3780618
+          ],
+          [
+            -122.9404637,
+            49.3779739
+          ],
+          [
+            -122.9403426,
+            49.377902
+          ],
+          [
+            -122.9402371,
+            49.3778057
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-cabin-trail",
+      "properties": {
+        "id": "seymour-cabin-trail",
+        "name": "Cabin Trail",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 424,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "62103222"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Cabin Trail",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9483206,
+            49.3641638
+          ],
+          [
+            -122.9481003,
+            49.3640598
+          ],
+          [
+            -122.9478204,
+            49.363978
+          ],
+          [
+            -122.9477142,
+            49.3639327
+          ],
+          [
+            -122.9475674,
+            49.3638987
+          ],
+          [
+            -122.9471937,
+            49.3638837
+          ],
+          [
+            -122.9469237,
+            49.3638738
+          ],
+          [
+            -122.9467764,
+            49.3638829
+          ],
+          [
+            -122.9465532,
+            49.3638774
+          ],
+          [
+            -122.9462378,
+            49.3638252
+          ],
+          [
+            -122.9460595,
+            49.3637589
+          ],
+          [
+            -122.9458096,
+            49.3637486
+          ],
+          [
+            -122.9455075,
+            49.3637296
+          ],
+          [
+            -122.9451634,
+            49.3636821
+          ],
+          [
+            -122.9447557,
+            49.3635913
+          ],
+          [
+            -122.944391,
+            49.3635075
+          ],
+          [
+            -122.9441549,
+            49.3634446
+          ],
+          [
+            -122.9438386,
+            49.3634371
+          ],
+          [
+            -122.9435608,
+            49.3634735
+          ],
+          [
+            -122.9434273,
+            49.363543
+          ],
+          [
+            -122.9432733,
+            49.3636979
+          ],
+          [
+            -122.943226,
+            49.3638235
+          ],
+          [
+            -122.9432141,
+            49.3639601
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-chuck-s-place",
+      "properties": {
+        "id": "seymour-chuck-s-place",
+        "name": "Chuck's Place",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 562,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "62103216",
+            "62103224"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Chuck's Place",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            },
+            {
+              "lit": "yes",
+              "name": "Chuck's Place",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -122.9453455,
+              49.3651009
+            ],
+            [
+              -122.9451742,
+              49.3648909
+            ],
+            [
+              -122.9450454,
+              49.3646603
+            ],
+            [
+              -122.9449154,
+              49.3644818
+            ],
+            [
+              -122.9448308,
+              49.3642761
+            ],
+            [
+              -122.9447343,
+              49.3641154
+            ],
+            [
+              -122.9446586,
+              49.3639839
+            ]
+          ],
+          [
+            [
+              -122.9477335,
+              49.3657981
+            ],
+            [
+              -122.9474272,
+              49.3656874
+            ],
+            [
+              -122.9470177,
+              49.3655609
+            ],
+            [
+              -122.9464,
+              49.3654112
+            ],
+            [
+              -122.9457069,
+              49.365199
+            ],
+            [
+              -122.9453455,
+              49.3651009
+            ],
+            [
+              -122.9449778,
+              49.3649833
+            ],
+            [
+              -122.9445948,
+              49.36487
+            ],
+            [
+              -122.9440531,
+              49.3648571
+            ],
+            [
+              -122.9438112,
+              49.3647979
+            ],
+            [
+              -122.9435863,
+              49.3647232
+            ],
+            [
+              -122.9434698,
+              49.3646839
+            ],
+            [
+              -122.9432707,
+              49.3646414
+            ],
+            [
+              -122.9431884,
+              49.3645934
+            ],
+            [
+              -122.9431146,
+              49.3645163
+            ],
+            [
+              -122.9431112,
+              49.3644694
+            ],
+            [
+              -122.9431009,
+              49.3643923
+            ],
+            [
+              -122.9430065,
+              49.3642973
+            ],
+            [
+              -122.9428138,
+              49.3641852
+            ],
+            [
+              -122.9426995,
+              49.3640884
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-cliff-house",
+      "properties": {
+        "id": "seymour-cliff-house",
+        "name": "Cliff House",
+        "resortId": "seymour",
+        "difficulty": "black",
+        "lengthMeters": 643,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "1052533625",
+            "1052533626"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Cliff House",
+              "oneway": "yes",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            },
+            {
+              "lit": "no",
+              "name": "Cliff House",
+              "oneway": "yes",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -122.9404846,
+              49.380587
+            ],
+            [
+              -122.9405103,
+              49.3806448
+            ],
+            [
+              -122.9405572,
+              49.3806688
+            ],
+            [
+              -122.9406075,
+              49.380671
+            ],
+            [
+              -122.9406578,
+              49.3806448
+            ],
+            [
+              -122.9406779,
+              49.3806164
+            ],
+            [
+              -122.9407349,
+              49.3805269
+            ],
+            [
+              -122.9408254,
+              49.3804309
+            ],
+            [
+              -122.9409126,
+              49.3802803
+            ],
+            [
+              -122.9409327,
+              49.3801231
+            ],
+            [
+              -122.9409059,
+              49.3800009
+            ],
+            [
+              -122.9408522,
+              49.3798153
+            ],
+            [
+              -122.940755,
+              49.3796625
+            ],
+            [
+              -122.9406142,
+              49.3795338
+            ],
+            [
+              -122.940457,
+              49.379436
+            ],
+            [
+              -122.9403249,
+              49.3793268
+            ],
+            [
+              -122.9402842,
+              49.3791614
+            ],
+            [
+              -122.940269,
+              49.3789596
+            ],
+            [
+              -122.9402995,
+              49.3788074
+            ],
+            [
+              -122.9403605,
+              49.3785791
+            ],
+            [
+              -122.9403605,
+              49.3784335
+            ],
+            [
+              -122.9403198,
+              49.3782052
+            ],
+            [
+              -122.9402639,
+              49.3779604
+            ],
+            [
+              -122.9402371,
+              49.3778057
+            ]
+          ],
+          [
+            [
+              -122.9407349,
+              49.3805269
+            ],
+            [
+              -122.9406145,
+              49.3804227
+            ],
+            [
+              -122.9405105,
+              49.3802572
+            ],
+            [
+              -122.9404797,
+              49.3800842
+            ],
+            [
+              -122.9405028,
+              49.3798962
+            ],
+            [
+              -122.9405259,
+              49.3797131
+            ],
+            [
+              -122.9406142,
+              49.3795338
+            ],
+            [
+              -122.9407311,
+              49.3793083
+            ],
+            [
+              -122.9408859,
+              49.3790923
+            ],
+            [
+              -122.9409434,
+              49.3789108
+            ],
+            [
+              -122.940939,
+              49.3786285
+            ],
+            [
+              -122.9408505,
+              49.3783203
+            ],
+            [
+              -122.9406171,
+              49.3780618
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-crowfoot",
+      "properties": {
+        "id": "seymour-crowfoot",
+        "name": "Crowfoot",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 115,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "1052361703"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Crowfoot",
+              "oneway": "yes",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9460025,
+            49.370492
+          ],
+          [
+            -122.946173,
+            49.3703916
+          ],
+          [
+            -122.9462868,
+            49.3702376
+          ],
+          [
+            -122.9464386,
+            49.3700913
+          ],
+          [
+            -122.9465058,
+            49.3698898
+          ],
+          [
+            -122.946585,
+            49.3697504
+          ],
+          [
+            -122.9466385,
+            49.3695756
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-earl-s",
+      "properties": {
+        "id": "seymour-earl-s",
+        "name": "Earl's",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 241,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "403799481",
+            "403799482"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Earl's",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            },
+            {
+              "lit": "no",
+              "name": "Earl's",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -122.9459361,
+              49.3740608
+            ],
+            [
+              -122.9459513,
+              49.373972
+            ],
+            [
+              -122.9459697,
+              49.373816
+            ],
+            [
+              -122.9460316,
+              49.3736911
+            ],
+            [
+              -122.946113,
+              49.3735495
+            ],
+            [
+              -122.9461106,
+              49.3734768
+            ],
+            [
+              -122.9460911,
+              49.3734112
+            ],
+            [
+              -122.9460863,
+              49.373321
+            ],
+            [
+              -122.9461021,
+              49.3732641
+            ],
+            [
+              -122.9461494,
+              49.373185
+            ],
+            [
+              -122.9462267,
+              49.3731286
+            ],
+            [
+              -122.9463091,
+              49.37308
+            ],
+            [
+              -122.9463435,
+              49.3730542
+            ],
+            [
+              -122.946383,
+              49.3730213
+            ],
+            [
+              -122.9464053,
+              49.3729844
+            ],
+            [
+              -122.946425,
+              49.3729324
+            ],
+            [
+              -122.9464714,
+              49.3728714
+            ],
+            [
+              -122.9465126,
+              49.3728261
+            ],
+            [
+              -122.9465719,
+              49.3727781
+            ],
+            [
+              -122.9466328,
+              49.3727361
+            ],
+            [
+              -122.9467024,
+              49.3726333
+            ]
+          ],
+          [
+            [
+              -122.9461494,
+              49.373185
+            ],
+            [
+              -122.9460838,
+              49.3731313
+            ],
+            [
+              -122.945994,
+              49.373057
+            ],
+            [
+              -122.9459345,
+              49.3729874
+            ],
+            [
+              -122.9458968,
+              49.3729075
+            ],
+            [
+              -122.9458749,
+              49.372797
+            ],
+            [
+              -122.9458974,
+              49.372695
+            ],
+            [
+              -122.9459107,
+              49.3726402
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-elevator-shaft",
+      "properties": {
+        "id": "seymour-elevator-shaft",
+        "name": "Elevator Shaft",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 298,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "1052361694"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Elevator Shaft",
+              "oneway": "yes",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9465187,
+            49.3747522
+          ],
+          [
+            -122.9465843,
+            49.3743072
+          ],
+          [
+            -122.9467012,
+            49.3738175
+          ],
+          [
+            -122.9467622,
+            49.3732649
+          ],
+          [
+            -122.9467024,
+            49.3726333
+          ],
+          [
+            -122.9467105,
+            49.3725244
+          ],
+          [
+            -122.9467454,
+            49.3720802
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-exit-22",
+      "properties": {
+        "id": "seymour-exit-22",
+        "name": "Exit 22",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 51,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "1052361701"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Exit 22",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9414211,
+            49.3786526
+          ],
+          [
+            -122.9416291,
+            49.378505
+          ],
+          [
+            -122.941759,
+            49.3782602
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-friendly-nut-house",
+      "properties": {
+        "id": "seymour-friendly-nut-house",
+        "name": "Friendly Nut House",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 455,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "403799483",
+            "403799484"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Friendly Nut House",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            },
+            {
+              "lit": "yes",
+              "name": "Friendly Nut House",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -122.9438986,
+              49.3755705
+            ],
+            [
+              -122.943845,
+              49.3754054
+            ],
+            [
+              -122.9437891,
+              49.3753045
+            ],
+            [
+              -122.9437103,
+              49.3752085
+            ],
+            [
+              -122.9436933,
+              49.3751733
+            ],
+            [
+              -122.9436961,
+              49.3750326
+            ],
+            [
+              -122.9436978,
+              49.374932
+            ],
+            [
+              -122.9436875,
+              49.3748604
+            ],
+            [
+              -122.9436532,
+              49.3747397
+            ],
+            [
+              -122.9436412,
+              49.3746402
+            ],
+            [
+              -122.943636,
+              49.3745283
+            ],
+            [
+              -122.943648,
+              49.3744188
+            ],
+            [
+              -122.9436618,
+              49.3742242
+            ],
+            [
+              -122.9437116,
+              49.3740252
+            ]
+          ],
+          [
+            [
+              -122.943243,
+              49.3754891
+            ],
+            [
+              -122.9434945,
+              49.3753274
+            ],
+            [
+              -122.9436933,
+              49.3751733
+            ],
+            [
+              -122.9438352,
+              49.3750908
+            ],
+            [
+              -122.9440224,
+              49.3749935
+            ],
+            [
+              -122.9441666,
+              49.3748895
+            ],
+            [
+              -122.9442336,
+              49.374806
+            ],
+            [
+              -122.944269,
+              49.374708
+            ],
+            [
+              -122.9443085,
+              49.3745335
+            ],
+            [
+              -122.9443171,
+              49.3743681
+            ],
+            [
+              -122.944292,
+              49.3742991
+            ],
+            [
+              -122.9442525,
+              49.3742399
+            ],
+            [
+              -122.9441924,
+              49.3741996
+            ],
+            [
+              -122.9440664,
+              49.3741534
+            ],
+            [
+              -122.9439468,
+              49.3741336
+            ],
+            [
+              -122.9438077,
+              49.3741001
+            ],
+            [
+              -122.9437116,
+              49.3740252
+            ],
+            [
+              -122.9436807,
+              49.3739659
+            ],
+            [
+              -122.9436618,
+              49.3738843
+            ],
+            [
+              -122.9436257,
+              49.3737266
+            ],
+            [
+              -122.9436216,
+              49.3735854
+            ],
+            [
+              -122.943619,
+              49.3734674
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-gun-barrel",
+      "properties": {
+        "id": "seymour-gun-barrel",
+        "name": "Gun Barrel",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 666,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "693987119",
+            "1052361704"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Gun Barrel",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            },
+            {
+              "lit": "no",
+              "name": "Gun Barrel",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -122.9455983,
+              49.3726926
+            ],
+            [
+              -122.9456478,
+              49.3726032
+            ],
+            [
+              -122.9457644,
+              49.3723949
+            ],
+            [
+              -122.9457849,
+              49.3719408
+            ],
+            [
+              -122.9457371,
+              49.3715178
+            ],
+            [
+              -122.9457619,
+              49.3714559
+            ],
+            [
+              -122.9459012,
+              49.3711082
+            ],
+            [
+              -122.9459422,
+              49.3707921
+            ],
+            [
+              -122.9460025,
+              49.370492
+            ],
+            [
+              -122.9460037,
+              49.3704894
+            ],
+            [
+              -122.9460311,
+              49.3703024
+            ],
+            [
+              -122.9459832,
+              49.3701332
+            ],
+            [
+              -122.9459945,
+              49.3700819
+            ],
+            [
+              -122.9460242,
+              49.3699462
+            ],
+            [
+              -122.9462157,
+              49.3698616
+            ],
+            [
+              -122.9462949,
+              49.3698152
+            ],
+            [
+              -122.9464687,
+              49.3697147
+            ],
+            [
+              -122.9466385,
+              49.3695756
+            ],
+            [
+              -122.94679,
+              49.369452
+            ],
+            [
+              -122.9471182,
+              49.369265
+            ],
+            [
+              -122.9474601,
+              49.3691893
+            ],
+            [
+              -122.9477062,
+              49.3691581
+            ],
+            [
+              -122.9478635,
+              49.3691181
+            ],
+            [
+              -122.9480754,
+              49.3689889
+            ],
+            [
+              -122.9483079,
+              49.3686105
+            ],
+            [
+              -122.9483797,
+              49.3682306
+            ],
+            [
+              -122.9483928,
+              49.3681538
+            ],
+            [
+              -122.948447,
+              49.3680457
+            ]
+          ],
+          [
+            [
+              -122.9460311,
+              49.3703024
+            ],
+            [
+              -122.9460635,
+              49.3701991
+            ],
+            [
+              -122.9460812,
+              49.3700796
+            ],
+            [
+              -122.9460831,
+              49.3700727
+            ],
+            [
+              -122.9461034,
+              49.3699989
+            ],
+            [
+              -122.9462095,
+              49.369924
+            ],
+            [
+              -122.9462949,
+              49.3698152
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-lodge-connector",
+      "properties": {
+        "id": "seymour-lodge-connector",
+        "name": "Lodge Connector",
+        "resortId": "seymour",
+        "difficulty": "green",
+        "lengthMeters": 334,
+        "grooming": "groomed",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "1393164137"
+          ],
+          "osmDifficultyValues": [
+            "easy"
+          ],
+          "osmGroomingValues": [
+            "classic"
+          ],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Lodge Connector",
+              "piste:difficulty": "easy",
+              "piste:grooming": "classic",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9488761,
+            49.3636429
+          ],
+          [
+            -122.9489751,
+            49.363494
+          ],
+          [
+            -122.949109,
+            49.3632805
+          ],
+          [
+            -122.9492503,
+            49.3630988
+          ],
+          [
+            -122.9494887,
+            49.3628487
+          ],
+          [
+            -122.9496447,
+            49.3626905
+          ],
+          [
+            -122.9497346,
+            49.3625996
+          ],
+          [
+            -122.9498375,
+            49.3624579
+          ],
+          [
+            -122.9497398,
+            49.3624582
+          ],
+          [
+            -122.9494573,
+            49.3626012
+          ],
+          [
+            -122.9491879,
+            49.3626955
+          ],
+          [
+            -122.9489656,
+            49.3627734
+          ],
+          [
+            -122.9487568,
+            49.362876
+          ],
+          [
+            -122.9485851,
+            49.3629912
+          ],
+          [
+            -122.9484875,
+            49.3631534
+          ],
+          [
+            -122.9484056,
+            49.3633708
+          ],
+          [
+            -122.9483156,
+            49.363521
+          ],
+          [
+            -122.948239,
+            49.3636233
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-looper-express",
+      "properties": {
+        "id": "seymour-looper-express",
+        "name": "Looper Express",
+        "resortId": "seymour",
+        "difficulty": "black",
+        "lengthMeters": 181,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "403799485"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Looper Express",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9428134,
+            49.3763013
+          ],
+          [
+            -122.9428963,
+            49.3762712
+          ],
+          [
+            -122.9430372,
+            49.3761843
+          ],
+          [
+            -122.943229,
+            49.3760815
+          ],
+          [
+            -122.9433806,
+            49.3760161
+          ],
+          [
+            -122.9435883,
+            49.3759177
+          ],
+          [
+            -122.9437402,
+            49.3758149
+          ],
+          [
+            -122.9438308,
+            49.3756745
+          ],
+          [
+            -122.9438986,
+            49.3755705
+          ],
+          [
+            -122.943968,
+            49.3753054
+          ],
+          [
+            -122.943981,
+            49.375177
+          ],
+          [
+            -122.9440224,
+            49.3749935
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-lower-unicorn",
+      "properties": {
+        "id": "seymour-lower-unicorn",
+        "name": "Lower Unicorn",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 350,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "62103214"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Lower Unicorn",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.94436,
+            49.3676046
+          ],
+          [
+            -122.9443039,
+            49.3675746
+          ],
+          [
+            -122.9442041,
+            49.3675362
+          ],
+          [
+            -122.9440584,
+            49.3674481
+          ],
+          [
+            -122.9439977,
+            49.3673633
+          ],
+          [
+            -122.944,
+            49.3672762
+          ],
+          [
+            -122.9440431,
+            49.3671624
+          ],
+          [
+            -122.9441787,
+            49.3670636
+          ],
+          [
+            -122.9442558,
+            49.3669781
+          ],
+          [
+            -122.9442669,
+            49.3668776
+          ],
+          [
+            -122.9442178,
+            49.3666944
+          ],
+          [
+            -122.9440766,
+            49.3665349
+          ],
+          [
+            -122.9438341,
+            49.3663414
+          ],
+          [
+            -122.9435735,
+            49.3661653
+          ],
+          [
+            -122.9434079,
+            49.3660162
+          ],
+          [
+            -122.9433452,
+            49.3658667
+          ],
+          [
+            -122.9432629,
+            49.3656779
+          ],
+          [
+            -122.9431464,
+            49.3654219
+          ],
+          [
+            -122.9430405,
+            49.3652658
+          ],
+          [
+            -122.9428595,
+            49.3650795
+          ],
+          [
+            -122.9426807,
+            49.3649037
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-mistletoe",
+      "properties": {
+        "id": "seymour-mistletoe",
+        "name": "Mistletoe",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 378,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "403399418",
+            "1052361705"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Mistletoe",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            },
+            {
+              "name": "Mistletoe",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -122.9488761,
+              49.3636429
+            ],
+            [
+              -122.948637,
+              49.363584
+            ],
+            [
+              -122.9485087,
+              49.3635609
+            ],
+            [
+              -122.9483229,
+              49.3635955
+            ],
+            [
+              -122.948239,
+              49.3636233
+            ],
+            [
+              -122.948053,
+              49.3636848
+            ],
+            [
+              -122.9476681,
+              49.3637655
+            ],
+            [
+              -122.9472124,
+              49.3638029
+            ],
+            [
+              -122.9467944,
+              49.3637668
+            ],
+            [
+              -122.9466343,
+              49.3636736
+            ],
+            [
+              -122.946496,
+              49.363525
+            ],
+            [
+              -122.9463286,
+              49.3633923
+            ],
+            [
+              -122.9461417,
+              49.3633038
+            ],
+            [
+              -122.9459112,
+              49.3632501
+            ],
+            [
+              -122.9455667,
+              49.3632343
+            ],
+            [
+              -122.9452586,
+              49.3632596
+            ],
+            [
+              -122.9450548,
+              49.3633417
+            ],
+            [
+              -122.9448971,
+              49.363405
+            ],
+            [
+              -122.9446884,
+              49.3634397
+            ],
+            [
+              -122.944504,
+              49.3634618
+            ],
+            [
+              -122.944391,
+              49.3635075
+            ]
+          ],
+          [
+            [
+              -122.9469237,
+              49.3638738
+            ],
+            [
+              -122.9467944,
+              49.3637668
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-mushroom",
+      "properties": {
+        "id": "seymour-mushroom",
+        "name": "Mushroom",
+        "resortId": "seymour",
+        "difficulty": "green",
+        "lengthMeters": 227,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "62103211",
+            "403399419"
+          ],
+          "osmDifficultyValues": [
+            "easy",
+            "novice"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Mushroom",
+              "piste:difficulty": "easy",
+              "piste:type": "downhill"
+            },
+            {
+              "name": "Mushroom",
+              "oneway": "yes",
+              "piste:difficulty": "novice",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -122.9454615,
+              49.3670648
+            ],
+            [
+              -122.945487,
+              49.3669463
+            ],
+            [
+              -122.9455015,
+              49.3668199
+            ],
+            [
+              -122.9455005,
+              49.3667549
+            ],
+            [
+              -122.9455003,
+              49.3666856
+            ],
+            [
+              -122.9455198,
+              49.3665854
+            ],
+            [
+              -122.9455986,
+              49.3664284
+            ],
+            [
+              -122.9456998,
+              49.3662675
+            ],
+            [
+              -122.945765,
+              49.3661815
+            ],
+            [
+              -122.9458199,
+              49.366044
+            ],
+            [
+              -122.9458319,
+              49.3659044
+            ],
+            [
+              -122.9458113,
+              49.3657279
+            ],
+            [
+              -122.9457444,
+              49.3656206
+            ],
+            [
+              -122.9456055,
+              49.3654709
+            ]
+          ],
+          [
+            [
+              -122.9472468,
+              49.3671743
+            ],
+            [
+              -122.9472375,
+              49.3671266
+            ],
+            [
+              -122.9472254,
+              49.367095
+            ],
+            [
+              -122.9472072,
+              49.3670491
+            ],
+            [
+              -122.947189,
+              49.3669575
+            ],
+            [
+              -122.9471295,
+              49.366854
+            ],
+            [
+              -122.9470992,
+              49.3668114
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-mystery-glades",
+      "properties": {
+        "id": "seymour-mystery-glades",
+        "name": "Mystery Glades",
+        "resortId": "seymour",
+        "difficulty": "unknown",
+        "lengthMeters": 661,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "1052533618"
+          ],
+          "osmDifficultyValues": [],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Mystery Glades",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.942615,
+            49.3768628
+          ],
+          [
+            -122.9422732,
+            49.3767852
+          ],
+          [
+            -122.9419308,
+            49.3766821
+          ],
+          [
+            -122.9416295,
+            49.3766036
+          ],
+          [
+            -122.9414872,
+            49.3765544
+          ],
+          [
+            -122.9413291,
+            49.3764848
+          ],
+          [
+            -122.9411169,
+            49.3763401
+          ],
+          [
+            -122.9409481,
+            49.3761749
+          ],
+          [
+            -122.9408874,
+            49.3760879
+          ],
+          [
+            -122.9408218,
+            49.3759677
+          ],
+          [
+            -122.940789,
+            49.3758871
+          ],
+          [
+            -122.9408012,
+            49.3758088
+          ],
+          [
+            -122.9408522,
+            49.3757226
+          ],
+          [
+            -122.9409287,
+            49.3756594
+          ],
+          [
+            -122.9410608,
+            49.3755558
+          ],
+          [
+            -122.9411533,
+            49.3754562
+          ],
+          [
+            -122.9412003,
+            49.3753392
+          ],
+          [
+            -122.9412152,
+            49.375219
+          ],
+          [
+            -122.9412003,
+            49.3751506
+          ],
+          [
+            -122.9412228,
+            49.3750699
+          ],
+          [
+            -122.9412925,
+            49.3750245
+          ],
+          [
+            -122.9413408,
+            49.375014
+          ],
+          [
+            -122.9413784,
+            49.3749756
+          ],
+          [
+            -122.9414588,
+            49.3749372
+          ],
+          [
+            -122.9415178,
+            49.3749372
+          ],
+          [
+            -122.9415768,
+            49.3749407
+          ],
+          [
+            -122.9416358,
+            49.3749686
+          ],
+          [
+            -122.9417002,
+            49.375014
+          ],
+          [
+            -122.9417539,
+            49.3750594
+          ],
+          [
+            -122.9417968,
+            49.3751153
+          ],
+          [
+            -122.9418504,
+            49.3751607
+          ],
+          [
+            -122.9418719,
+            49.3752026
+          ],
+          [
+            -122.9419363,
+            49.3752375
+          ],
+          [
+            -122.942006,
+            49.3752375
+          ],
+          [
+            -122.942065,
+            49.3752236
+          ],
+          [
+            -122.9421294,
+            49.3752026
+          ],
+          [
+            -122.9422152,
+            49.3752166
+          ],
+          [
+            -122.9422742,
+            49.3752306
+          ],
+          [
+            -122.9423064,
+            49.3751886
+          ],
+          [
+            -122.9432801,
+            49.3750992
+          ],
+          [
+            -122.9432801,
+            49.3753292
+          ],
+          [
+            -122.943243,
+            49.3754891
+          ],
+          [
+            -122.9431999,
+            49.375621
+          ],
+          [
+            -122.9431518,
+            49.3757122
+          ],
+          [
+            -122.9430559,
+            49.3758626
+          ],
+          [
+            -122.9429364,
+            49.3760359
+          ],
+          [
+            -122.9428567,
+            49.3762086
+          ],
+          [
+            -122.9428134,
+            49.3763013
+          ],
+          [
+            -122.9427837,
+            49.3763648
+          ],
+          [
+            -122.9427465,
+            49.3765178
+          ],
+          [
+            -122.9426682,
+            49.3767651
+          ],
+          [
+            -122.942615,
+            49.3768628
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-noel-s-flight",
+      "properties": {
+        "id": "seymour-noel-s-flight",
+        "name": "Noel's Flight",
+        "resortId": "seymour",
+        "difficulty": "black",
+        "lengthMeters": 304,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "693987122",
+            "1052938317"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Noel's Flight",
+              "oneway": "yes",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            },
+            {
+              "lit": "no",
+              "name": "Noel's Flight",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -122.9429605,
+              49.3769339
+            ],
+            [
+              -122.9428052,
+              49.3772002
+            ],
+            [
+              -122.9432057,
+              49.377337
+            ],
+            [
+              -122.943546,
+              49.377311
+            ],
+            [
+              -122.9437062,
+              49.3771806
+            ],
+            [
+              -122.9438964,
+              49.3768287
+            ],
+            [
+              -122.9439564,
+              49.3764832
+            ],
+            [
+              -122.9440208,
+              49.3763582
+            ]
+          ],
+          [
+            [
+              -122.9432057,
+              49.377337
+            ],
+            [
+              -122.9438188,
+              49.3774792
+            ],
+            [
+              -122.9445647,
+              49.3774227
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-nutcracker",
+      "properties": {
+        "id": "seymour-nutcracker",
+        "name": "Nutcracker",
+        "resortId": "seymour",
+        "difficulty": "black",
+        "lengthMeters": 190,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "403799486",
+            "403799487"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Nutcracker",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            },
+            {
+              "name": "Nutcracker",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -122.9427465,
+              49.3765178
+            ],
+            [
+              -122.9428866,
+              49.3765195
+            ],
+            [
+              -122.9429959,
+              49.3764926
+            ],
+            [
+              -122.9430979,
+              49.3764467
+            ],
+            [
+              -122.9431853,
+              49.3764009
+            ],
+            [
+              -122.9432922,
+              49.3763582
+            ],
+            [
+              -122.9434695,
+              49.3762981
+            ],
+            [
+              -122.94362,
+              49.3762807
+            ],
+            [
+              -122.9437415,
+              49.3762997
+            ],
+            [
+              -122.9438702,
+              49.3763503
+            ],
+            [
+              -122.9440208,
+              49.3763582
+            ],
+            [
+              -122.9441835,
+              49.3763345
+            ],
+            [
+              -122.9443,
+              49.3762934
+            ],
+            [
+              -122.9443948,
+              49.3762412
+            ],
+            [
+              -122.9444833,
+              49.3761914
+            ]
+          ],
+          [
+            [
+              -122.9426682,
+              49.3767651
+            ],
+            [
+              -122.9427579,
+              49.3767535
+            ],
+            [
+              -122.9428866,
+              49.3766887
+            ],
+            [
+              -122.9429862,
+              49.3766238
+            ],
+            [
+              -122.9430323,
+              49.3765464
+            ],
+            [
+              -122.9430979,
+              49.3764467
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-pete-s",
+      "properties": {
+        "id": "seymour-pete-s",
+        "name": "Pete's",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 572,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "693987123"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Pete's",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9464839,
+            49.3750367
+          ],
+          [
+            -122.9467388,
+            49.3749319
+          ],
+          [
+            -122.9471448,
+            49.3748246
+          ],
+          [
+            -122.9473409,
+            49.374704
+          ],
+          [
+            -122.9475474,
+            49.3747224
+          ],
+          [
+            -122.9478311,
+            49.3746298
+          ],
+          [
+            -122.9479538,
+            49.3744465
+          ],
+          [
+            -122.9484753,
+            49.3742586
+          ],
+          [
+            -122.9487118,
+            49.3740396
+          ],
+          [
+            -122.9488027,
+            49.3738876
+          ],
+          [
+            -122.9487854,
+            49.3737329
+          ],
+          [
+            -122.9485533,
+            49.3732641
+          ],
+          [
+            -122.9484306,
+            49.3731605
+          ],
+          [
+            -122.947986,
+            49.3729139
+          ],
+          [
+            -122.9479015,
+            49.3728117
+          ],
+          [
+            -122.9477473,
+            49.372617
+          ],
+          [
+            -122.947526,
+            49.3725419
+          ],
+          [
+            -122.9474509,
+            49.3724659
+          ],
+          [
+            -122.94753,
+            49.3723044
+          ],
+          [
+            -122.9476203,
+            49.372079
+          ],
+          [
+            -122.9475667,
+            49.3716824
+          ],
+          [
+            -122.9473843,
+            49.371116
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-rookies",
+      "properties": {
+        "id": "seymour-rookies",
+        "name": "Rookies",
+        "resortId": "seymour",
+        "difficulty": "green",
+        "lengthMeters": 603,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "62103217",
+            "403399420"
+          ],
+          "osmDifficultyValues": [
+            "easy"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Rookies",
+              "piste:difficulty": "easy",
+              "piste:type": "downhill"
+            },
+            {
+              "name": "Rookies",
+              "piste:difficulty": "easy",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -122.9476796,
+              49.3661132
+            ],
+            [
+              -122.9475023,
+              49.3660997
+            ],
+            [
+              -122.947041,
+              49.3660298
+            ],
+            [
+              -122.946922,
+              49.3660218
+            ],
+            [
+              -122.9467436,
+              49.3659451
+            ],
+            [
+              -122.9464635,
+              49.365819
+            ],
+            [
+              -122.9463402,
+              49.3657671
+            ],
+            [
+              -122.9460659,
+              49.3656497
+            ],
+            [
+              -122.9456055,
+              49.3654709
+            ],
+            [
+              -122.9453656,
+              49.3653541
+            ],
+            [
+              -122.9450132,
+              49.3652333
+            ],
+            [
+              -122.9448147,
+              49.3651615
+            ],
+            [
+              -122.9445304,
+              49.3650586
+            ],
+            [
+              -122.9442515,
+              49.3649748
+            ],
+            [
+              -122.9441361,
+              49.3649733
+            ],
+            [
+              -122.9440155,
+              49.3649957
+            ],
+            [
+              -122.9439228,
+              49.3650236
+            ],
+            [
+              -122.9438331,
+              49.3650796
+            ],
+            [
+              -122.9437391,
+              49.3650974
+            ],
+            [
+              -122.9436185,
+              49.3650866
+            ],
+            [
+              -122.9434964,
+              49.3650487
+            ],
+            [
+              -122.9433825,
+              49.3649748
+            ],
+            [
+              -122.9432696,
+              49.3649334
+            ],
+            [
+              -122.9430713,
+              49.3649119
+            ],
+            [
+              -122.9426807,
+              49.3649037
+            ],
+            [
+              -122.94258,
+              49.3647975
+            ],
+            [
+              -122.9425369,
+              49.3647252
+            ],
+            [
+              -122.942546,
+              49.3646188
+            ],
+            [
+              -122.9426242,
+              49.3644987
+            ],
+            [
+              -122.9426863,
+              49.36438
+            ],
+            [
+              -122.9427113,
+              49.3642303
+            ],
+            [
+              -122.9426995,
+              49.3640884
+            ]
+          ],
+          [
+            [
+              -122.9476993,
+              49.3662666
+            ],
+            [
+              -122.9475966,
+              49.3663499
+            ],
+            [
+              -122.9475481,
+              49.3664076
+            ],
+            [
+              -122.9475239,
+              49.3664549
+            ],
+            [
+              -122.9474626,
+              49.3664962
+            ],
+            [
+              -122.9473661,
+              49.3665111
+            ],
+            [
+              -122.9473105,
+              49.3664872
+            ],
+            [
+              -122.9472663,
+              49.366449
+            ],
+            [
+              -122.9472183,
+              49.3663884
+            ],
+            [
+              -122.9471467,
+              49.366296
+            ],
+            [
+              -122.947063,
+              49.3662249
+            ],
+            [
+              -122.9470088,
+              49.3661416
+            ],
+            [
+              -122.946922,
+              49.3660218
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-sammy-j",
+      "properties": {
+        "id": "seymour-sammy-j",
+        "name": "Sammy J",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 215,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "1052533624"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Sammy J",
+              "oneway": "yes",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9404179,
+            49.3808022
+          ],
+          [
+            -122.9405888,
+            49.3807597
+          ],
+          [
+            -122.940739,
+            49.3807108
+          ],
+          [
+            -122.9408626,
+            49.3805945
+          ],
+          [
+            -122.9408937,
+            49.3805541
+          ],
+          [
+            -122.9410971,
+            49.3802904
+          ],
+          [
+            -122.9412127,
+            49.3800222
+          ],
+          [
+            -122.9412782,
+            49.3797263
+          ],
+          [
+            -122.9413757,
+            49.3795376
+          ],
+          [
+            -122.9414091,
+            49.379473
+          ],
+          [
+            -122.941567,
+            49.37928
+          ],
+          [
+            -122.9417601,
+            49.379174
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-sammy-s-express",
+      "properties": {
+        "id": "seymour-sammy-s-express",
+        "name": "Sammy's Express",
+        "resortId": "seymour",
+        "difficulty": "black",
+        "lengthMeters": 95,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "403388815"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Sammy's Express",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9417385,
+            49.3790999
+          ],
+          [
+            -122.9418187,
+            49.3789781
+          ],
+          [
+            -122.941889,
+            49.3788287
+          ],
+          [
+            -122.9419063,
+            49.3787821
+          ],
+          [
+            -122.9419031,
+            49.3787296
+          ],
+          [
+            -122.941903,
+            49.3786753
+          ],
+          [
+            -122.941889,
+            49.3786183
+          ],
+          [
+            -122.9418781,
+            49.3785751
+          ],
+          [
+            -122.941882,
+            49.3785131
+          ],
+          [
+            -122.9419228,
+            49.3784586
+          ],
+          [
+            -122.9419944,
+            49.3784078
+          ],
+          [
+            -122.9420719,
+            49.3783637
+          ],
+          [
+            -122.942131,
+            49.3783281
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-scooter",
+      "properties": {
+        "id": "seymour-scooter",
+        "name": "Scooter",
+        "resortId": "seymour",
+        "difficulty": "black",
+        "lengthMeters": 91,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "62103835"
+          ],
+          "osmDifficultyValues": [
+            "advanced"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Scooter",
+              "piste:difficulty": "advanced",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9410176,
+            49.3773199
+          ],
+          [
+            -122.9407169,
+            49.3772297
+          ],
+          [
+            -122.9406395,
+            49.3772169
+          ],
+          [
+            -122.9405351,
+            49.3772183
+          ],
+          [
+            -122.9404458,
+            49.3772496
+          ],
+          [
+            -122.9403742,
+            49.3773021
+          ],
+          [
+            -122.9403122,
+            49.3773645
+          ],
+          [
+            -122.9402521,
+            49.3774108
+          ],
+          [
+            -122.940162,
+            49.3774384
+          ],
+          [
+            -122.9400847,
+            49.3774777
+          ],
+          [
+            -122.9400454,
+            49.3775179
+          ],
+          [
+            -122.9400056,
+            49.3775443
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-seymour-16-s",
+      "properties": {
+        "id": "seymour-seymour-16-s",
+        "name": "Seymour 16's",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 408,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "62103221"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Seymour 16's",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9480047,
+            49.3645621
+          ],
+          [
+            -122.9478197,
+            49.3644668
+          ],
+          [
+            -122.9476847,
+            49.3643599
+          ],
+          [
+            -122.9474315,
+            49.3642866
+          ],
+          [
+            -122.9470676,
+            49.3642455
+          ],
+          [
+            -122.9465796,
+            49.3642132
+          ],
+          [
+            -122.9457768,
+            49.364176
+          ],
+          [
+            -122.9452018,
+            49.3641302
+          ],
+          [
+            -122.9449155,
+            49.3640781
+          ],
+          [
+            -122.9446586,
+            49.3639839
+          ],
+          [
+            -122.9444582,
+            49.3639106
+          ],
+          [
+            -122.9441973,
+            49.3638671
+          ],
+          [
+            -122.9438601,
+            49.3638403
+          ],
+          [
+            -122.9434755,
+            49.3638655
+          ],
+          [
+            -122.9432141,
+            49.3639601
+          ],
+          [
+            -122.9429619,
+            49.3640247
+          ],
+          [
+            -122.9428347,
+            49.3640392
+          ],
+          [
+            -122.9426995,
+            49.3640884
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-slingshot",
+      "properties": {
+        "id": "seymour-slingshot",
+        "name": "Slingshot",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 240,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "693987120"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Slingshot",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9457619,
+            49.3714559
+          ],
+          [
+            -122.9448183,
+            49.3704551
+          ],
+          [
+            -122.9440262,
+            49.3696139
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-trapper-john-s",
+      "properties": {
+        "id": "seymour-trapper-john-s",
+        "name": "Trapper John's",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 374,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "62103223"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "yes",
+              "name": "Trapper John's",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9479174,
+            49.3647276
+          ],
+          [
+            -122.9457213,
+            49.3645835
+          ],
+          [
+            -122.9450562,
+            49.3645066
+          ],
+          [
+            -122.9449154,
+            49.3644818
+          ],
+          [
+            -122.9445412,
+            49.3644158
+          ],
+          [
+            -122.9440691,
+            49.3643389
+          ],
+          [
+            -122.9438609,
+            49.3642973
+          ],
+          [
+            -122.9436619,
+            49.3642213
+          ],
+          [
+            -122.9435401,
+            49.3641543
+          ],
+          [
+            -122.9434423,
+            49.3640705
+          ],
+          [
+            -122.9432639,
+            49.3640314
+          ],
+          [
+            -122.9430558,
+            49.3640268
+          ],
+          [
+            -122.9429619,
+            49.3640247
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-uncle-al-s-glades",
+      "properties": {
+        "id": "seymour-uncle-al-s-glades",
+        "name": "Uncle Al's Glades",
+        "resortId": "seymour",
+        "difficulty": "unknown",
+        "lengthMeters": 849,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "1052533616"
+          ],
+          "osmDifficultyValues": [],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Uncle Al's Glades",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9436688,
+            49.3731742
+          ],
+          [
+            -122.9438083,
+            49.3731043
+          ],
+          [
+            -122.944055,
+            49.3730135
+          ],
+          [
+            -122.9443018,
+            49.3729507
+          ],
+          [
+            -122.9456478,
+            49.3726032
+          ],
+          [
+            -122.9457644,
+            49.3723949
+          ],
+          [
+            -122.9457849,
+            49.3719408
+          ],
+          [
+            -122.9457371,
+            49.3715178
+          ],
+          [
+            -122.9457619,
+            49.3714559
+          ],
+          [
+            -122.9448183,
+            49.3704551
+          ],
+          [
+            -122.9445126,
+            49.3704198
+          ],
+          [
+            -122.9439597,
+            49.3704569
+          ],
+          [
+            -122.9434968,
+            49.3705436
+          ],
+          [
+            -122.9433874,
+            49.370695
+          ],
+          [
+            -122.9433473,
+            49.3708438
+          ],
+          [
+            -122.9432767,
+            49.3710971
+          ],
+          [
+            -122.9432282,
+            49.3712746
+          ],
+          [
+            -122.9431272,
+            49.3714252
+          ],
+          [
+            -122.9430261,
+            49.3717208
+          ],
+          [
+            -122.9429721,
+            49.3718561
+          ],
+          [
+            -122.9428891,
+            49.3719895
+          ],
+          [
+            -122.9428572,
+            49.3720931
+          ],
+          [
+            -122.9428572,
+            49.3721842
+          ],
+          [
+            -122.9429292,
+            49.3723672
+          ],
+          [
+            -122.9430375,
+            49.3725111
+          ],
+          [
+            -122.9431438,
+            49.3726078
+          ],
+          [
+            -122.9432537,
+            49.3727437
+          ],
+          [
+            -122.9433487,
+            49.3730027
+          ],
+          [
+            -122.9434576,
+            49.3732467
+          ],
+          [
+            -122.9436688,
+            49.3731742
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-unicorn-glades",
+      "properties": {
+        "id": "seymour-unicorn-glades",
+        "name": "Unicorn Glades",
+        "resortId": "seymour",
+        "difficulty": "unknown",
+        "lengthMeters": 684,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "1052533617"
+          ],
+          "osmDifficultyValues": [],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "name": "Unicorn Glades",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9412788,
+            49.3741237
+          ],
+          [
+            -122.9411094,
+            49.374384
+          ],
+          [
+            -122.9412772,
+            49.3744529
+          ],
+          [
+            -122.9414071,
+            49.3744537
+          ],
+          [
+            -122.9419305,
+            49.3745169
+          ],
+          [
+            -122.9424445,
+            49.374459
+          ],
+          [
+            -122.9427396,
+            49.3743923
+          ],
+          [
+            -122.9428648,
+            49.3743392
+          ],
+          [
+            -122.9428222,
+            49.3742159
+          ],
+          [
+            -122.9428138,
+            49.3741618
+          ],
+          [
+            -122.9428782,
+            49.3739034
+          ],
+          [
+            -122.9430499,
+            49.373603
+          ],
+          [
+            -122.943243,
+            49.3734633
+          ],
+          [
+            -122.9434576,
+            49.3732467
+          ],
+          [
+            -122.9432537,
+            49.3727437
+          ],
+          [
+            -122.9430375,
+            49.3725111
+          ],
+          [
+            -122.9429292,
+            49.3723672
+          ],
+          [
+            -122.9428572,
+            49.3721842
+          ],
+          [
+            -122.9426265,
+            49.3721848
+          ],
+          [
+            -122.942606,
+            49.3722917
+          ],
+          [
+            -122.9419955,
+            49.3728044
+          ],
+          [
+            -122.9415,
+            49.3734036
+          ],
+          [
+            -122.9412788,
+            49.3741237
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-velvet-gully",
+      "properties": {
+        "id": "seymour-velvet-gully",
+        "name": "Velvet Gully",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 423,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "62103838",
+            "1052361700"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Velvet Gully",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            },
+            {
+              "lit": "no",
+              "name": "Velvet Gully",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              -122.9444833,
+              49.3761914
+            ],
+            [
+              -122.9446335,
+              49.3758142
+            ],
+            [
+              -122.9448267,
+              49.3755278
+            ],
+            [
+              -122.9449541,
+              49.3753424
+            ],
+            [
+              -122.9450091,
+              49.3752624
+            ],
+            [
+              -122.9451271,
+              49.374969
+            ],
+            [
+              -122.9452773,
+              49.3745778
+            ],
+            [
+              -122.945373,
+              49.3743162
+            ],
+            [
+              -122.9453846,
+              49.3742844
+            ],
+            [
+              -122.9454168,
+              49.3741027
+            ],
+            [
+              -122.9454196,
+              49.3737409
+            ]
+          ],
+          [
+            [
+              -122.9445647,
+              49.3774227
+            ],
+            [
+              -122.944419,
+              49.3772253
+            ],
+            [
+              -122.9443868,
+              49.3770227
+            ],
+            [
+              -122.9443761,
+              49.3767782
+            ],
+            [
+              -122.9444512,
+              49.3764289
+            ],
+            [
+              -122.9444833,
+              49.3761914
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "seymour-wonger",
+      "properties": {
+        "id": "seymour-wonger",
+        "name": "Wonger",
+        "resortId": "seymour",
+        "difficulty": "blue",
+        "lengthMeters": 155,
+        "grooming": "unknown",
+        "source": "OpenStreetMap",
+        "metadata": {
+          "osmWayIds": [
+            "403799488"
+          ],
+          "osmDifficultyValues": [
+            "intermediate"
+          ],
+          "osmGroomingValues": [],
+          "osmTags": [
+            {
+              "lit": "no",
+              "name": "Wonger",
+              "piste:difficulty": "intermediate",
+              "piste:type": "downhill"
+            }
+          ],
+          "snapshotDate": "2026-10-06"
+        }
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -122.9449541,
+            49.3753424
+          ],
+          [
+            -122.945084,
+            49.3752963
+          ],
+          [
+            -122.9452042,
+            49.3752656
+          ],
+          [
+            -122.9453098,
+            49.3752471
+          ],
+          [
+            -122.945455,
+            49.3752483
+          ],
+          [
+            -122.9455451,
+            49.3752371
+          ],
+          [
+            -122.9455863,
+            49.3752248
+          ],
+          [
+            -122.9456258,
+            49.3752013
+          ],
+          [
+            -122.9456413,
+            49.3751577
+          ],
+          [
+            -122.9456481,
+            49.3750783
+          ],
+          [
+            -122.9456293,
+            49.3749732
+          ],
+          [
+            -122.9455949,
+            49.374848
+          ],
+          [
+            -122.9455743,
+            49.3747317
+          ],
+          [
+            -122.9455692,
+            49.3746143
+          ],
+          [
+            -122.945564,
+            49.3745595
+          ],
+          [
+            -122.9455382,
+            49.3745103
+          ],
+          [
+            -122.9454953,
+            49.3744745
+          ],
+          [
+            -122.9454318,
+            49.3744276
+          ],
+          [
+            -122.9453935,
+            49.3743773
+          ],
+          [
+            -122.945373,
+            49.3743162
           ]
         ]
       }

@@ -47,6 +47,110 @@ try {
     new Set(samples.map((a) => a.resortId)).size === 3,
     "Sample season covers all three mountains",
   );
+  const { ridingProgress } = await server.ssrLoadModule(
+    "/src/engine/progression.ts",
+  );
+  const emptyProgress = ridingProgress([], allTrails, demoProfile);
+  ok(
+    emptyProgress.level === 1 && emptyProgress.xp === 0,
+    "New rider starts at level one with zero XP",
+  );
+  const season = ridingProgress(samples, allTrails, demoProfile);
+  ok(
+    season.level > 1 && season.unique > 2 && season.completed > 3,
+    "Completed sample rides earn levels and distinct-run badges",
+  );
+  ok(
+    ridingProgress([...samples, ...samples], allTrails, demoProfile).xp ===
+      season.xp,
+    "Duplicate ride IDs cannot earn extra XP",
+  );
+  ok(
+    ridingProgress(samples, allTrails, { ...demoProfile, ceiling: "green" })
+      .xp === season.xp,
+    "Changing terrain limit does not remove earned experience",
+  );
+  ok(
+    ridingProgress(
+      samples.map((a) => ({
+        ...a,
+        telemetry: a.telemetry.map((p) => ({ ...p, speed: p.speed * 2 })),
+      })),
+      allTrails,
+      demoProfile,
+    ).xp === season.xp,
+    "Higher speed earns no progression bonus",
+  );
+  ok(
+    ridingProgress([{ ...samples[0], trailId: "" }], allTrails, demoProfile)
+      .xp === 0,
+    "Unmatched rides do not claim completed-run XP",
+  );
+  ok(
+    ridingProgress(
+      [{ ...samples[0], telemetry: samples[0].telemetry.slice(0, 2) }],
+      allTrails,
+      demoProfile,
+    ).xp === 0,
+    "Trivial recordings cannot unlock levels",
+  );
+  ok(
+    ridingProgress(
+      [{ ...samples[0], simulated: false, matchingConfidence: 0.2 }],
+      allTrails,
+      demoProfile,
+    ).xp === 0,
+    "Low-confidence live matches do not earn route XP",
+  );
+  ok(
+    ridingProgress(
+      [
+        {
+          ...samples[0],
+          simulated: false,
+          matchingConfidence: 0.8,
+          telemetry: samples[0].telemetry.map((p) => ({
+            ...p,
+            lat: 40,
+            lng: -100,
+          })),
+        },
+      ],
+      allTrails,
+      demoProfile,
+    ).xp === 0,
+    "Manually naming an unrelated run cannot earn route XP",
+  );
+  ok(
+    ridingProgress(
+      [{ ...samples[0], simulated: false, matchingConfidence: 0.8 }],
+      allTrails,
+      demoProfile,
+    ).xp === 150,
+    "A sufficiently matched completed GPS ride earns first-route XP",
+  );
+  ok(
+    ridingProgress([], allTrails, {
+      ...demoProfile,
+      ceiling: "green",
+    }).nextRuns.every((t) => t.difficulty === "green"),
+    "Level challenges stay inside the user's terrain limit",
+  );
+  const { loadMapContext } = await server.ssrLoadModule(
+    "/src/data/mapContext.ts",
+  );
+  for (const id of ["cypress", "grouse", "seymour"]) {
+    const context = await loadMapContext(id);
+    ok(
+      context.features.some((f) => f.properties.kind === "connector") &&
+        context.features.some((f) => f.properties.kind === "lift"),
+      `${id} includes sourced connectors and lifts`,
+    );
+    ok(
+      context.features.every((f) => /^\d+$/.test(f.properties.osmWayId)),
+      `${id} context has inspectable OSM provenance`,
+    );
+  }
   const dates = samples.map((a) => Date.parse(a.date));
   ok(
     Math.max(...dates) - Math.min(...dates) > 6 * 7 * 86400000,

@@ -1,9 +1,13 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { Icon } from "./components/Icon";
 import { Home } from "./pages/Home";
-import { Mountain } from "./pages/Mountain";
-import { RecordPage } from "./pages/Record";
-import { ActivityPage } from "./pages/Activity";
 import { Progress } from "./pages/Progress";
 import { Profile } from "./pages/Profile";
 import { allTrails } from "./data/demo";
@@ -23,6 +27,18 @@ import type { SkiRun } from "./types/trail";
 import "./styles.css";
 import "./live.css";
 import "./personal.css";
+import "./ride.css";
+const Mountain = lazy(() =>
+  import("./pages/Mountain").then((module) => ({ default: module.Mountain })),
+);
+const RecordPage = lazy(() =>
+  import("./pages/Record").then((module) => ({ default: module.RecordPage })),
+);
+const ActivityPage = lazy(() =>
+  import("./pages/Activity").then((module) => ({
+    default: module.ActivityPage,
+  })),
+);
 const nav = [
   { id: "home", label: "Home", icon: "home" },
   { id: "explore", label: "Explore", icon: "compass" },
@@ -36,6 +52,7 @@ export default function App() {
     [page, setPage] = useState("home"),
     [resortId, setResortId] = useState<ResortId>("cypress"),
     [selected, setSelected] = useState<SkiRun | null>(null),
+    [activityOrigin, setActivityOrigin] = useState("home"),
     [activity, setActivity] = useState<Activity | null>(null),
     [warning, setWarning] = useState(""),
     [online, setOnline] = useState(navigator.onLine),
@@ -45,6 +62,7 @@ export default function App() {
   const { weather, loading, error, refresh } = useWeather(prefs.demo),
     activities = allActivities.filter((a) => a.simulated === prefs.demo);
   const onSaved = useCallback((a: Activity) => {
+    setActivityOrigin("record");
     setActivities((list) => [...list.filter((x) => x.id !== a.id), a]);
     setActivity(a);
     setPage("activity");
@@ -81,7 +99,10 @@ export default function App() {
   );
   const navigate = (target: string) => {
     setPage(target);
-    if (target === "activity") setActivity(null);
+    if (target === "activity") {
+      setActivityOrigin(page === "activity" ? activityOrigin : page);
+      setActivity(null);
+    }
     window.scrollTo({ top: 0, behavior: "instant" });
   };
   const openMountain = (id: ResortId) => {
@@ -117,6 +138,7 @@ export default function App() {
     }
   };
   const openActivity = (a: Activity) => {
+    setActivityOrigin(page);
     setActivity(a);
     setPage("activity");
     window.scrollTo(0, 0);
@@ -148,10 +170,12 @@ export default function App() {
             <button
               key={n.id}
               className={`${page === n.id ? "active" : ""} ${n.id === "record" ? "record-nav" : ""}`}
+              aria-label={n.label}
+              title={n.label}
               onClick={() => navigate(n.id)}
             >
               <Icon name={n.icon} size={18} />
-              {n.label}
+              {n.id !== "record" && n.label}
             </button>
           ))}
         </nav>
@@ -209,93 +233,116 @@ export default function App() {
           <Icon name="arrow" size={16} />
         </button>
       )}
-      <main className={`main-content ${page === "home" ? "home-content" : ""}`}>
-        {page === "home" && (
-          <Home
-            profile={prefs.profile}
-            activities={activities}
-            fits={fits}
-            weather={weather}
-            demo={prefs.demo}
-            openMountain={openMountain}
-            openTrail={openTrail}
-            onNavigate={navigate}
-          />
-        )}
-        {page === "explore" && (
-          <Mountain
-            resortId={resortId}
-            selected={selected}
-            fits={fits}
-            profile={prefs.profile}
-            weather={weather[resortId]}
-            onResort={openMountain}
-            onSelect={setSelected}
-            onRecord={(t) => {
-              setSelected(t);
-              navigate("record");
-            }}
-            onRefresh={refresh}
-            loading={loading}
-          />
-        )}
-        {page === "record" && (
-          <RecordPage
-            key={`${prefs.demo}-${selected?.id || "auto"}`}
-            recorder={recorder}
-            profile={prefs.profile}
-            demo={prefs.demo}
-            selected={selected}
-            onHistory={() => navigate("activity")}
-          />
-        )}
-        {page === "activity" && (
-          <ActivityPage
-            activities={activities}
-            selected={activity}
-            onSelect={setActivity}
-            onExplore={() => navigate("record")}
-          />
-        )}
-        {page === "progress" && (
-          <Progress
-            activities={activities}
-            profile={prefs.profile}
-            onActivity={openActivity}
-          />
-        )}
-        {page === "profile" && (
-          <Profile
-            key={String(prefs.demo)}
-            profile={prefs.profile}
-            activities={activities}
-            onActivity={openActivity}
-            onSave={(p) => updatePrefs(p)}
-            demo={prefs.demo}
-            onDemo={(v) => {
-              if (!recorder.draft) {
-                updatePrefs(prefs.profile, v);
-                setSelected(null);
+      <main
+        className={`main-content ${page === "home" ? "home-content" : page === "record" ? "record-content" : ""}`}
+      >
+        <Suspense
+          fallback={
+            <div className="page-loading" role="status">
+              Loading your map…
+            </div>
+          }
+        >
+          {page === "home" && (
+            <Home
+              profile={prefs.profile}
+              activities={activities}
+              fits={fits}
+              weather={weather}
+              demo={prefs.demo}
+              openMountain={openMountain}
+              openTrail={openTrail}
+              onNavigate={navigate}
+            />
+          )}
+          {page === "explore" && (
+            <Mountain
+              resortId={resortId}
+              selected={selected}
+              fits={fits}
+              profile={prefs.profile}
+              weather={weather[resortId]}
+              onResort={openMountain}
+              onSelect={setSelected}
+              onRecord={(t) => {
+                setSelected(t);
+                navigate("record");
+              }}
+              onRefresh={refresh}
+              loading={loading}
+            />
+          )}
+          {page === "record" && (
+            <RecordPage
+              key={`${prefs.demo}-${selected?.id || "auto"}`}
+              recorder={recorder}
+              profile={prefs.profile}
+              demo={prefs.demo}
+              selected={selected}
+              onHistory={() => navigate("activity")}
+              onSport={(sport) => updatePrefs({ ...prefs.profile, sport })}
+            />
+          )}
+          {page === "activity" && (
+            <ActivityPage
+              activities={activities}
+              selected={activity}
+              onSelect={(a) => {
+                setActivity(a);
+                window.scrollTo({ top: 0, behavior: "instant" });
+              }}
+              backLabel={
+                nav.find((n) => n.id === activityOrigin)?.label || "Home"
               }
-            }}
-            locked={Boolean(recorder.draft)}
-            onHistory={() => navigate("activity")}
-            onExport={() =>
-              download(
-                "slopesense-backup.json",
-                JSON.stringify(
-                  {
-                    version: 3,
-                    profile: prefs.profile,
-                    activities: allActivities,
-                  },
-                  null,
-                  2,
-                ),
-              )
-            }
-          />
-        )}
+              onBack={() => navigate(activityOrigin)}
+              onExplore={() => navigate("record")}
+            />
+          )}
+          {page === "progress" && (
+            <Progress
+              activities={activities}
+              profile={prefs.profile}
+              onActivity={openActivity}
+              onTrail={(trail) => {
+                setResortId(trail.resortId);
+                setSelected(trail);
+                navigate("explore");
+              }}
+            />
+          )}
+          {page === "profile" && (
+            <Profile
+              key={String(prefs.demo)}
+              profile={prefs.profile}
+              activities={activities}
+              onActivity={openActivity}
+              onSave={(p) => updatePrefs(p)}
+              demo={prefs.demo}
+              onDemo={(v) => {
+                if (!recorder.draft) {
+                  updatePrefs(prefs.profile, v);
+                  setSelected(null);
+                }
+              }}
+              locked={Boolean(recorder.draft)}
+              onHistory={() => navigate("activity")}
+              onExport={() =>
+                download(
+                  "slopesense-backup.json",
+                  JSON.stringify(
+                    {
+                      version: 3,
+                      profile: prefs.profile,
+                      activities: allActivities,
+                    },
+                    null,
+                    2,
+                  ),
+                )
+              }
+            />
+          )}
+        </Suspense>
         <footer className="app-footer">
           <span>
             <Icon name="mountain" size={16} /> North Shore, British Columbia

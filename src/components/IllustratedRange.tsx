@@ -49,7 +49,7 @@ export function IllustratedRange({
           width={homeArtwork.wide.width}
           height={homeArtwork.wide.height}
           decoding="async"
-          fetchPriority="high"
+          {...{ fetchpriority: "high" }}
           onLoad={(event) => {
             const src = event.currentTarget.currentSrc;
             const selected = (Object.keys(homeArtwork) as ArtworkFrame[]).find(
@@ -104,6 +104,38 @@ export function IllustratedRange({
         />
       </svg>
       <MountainSnow weather={weather} frame={frame} />
+      <svg
+        className="mountain-hit-areas"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        aria-label="Interactive mountain terrain"
+      >
+        {resorts.map((r) => {
+          const [x, y, rx, ry] = artwork.mountains[r.id].glow;
+          return (
+            <ellipse
+              key={r.id}
+              className={`terrain-hit ${r.id}`}
+              cx={x * 100}
+              cy={y * 100}
+              rx={rx * 85}
+              ry={ry * 85}
+              role="button"
+              tabIndex={0}
+              aria-label={`Explore ${r.name} terrain`}
+              onClick={() => onMountain(r.id)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  onMountain(r.id);
+                }
+              }}
+            >
+              <title>Explore {r.name}</title>
+            </ellipse>
+          );
+        })}
+      </svg>
       {resorts.map((r) => {
         const c = weather[r.id],
           snow = c.snowing && !c.stale;

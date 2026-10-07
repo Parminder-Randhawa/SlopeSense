@@ -65,7 +65,7 @@ try {
       return (
         img.complete &&
         img.naturalWidth > 0 &&
-        img.currentSrc.endsWith(`north-shore-${expected}-v2.png`) &&
+        img.currentSrc.endsWith(`north-shore-${expected}-hd.webp`) &&
         document.querySelector(".illustrated-range").dataset.frame === expected
       );
     });
@@ -209,7 +209,7 @@ try {
             box.width / img.naturalWidth,
             box.height / img.naturalHeight,
           );
-          const density = img.currentSrc.endsWith("tall-v2.png")
+          const density = img.currentSrc.endsWith("tall-hd.webp")
             ? devicePixelRatio
             : 2;
           return (
@@ -405,6 +405,9 @@ try {
     "Small demo control is last in Settings",
   );
   await page.locator(".profile-recent button").first().click();
+  await page
+    .getByRole("button", { name: "Play replay", exact: true })
+    .waitFor();
   check(
     await page
       .getByRole("button", { name: "Play replay", exact: true })

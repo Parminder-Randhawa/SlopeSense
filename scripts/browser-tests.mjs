@@ -20,6 +20,7 @@ const run = (script) =>
 try {
   await run("scripts/live-smoke.mjs");
   await run("scripts/design-smoke.mjs");
+  await run("scripts/mobile-experience.mjs");
 } finally {
   await new Promise((resolve) => server.httpServer.close(resolve));
 }

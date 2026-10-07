@@ -6,7 +6,7 @@ Usage:
     --cypress /path/to/cypress.osm \
     --grouse /path/to/grouse.osm \
     --seymour /path/to/seymour.osm \
-    --output src/data
+    --snapshot-date 2026-10-06 --output src/data
 
 The runtime application never calls Overpass or the OSM data API. This script is
 only a documented, reproducible import step for refreshing the local snapshots.
@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+from datetime import date
 import re
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -110,7 +111,7 @@ def line_length(coordinates: list[list[float]]) -> float:
     return sum(haversine_meters(a, b) for a, b in zip(coordinates, coordinates[1:]))
 
 
-def read_osm(path: Path, resort_id: str) -> list[dict[str, Any]]:
+def read_osm(path: Path, resort_id: str, snapshot_date: date) -> list[dict[str, Any]]:
     root = ET.parse(path).getroot()
     nodes = {
         node.attrib["id"]: [float(node.attrib["lon"]), float(node.attrib["lat"])]
@@ -126,7 +127,7 @@ def read_osm(path: Path, resort_id: str) -> list[dict[str, Any]]:
             if "k" in tag.attrib and "v" in tag.attrib
         }
         name = tags.get("name")
-        if tags.get("piste:type") != "downhill" or name not in selected:
+        if tags.get("piste:type") != "downhill" or not name:
             continue
 
         coordinates = [
@@ -137,7 +138,7 @@ def read_osm(path: Path, resort_id: str) -> list[dict[str, Any]]:
         if len(coordinates) < 2:
             continue
 
-        grouped[name].append(
+        grouped.setdefault(name, []).append(
             {
                 "wayId": way.attrib["id"],
                 "coordinates": coordinates,
@@ -152,7 +153,7 @@ def read_osm(path: Path, resort_id: str) -> list[dict[str, Any]]:
         )
 
     features: list[dict[str, Any]] = []
-    for name in SELECTED_RUNS[resort_id]:
+    for name in SELECTED_RUNS[resort_id] + sorted(set(grouped) - selected):
         segments = grouped.get(name, [])
         if not segments:
             raise ValueError(f"{resort_id}: selected run '{name}' was not found")
@@ -205,7 +206,7 @@ def read_osm(path: Path, resort_id: str) -> list[dict[str, Any]]:
                         "osmDifficultyValues": difficulty_values,
                         "osmGroomingValues": grooming_values,
                         "osmTags": [item["tags"] for item in segments],
-                        "snapshotDate": "2026-10-03",
+                        "snapshotDate": snapshot_date.isoformat(),
                     },
                 },
                 "geometry": geometry,
@@ -215,11 +216,70 @@ def read_osm(path: Path, resort_id: str) -> list[dict[str, Any]]:
     return features
 
 
+def read_context(path: Path, snapshot_date: date) -> dict[str, Any]:
+    root = ET.parse(path).getroot()
+    nodes = {
+        n.attrib["id"]: [float(n.attrib["lon"]), float(n.attrib["lat"])]
+        for n in root.findall("node")
+    }
+    features = []
+    lift_types = {
+        "chair_lift", "gondola", "cable_car", "drag_lift",
+        "magic_carpet", "t-bar", "platter",
+    }
+    for way in root.findall("way"):
+        tags = {t.attrib["k"]: t.attrib["v"] for t in way.findall("tag")}
+        if tags.get("piste:type") == "downhill" and not tags.get("name"):
+            kind = "connector"
+        elif tags.get("aerialway") in lift_types:
+            kind = "lift"
+        elif tags.get("natural") == "water":
+            kind = "water"
+        elif tags.get("waterway"):
+            kind = "stream"
+        elif tags.get("building"):
+            kind = "building"
+        elif tags.get("natural") == "wood" or tags.get("landuse") == "forest":
+            kind = "wood"
+        elif tags.get("highway"):
+            kind = "path"
+        else:
+            continue
+        points = [
+            nodes[nd.attrib["ref"]] for nd in way.findall("nd")
+            if nd.attrib.get("ref") in nodes
+        ]
+        if len(points) < 2:
+            continue
+        polygon = (
+            kind in {"water", "wood", "building"}
+            and len(points) >= 4 and points[0] == points[-1]
+        )
+        features.append({
+            "type": "Feature", "id": way.attrib["id"],
+            "properties": {
+                "kind": kind, "name": tags.get("name", ""),
+                "osmWayId": way.attrib["id"],
+            },
+            "geometry": {
+                "type": "Polygon" if polygon else "LineString",
+                "coordinates": [points] if polygon else points,
+            },
+        })
+    return {
+        "type": "FeatureCollection", "source": "© OpenStreetMap contributors",
+        "license": "ODbL 1.0", "snapshotDate": snapshot_date.isoformat(),
+        "features": features,
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     for resort_id in SELECTED_RUNS:
         parser.add_argument(f"--{resort_id}", type=Path, required=True)
     parser.add_argument("--output", type=Path, default=Path("src/data"))
+    parser.add_argument("--snapshot-date", type=date.fromisoformat, default=date.today(),
+                        help="Retrieval date of the input exports (YYYY-MM-DD)")
     args = parser.parse_args()
 
     args.output.mkdir(parents=True, exist_ok=True)
@@ -230,11 +290,14 @@ def main() -> None:
             "name": f"SlopeSense — {resort_id.title()} selected downhill runs",
             "source": "© OpenStreetMap contributors",
             "license": "ODbL 1.0",
-            "features": read_osm(source_path, resort_id),
+            "features": read_osm(source_path, resort_id, args.snapshot_date),
         }
         destination = args.output / f"{resort_id}.geojson"
         destination.write_text(json.dumps(collection, indent=2) + "\n")
         print(f"Wrote {len(collection['features'])} runs to {destination}")
+        context = read_context(source_path, args.snapshot_date)
+        context_path = args.output / f"{resort_id}-context.geojson"
+        context_path.write_text(json.dumps(context, separators=(",", ":")) + "\n")
 
 
 if __name__ == "__main__":

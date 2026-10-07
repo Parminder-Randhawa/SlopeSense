@@ -17,12 +17,14 @@ export function RecordPage({
   demo,
   selected,
   onHistory,
+  onSport,
 }: {
   recorder: Recorder;
   profile: Profile;
   demo: boolean;
   selected: SkiRun | null;
   onHistory: () => void;
+  onSport: (sport: Profile["sport"]) => void;
 }) {
   const [picking, setPicking] = useState(false);
   const [mode, setMode] = useState<"auto" | "manual">(
@@ -35,7 +37,12 @@ export function RecordPage({
     [surface, setSurface] = useState<Surface>("unknown");
   const chosen = allTrails.find((t) => t.id === (r.draft?.trailId || trailId)),
     matched = allTrails.find((t) => t.id === r.stats.matchedTrailId),
-    mountain = chosen ? resortById[chosen.resortId] : resorts[0],
+    mountain =
+      r.draft?.mode === "auto" && matched
+        ? resortById[matched.resortId]
+        : chosen
+          ? resortById[chosen.resortId]
+          : resorts[0],
     last = r.stats.samples.at(-1),
     stats = analyze(r.stats.samples);
   const duration = r.draft?.simulated ? last?.time || 0 : r.elapsed / 1000;
@@ -44,9 +51,9 @@ export function RecordPage({
       <div className="record-title">
         <div>
           <p className="eyebrow">
-            {demo ? "HACKATHON · SIMULATED GPS" : "GPS ACTIVITY"}
+            {demo ? "DEMO · SIMULATED GPS" : "GPS ACTIVITY"}
           </p>
-          <h1>{r.draft ? "Your ride, in motion." : "Ready when you are."}</h1>
+          <h1>{r.draft ? "Recording your ride" : "Let’s ride."}</h1>
         </div>
         <button className="secondary" onClick={onHistory}>
           <Icon name="activity" size={17} />
@@ -66,6 +73,8 @@ export function RecordPage({
               : null
           }
           track={r.stats.samples}
+          showZoomControls={false}
+          cameraPadding={{ top: 100, bottom: 270, left: 35, right: 35 }}
         />
         <div
           className={`gps-status ${r.recording ? "is-recording" : ""}`}
@@ -173,7 +182,17 @@ export function RecordPage({
               )}
             </div>
             <div className="start-row">
-              <span>{profile.sport === "ski" ? "Skiing" : "Snowboarding"}</span>
+              <label className="record-sport">
+                <Icon name="mountain" size={17} />
+                <select
+                  aria-label="Recording sport"
+                  value={profile.sport}
+                  onChange={(e) => onSport(e.target.value as Profile["sport"])}
+                >
+                  <option value="ski">Skiing</option>
+                  <option value="snowboard">Snowboarding</option>
+                </select>
+              </label>
               <button
                 className="record-start"
                 aria-label={demo ? "Start demo activity" : "Start activity"}
@@ -187,9 +206,12 @@ export function RecordPage({
                   )
                 }
               >
-                <Icon name="play" size={30} />
+                <Icon name="record" size={25} />
+                <span>Start recording</span>
               </button>
-              <span>{demo ? "Demo GPS" : "Device GPS"}</span>
+              <span className="record-source">
+                {demo ? "Demo GPS" : "Device GPS"}
+              </span>
             </div>
           </>
         ) : (
@@ -328,11 +350,14 @@ export function RecordPage({
             )}
           </>
         )}
-        <p className="record-footnote">
-          {demo
-            ? "Simulated fixes travel through the same GPS filtering, matching and analysis as live rides. Saved demo rides stay separate."
-            : "Keep the app visible while recording. It pauses in the background; a browser cannot reliably record with your phone locked. Routes stay on this device."}
-        </p>
+        <details className="record-guidance">
+          <summary>Recording tips & privacy</summary>
+          <p className="record-footnote">
+            {demo
+              ? "Simulated fixes travel through the same GPS filtering, matching and analysis as live rides. Saved demo rides stay separate."
+              : "Keep the app visible while recording. It pauses in the background; a browser cannot reliably record with your phone locked. Routes stay on this device."}
+          </p>
+        </details>
       </section>
     </div>
   );

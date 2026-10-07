@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { Resort } from "../types/resort";
 import type { SkiRun } from "../types/trail";
 import type { Sample } from "../types/rider";
+import { useMapContext } from "../hooks/useMapContext";
 import { Icon } from "./Icon";
 const emptyTrack: Sample[] = [];
 const colors = {
@@ -18,8 +19,10 @@ type Props = {
   onSelectTrail: (t: SkiRun) => void;
   recommendedId?: string;
   rider?: Sample;
+  centerOnRider?: number;
   compact?: boolean;
   lockCamera?: boolean;
+  showZoomControls?: boolean;
   onClearSelection?: () => void;
   track?: Sample[];
 };
@@ -30,11 +33,14 @@ export function OfflineTrailMap({
   onSelectTrail,
   recommendedId,
   rider,
+  centerOnRider = 0,
   compact,
   lockCamera = false,
+  showZoomControls = true,
   onClearSelection,
   track = emptyTrack,
 }: Props) {
+  const context = useMapContext(resort.id);
   const [view, setView] = useState({ x: 0, y: 0, scale: 1 });
   const svgRef = useRef<SVGSVGElement>(null);
   const pointers = useRef(new Map<number, { x: number; y: number }>());
@@ -129,6 +135,13 @@ export function OfflineTrailMap({
       scale: Math.max(0.8, Math.min(5, v.scale * factor)),
     }));
   const position = rider ? geometry.project(rider.lng, rider.lat) : null;
+  const positionRef = useRef(position);
+  positionRef.current = position;
+  useEffect(() => {
+    if (!centerOnRider || !positionRef.current) return;
+    const [x, y] = positionRef.current;
+    setView({ x: (400 - x) * 1.8, y: (325 - y) * 1.8, scale: 1.8 });
+  }, [centerOnRider]);
   return (
     <div className={`terrain-map ${compact ? "compact" : ""}`}>
       <svg
@@ -189,6 +202,53 @@ export function OfflineTrailMap({
         <g
           transform={`translate(${400 + view.x},${325 + view.y}) scale(${view.scale}) translate(-400,-325)`}
         >
+          <g className="geographic-context" aria-hidden="true">
+            {context.features.map((feature) => {
+              const { kind, osmWayId, name } = feature.properties;
+              const polygon = feature.geometry.type === "Polygon";
+              const points =
+                feature.geometry.type === "Polygon"
+                  ? feature.geometry.coordinates[0]
+                  : feature.geometry.coordinates;
+              const d =
+                points
+                  .map(
+                    ([lng, lat], i) =>
+                      `${i ? "L" : "M"}${geometry.project(lng, lat).join(",")}`,
+                  )
+                  .join(" ") + (polygon ? " Z" : "");
+              return (
+                <path
+                  key={osmWayId}
+                  d={d}
+                  data-context={kind}
+                  fill={
+                    polygon
+                      ? kind === "water"
+                        ? "#213e52"
+                        : kind === "building"
+                          ? "#3f5159"
+                          : "#203833"
+                      : "none"
+                  }
+                  stroke={
+                    kind === "lift"
+                      ? "#a3adb5"
+                      : kind === "connector"
+                        ? "#6d8d89"
+                        : kind === "stream"
+                          ? "#345c72"
+                          : "#45585d"
+                  }
+                  strokeWidth={kind === "connector" ? 2 : 1.2}
+                  strokeDasharray={kind === "lift" ? "5 4" : undefined}
+                  opacity={selectedTrail ? 0.25 : 0.65}
+                >
+                  <title>{name || kind}</title>
+                </path>
+              );
+            })}
+          </g>
           {geometry.mapped.map(({ trail, d, label }) => {
             const active = trail.id === selectedTrail?.id,
               recommended = trail.id === recommendedId;
@@ -214,16 +274,22 @@ export function OfflineTrailMap({
                   <path
                     d={d}
                     fill="none"
-                    stroke={active ? "#dcf9ed" : "#8cccb3"}
+                    stroke={active ? "#e2a675" : "#8cccb3"}
                     strokeWidth={active ? 13 : 10}
                     opacity=".16"
                   />
                 )}
-                <path d={d} fill="none" stroke="#0d171d" strokeWidth="6" />
                 <path
                   d={d}
                   fill="none"
-                  stroke={colors[trail.difficulty]}
+                  stroke="#0d171d"
+                  strokeWidth="6"
+                  opacity={selectedTrail && !active ? 0.13 : 1}
+                />
+                <path
+                  d={d}
+                  fill="none"
+                  stroke={active ? "#d97242" : colors[trail.difficulty]}
                   strokeWidth={active ? 4 : 2.5}
                   opacity={selectedTrail && !active ? 0.13 : 0.95}
                   strokeLinecap="round"
@@ -292,7 +358,7 @@ export function OfflineTrailMap({
         <span>N</span>
         <Icon name="compass" size={28} />
       </div>
-      {!lockCamera && (
+      {!lockCamera && showZoomControls && (
         <div className="map-controls">
           <button onClick={() => zoom(1.3)} aria-label="Zoom in">
             <Icon name="plus" />
@@ -316,7 +382,7 @@ export function OfflineTrailMap({
         >
           © OpenStreetMap
         </a>{" "}
-        · Trail geometry only
+        · Local trails, lifts & terrain context
       </div>
       <div className="map-difficulty">
         <span style={{ color: colors.green }}>● Green</span>

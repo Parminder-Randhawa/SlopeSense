@@ -30,10 +30,10 @@ try {
     "/src/engine/storage.ts",
   );
   const history = seedActivities();
-  test("37 real named trails across all three mountains", () => {
-    assert.equal(allTrails.length, 37);
+  test("149 real named trails across all three mountains", () => {
+    assert.equal(allTrails.length, 149);
     assert.equal(new Set(allTrails.map((t) => t.resortId)).size, 3);
-    assert.equal(new Set(allTrails.map((t) => t.id)).size, 37);
+    assert.equal(new Set(allTrails.map((t) => t.id)).size, 149);
   });
   for (const ceiling of ["green", "blue", "black", "double-black"])
     for (const goal of ["relax", "explore", "improve", "challenge"]) {

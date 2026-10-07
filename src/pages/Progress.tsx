@@ -1,18 +1,23 @@
 import type { Activity, Profile } from "../types/rider";
 import { allTrails } from "../data/demo";
-import { buildRiderModel, dimensionNames } from "../engine/riderModel";
+import { ridingProgress } from "../engine/progression";
+import type { SkiRun } from "../types/trail";
+import { Icon } from "../components/Icon";
+import { dateLabel } from "../components/Shared";
 import { analyze, durationLabel } from "../engine/telemetry";
 import { Metric, PageHeading, DifficultyPill } from "../components/Shared";
 export function Progress({
   activities,
   profile,
   onActivity,
+  onTrail,
 }: {
   activities: Activity[];
   profile: Profile;
   onActivity: (a: Activity) => void;
+  onTrail: (trail: SkiRun) => void;
 }) {
-  const model = buildRiderModel(activities, allTrails),
+  const progress = ridingProgress(activities, allTrails, profile),
     stats = activities.map((a) => analyze(a.telemetry)),
     demo = activities.length > 0 && activities.every((a) => a.simulated);
   const now = demo
@@ -35,7 +40,7 @@ export function Progress({
   });
   const max = Math.max(1000, ...weeks.map((w) => w.distance));
   return (
-    <div className="page-enter">
+    <div className="progress-page page-enter">
       <PageHeading
         eyebrow={`${profile.name.toUpperCase()}'S RIDING`}
         title="See your progress."
@@ -117,51 +122,103 @@ export function Progress({
             remains {profile.ceiling}.
           </p>
         </section>
-        <section className="panel">
-          <h2>Riding patterns</h2>
-          <div className="dimension-list">
-            {Object.entries(model)
-              .filter(([key]) => demo || key !== "steep")
-              .map(([key, value]) => (
-                <div className="dimension-row" key={key}>
-                  <div>
-                    <strong>
-                      {dimensionNames[key as keyof typeof dimensionNames]}
-                    </strong>
-                    <span>{value.count} supporting rides</span>
-                  </div>
-                  <span className="evidence-label">
-                    {value.count < 3 ? "Limited data" : value.label}
-                  </span>
-                </div>
-              ))}
+        <section className="panel rider-level" aria-label="Rider level">
+          <div className="section-title">
+            <h2>Your riding level</h2>
+            <span className="level-badge">Level {progress.level}</span>
+          </div>
+          <h3>{progress.name}</h3>
+          <p className="level-xp">
+            {progress.xp} XP{" "}
+            <span>
+              {progress.next
+                ? `· ${progress.next.xp - progress.xp} to ${progress.next.name}`
+                : "· All levels unlocked"}
+            </span>
+          </p>
+          <progress
+            max={1}
+            value={progress.fraction}
+            aria-label="Progress to next riding level"
+          />
+          <div className="ride-badges">
+            {progress.badges.map((b) => (
+              <div key={b.name} className={b.count >= b.goal ? "earned" : ""}>
+                <Icon
+                  name={b.count >= b.goal ? "check" : "mountain"}
+                  size={18}
+                />
+                <strong>{b.name}</strong>
+                <span>
+                  {Math.min(b.goal, b.count)} / {b.goal}
+                </span>
+              </div>
+            ))}
           </div>
           <p className="fine-print">
-            Experimental patterns from pace variation, pauses and your feedback.
-            These are not validated skill ratings.
+            Complete mapped rides to earn XP. Levels track experience, not a
+            validated skill rating.
           </p>
+          <details className="xp-rules">
+            <summary>How XP works</summary>
+            <p>
+              Earn 100 XP for a mapped ride of at least 150 m and 30 seconds,
+              plus 50 XP for each new run. Speed and harder terrain earn no
+              bonus. Your self-rated skill is {profile.experience}; your{" "}
+              {profile.ceiling} terrain limit stays under your control.
+            </p>
+          </details>
+          {progress.nextRuns.length > 0 && (
+            <div className="level-challenges">
+              <h4>Try a new line · +50 XP</h4>
+              {progress.nextRuns.map((t) => (
+                <button key={t.id} onClick={() => onTrail(t)}>
+                  <DifficultyPill difficulty={t.difficulty} />
+                  <span>{t.name}</span>
+                  <Icon name="chevron" size={16} />
+                </button>
+              ))}
+            </div>
+          )}
         </section>
       </div>
       {activities.length > 0 && (
-        <section className="panel">
-          <h2>Recent rides</h2>
-          {[...activities]
-            .sort((a, b) => b.date.localeCompare(a.date))
-            .slice(0, 4)
-            .map((a) => (
-              <button
-                key={a.id}
-                className="progress-recent"
-                onClick={() => onActivity(a)}
-              >
-                <strong>
-                  {allTrails.find((t) => t.id === a.trailId)?.name ||
-                    "Mountain activity"}
-                </strong>
-                <span>{new Date(a.date).toLocaleDateString()} ↗</span>
-              </button>
-            ))}
-        </section>
+        <details className="panel recent-rides-menu">
+          <summary>
+            <span>
+              <strong>Recent rides & replays</strong>
+              <small>{activities.length} saved rides · tap to browse</small>
+            </span>
+            <Icon name="down" size={18} />
+          </summary>
+          <div className="recent-rides-list">
+            {[...activities]
+              .sort((a, b) => b.date.localeCompare(a.date))
+              .slice(0, 8)
+              .map((a) => {
+                const trail = allTrails.find((t) => t.id === a.trailId),
+                  stats = analyze(a.telemetry);
+                return (
+                  <button
+                    key={a.id}
+                    className="progress-recent"
+                    onClick={() => onActivity(a)}
+                  >
+                    <Icon name="play" size={18} />
+                    <span>
+                      <strong>{trail?.name || "Mountain activity"}</strong>
+                      <small>
+                        {dateLabel(a.date)} ·{" "}
+                        {(stats.distance / 1000).toFixed(2)} km ·{" "}
+                        {durationLabel(stats.duration)}
+                      </small>
+                    </span>
+                    <Icon name="chevron" size={16} />
+                  </button>
+                );
+              })}
+          </div>
+        </details>
       )}
     </div>
   );

@@ -18,11 +18,15 @@ export function ActivityPage({
   selected,
   onSelect,
   onExplore,
+  onBack,
+  backLabel,
 }: {
   activities: Activity[];
   selected: Activity | null;
   onSelect: (a: Activity | null) => void;
   onExplore: () => void;
+  onBack: () => void;
+  backLabel: string;
 }) {
   const [compareId, setCompareId] = useState("");
   if (selected) {
@@ -143,6 +147,10 @@ export function ActivityPage({
   }
   return (
     <div className="page-enter">
+      <button className="back-link" onClick={onBack}>
+        <Icon name="back" size={17} />
+        Back to {backLabel}
+      </button>
       <PageHeading
         eyebrow="SAVED ON THIS DEVICE"
         title="Rides & replays."
